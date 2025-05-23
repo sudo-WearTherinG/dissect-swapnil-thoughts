@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>.: Access The Mind :.</title>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-  <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
   <style>
     * {
@@ -64,6 +64,13 @@
       border-radius: 4px;
       outline: none;
       caret-color: #00ff99;
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    /* Red error style */
+    input[type="password"].error {
+      border-color: #ff4d4d;
+      background-color: rgba(255, 77, 77, 0.1);
     }
 
     .submit-btn {
@@ -122,35 +129,79 @@
     }
 
     @keyframes flicker {
-      0% { opacity: 1; }
-      50% { opacity: 0.95; }
-      100% { opacity: 1; }
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.95;
+      }
+      100% {
+        opacity: 1;
+      }
     }
 
     .shake {
       animation: shake 0.5s ease-in-out;
     }
 
-    .fade-in {
-      animation: fadeIn 1.5s ease-in both;
-    }
-
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
     @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
+      0% {
+        transform: translateX(0);
+      }
+      25% {
+        transform: translateX(-5px);
+      }
+      50% {
+        transform: translateX(5px);
+      }
+      75% {
+        transform: translateX(-5px);
+      }
+      100% {
+        transform: translateX(0);
+      }
     }
+
+    .submit-btn {
+  animation: breathe 4s ease-in-out infinite, hueShift 10s linear infinite;
+}
+
+.submit-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: light-sweep 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes light-sweep {
+  0% {
+    left: -75%;
+  }
+  100% {
+    left: 125%;
+  }
+}
+
+
   </style>
 </head>
 <body>
-
   <div class="fade-in">
     <div class="lock-container glitch">
       <h2>ACCESS DENIED</h2>
@@ -173,18 +224,19 @@
       "Not sure? Try typing a hint...",
       "Nothing to hide..."
     ];
-  
+
     const passwordInput = document.getElementById("passwordInput");
+    const errorMsg = document.getElementById("errorMsg");
     let currentIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
-  
+
     function typePlaceholder() {
       const current = placeholders[currentIndex];
       const visibleText = current.substring(0, charIndex);
       const cursor = "_";
       passwordInput.setAttribute("placeholder", visibleText + cursor);
-  
+
       if (!isDeleting) {
         if (charIndex < current.length) {
           charIndex++;
@@ -206,16 +258,16 @@
         }
       }
     }
-  
+
     typePlaceholder();
-  
+
     // Generate and store a device fingerprint if not already present
     let deviceFingerprint = localStorage.getItem("deviceFingerprint");
     if (!deviceFingerprint) {
       deviceFingerprint = crypto.randomUUID();
       localStorage.setItem("deviceFingerprint", deviceFingerprint);
     }
-  
+
     function getSessionId() {
       let sessionId = localStorage.getItem("sessionId");
       if (!sessionId) {
@@ -224,38 +276,40 @@
       }
       return sessionId;
     }
-  
+
     async function submitPassword() {
-      const errorMsg = document.getElementById("errorMsg");
       const password = passwordInput.value;
-  
+
       const payload = {
         deviceFingerprint: deviceFingerprint,
         sessionId: getSessionId(),
-        passwordAttempt: password
+        passwordAttempt: password,
       };
-  
+
       errorMsg.textContent = "Checking...";
       errorMsg.style.display = "block";
       errorMsg.style.color = "#999";
-  
+
       try {
-        const response = await fetch("https://ftlpntiymqcrtcsxfchv.supabase.co/functions/v1/check-status", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ0bHBudGl5bXFjcnRjc3hmY2h2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUyNjUyNDAsImV4cCI6MjA2MDg0MTI0MH0.Kv5AC0h2mSaZZtlukWDcXsAkZj8lkRS8_3ZXRewZZ28`
-          },
-          body: JSON.stringify(payload)
-        });
-  
+        const response = await fetch(
+          "https://ftlpntiymqcrtcsxfchv.supabase.co/functions/v1/check-status",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ0bHBudGl5bXFjcnRjc3hmY2h2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUyNjUyNDAsImV4cCI6MjA2MDg0MTI0MH0.Kv5AC0h2mSaZZtlukWDcXsAkZj8lkRS8_3ZXRewZZ28",
+            },
+            body: JSON.stringify(payload),
+          }
+        );
+
         const data = await response.json();
-  
+
         if (data.status === "error") {
           errorMsg.textContent = data.message;
           errorMsg.style.color = "red";
-          passwordInput.classList.add("shake");
-          setTimeout(() => passwordInput.classList.remove("shake"), 500);
+          triggerInputError();
         } else if (data.status === "success") {
           if (data.message === "✌️ Maybe just ask him? ✅") {
             errorMsg.textContent = data.message;
@@ -274,9 +328,8 @@
           errorMsg.textContent = "Unexpected response. Try again.";
           errorMsg.style.color = "orange";
         }
-  
+
         passwordInput.value = "";
-  
       } catch (error) {
         console.error("Request error:", error);
         errorMsg.textContent = "You need an active internet connection to verify password";
@@ -286,7 +339,16 @@
         }, 4000);
       }
     }
-  
+
+    function triggerInputError() {
+      passwordInput.classList.add("error");
+      passwordInput.classList.add("shake");
+      setTimeout(() => {
+        passwordInput.classList.remove("error");
+        passwordInput.classList.remove("shake");
+      }, 500);
+    }
+
     passwordInput.addEventListener("keydown", function (event) {
       if (event.key === " " || event.code === "Space") {
         event.preventDefault();
@@ -295,11 +357,10 @@
         submitPassword();
       }
     });
-  
+
     passwordInput.addEventListener("input", function () {
-      this.value = this.value.replace(/\s/g, '');
+      this.value = this.value.replace(/\s/g, "");
     });
   </script>
-  
 </body>
 </html>
