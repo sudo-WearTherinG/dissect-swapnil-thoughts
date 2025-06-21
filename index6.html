@@ -436,8 +436,32 @@ body.fade-out {
         });
       }
     } else if (data.status === "success") {
-      // Your existing success flow here
-      // ...
+      if (data.message === "✌️ Maybe just ask him? ✅") {
+        errorMsg.textContent = data.message;
+        errorMsg.style.color = "blue";
+      } else if (data.signedUrl) {
+        errorMsg.textContent =
+          data.message || "🔓 Root access granted. You’re now the system.";
+        errorMsg.style.color = "green";
+        const h2 = document.querySelector("h2");
+
+        if (h2) {
+          h2.textContent = "ACCESS GRANTED";
+          h2.classList.remove("access-denied");
+          h2.classList.add("glitch");
+
+          setTimeout(() => {
+            h2.classList.remove("glitch");
+            h2.classList.add("access-granted");
+
+            document.body.classList.add("fade-out");
+            setTimeout(() => {
+              window.location.href = data.signedUrl;
+            }, 1500);
+          }, 600);
+        }
+      }
+
     } else {
       errorMsg.textContent = "Unexpected response. Try again.";
       errorMsg.style.color = "orange";
@@ -447,16 +471,13 @@ body.fade-out {
   } catch (error) {
     console.error("Request error:", error);
     errorMsg.textContent =
-      "You need an active internet connection to verify password";
+      "Your Internet is toast or server’s napping. Fix it, human";
     errorMsg.style.color = "orange";
     setTimeout(() => {
       errorMsg.style.display = "none";
     }, 4000);
   }
 }
-
-
-
   
     function triggerInputError() {
       passwordInput.classList.add("error");
