@@ -371,14 +371,23 @@ body.fade-out {
     async function submitPassword() {
   const password = passwordInput.value.trim();
 
-  // Frontend gatekeeping: don't even send empty password requests
   if (!password) {
-    errorMsg.textContent = "Password cannot be empty!";
-    errorMsg.style.color = "red";
-    errorMsg.style.display = "block";
-    triggerInputError();
-    return;
-  }
+  const msg = "Password cannot be empty!";
+  errorMsg.style.color = "red";
+  errorMsg.style.display = "block";
+
+  // Blink text by quick clear/restore
+  errorMsg.textContent = "";
+  errorMsg.classList.remove("shake");
+  void errorMsg.offsetWidth;  // force reflow
+  errorMsg.classList.add("shake");
+  setTimeout(() => {
+    errorMsg.textContent = msg;
+  }, 50);
+
+  triggerInputError();
+  return;
+}
 
   const payload = {
     deviceFingerprint: deviceFingerprint,
@@ -470,8 +479,7 @@ body.fade-out {
     passwordInput.value = "";
   } catch (error) {
     console.error("Request error:", error);
-    errorMsg.textContent =
-      "Your Internet is toast or server’s napping. Fix it, human";
+    errorMsg.textContent = "Your Internet is toast or server’s napping. Fix it, human";
     errorMsg.style.color = "orange";
     setTimeout(() => {
       errorMsg.style.display = "none";
