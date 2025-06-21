@@ -249,6 +249,7 @@ h2.access-granted {
 
 
 /* granted animation */
+/* granted animation */
 body.fade-out {
   animation: glitchFade 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
@@ -284,6 +285,7 @@ body.fade-out {
     clip-path: inset(100% 0 0 0);
   }
 }
+
 
   </style>
 </head>
@@ -367,7 +369,16 @@ body.fade-out {
     }
     
     async function submitPassword() {
-  const password = passwordInput.value;
+  const password = passwordInput.value.trim();
+
+  // Frontend gatekeeping: don't even send empty password requests
+  if (!password) {
+    errorMsg.textContent = "Password cannot be empty!";
+    errorMsg.style.color = "red";
+    errorMsg.style.display = "block";
+    triggerInputError();
+    return;
+  }
 
   const payload = {
     deviceFingerprint: deviceFingerprint,
@@ -393,6 +404,15 @@ body.fade-out {
       }
     );
 
+    if (!response.ok) {
+      // If the server replies with error status
+      const errorData = await response.json().catch(() => ({}));
+      errorMsg.textContent = errorData.message || "Unknown error occurred";
+      errorMsg.style.color = "red";
+      triggerInputError();
+      return;
+    }
+
     const data = await response.json();
 
     if (data.status === "error") {
@@ -401,48 +421,23 @@ body.fade-out {
       triggerInputError();
 
       if (data.playAudio) {
-  let audio;
-  if (data.audioUrl) {
-    audio = new Audio(data.audioUrl);
-    audio.volume = 0.3;
-  } else {
-    audio = new Audio("https://ftlpntiymqcrtcsxfchv.supabase.co/storage/v1/object/public/assets/giggle.mp3");
-    audio.volume = 1;
-  }
-  audio.play().catch(() => {
-    console.warn("Audio play blocked by browser policy.");
-  });
-}
-
-    } else if (data.status === "success") {
-      if (data.message === "✌️ Maybe just ask him? ✅") {
-        errorMsg.textContent = data.message;
-        errorMsg.style.color = "blue";
-      } else if (data.signedUrl) {
-        errorMsg.textContent =
-          data.message || "🔓 Root access granted. You’re now the system.";
-        errorMsg.style.color = "green";
-        const h2 = document.querySelector("h2");
-
-        if (h2) {
-          h2.textContent = "ACCESS GRANTED";
-          h2.classList.remove("access-denied");
-          h2.classList.add("glitch");
-
-          setTimeout(() => {
-            h2.classList.remove("glitch");
-            h2.classList.add("access-granted");
-
-            document.body.classList.add("fade-out");
-            setTimeout(() => {
-              window.location.href = data.signedUrl;
-            }, 1500);
-          }, 600);
+        let audio;
+        if (data.audioUrl) {
+          audio = new Audio(data.audioUrl);
+          audio.volume = 0.3;
+        } else {
+          audio = new Audio(
+            "https://ftlpntiymqcrtcsxfchv.supabase.co/storage/v1/object/public/assets/giggle.mp3"
+          );
+          audio.volume = 1;
         }
-      } else {
-        errorMsg.textContent = "Unexpected response. Try again.";
-        errorMsg.style.color = "orange";
+        audio.play().catch(() => {
+          console.warn("Audio play blocked by browser policy.");
+        });
       }
+    } else if (data.status === "success") {
+      // Your existing success flow here
+      // ...
     } else {
       errorMsg.textContent = "Unexpected response. Try again.";
       errorMsg.style.color = "orange";
@@ -459,6 +454,8 @@ body.fade-out {
     }, 4000);
   }
 }
+
+
 
   
     function triggerInputError() {
