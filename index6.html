@@ -505,6 +505,7 @@
                 data.message || '🔓 Root access granted. You’re now the system.';
               errorMsg.style.color = 'green';
               const h2 = document.querySelector('h2');
+
               if (h2) {
                 h2.textContent = 'ACCESS GRANTED';
                 h2.classList.remove('access-denied');
@@ -513,17 +514,11 @@
                 setTimeout(() => {
                   h2.classList.remove('glitch');
                   h2.classList.add('access-granted');
+
                   document.body.classList.add('fade-out');
-
-                  // Wait for fade-out animation to finish (listen to animationend once)
-                  function onFadeOutEnd(event) {
-                    if (event.target === document.body && event.animationName === 'glitchFade') {
-                      window.location.href = data.signedUrl;
-                      document.body.removeEventListener('animationend', onFadeOutEnd);
-                    }
-                  }
-
-                  document.body.addEventListener('animationend', onFadeOutEnd);
+                  setTimeout(() => {
+                    window.location.href = data.signedUrl;
+                  }, 1500);
                 }, 600);
               }
             }
