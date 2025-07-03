@@ -499,35 +499,28 @@
               errorMsg.textContent = data.message;
               errorMsg.style.color = 'blue';
               unlockButton.classList.remove('processing');
-              unlockButton.disabled = false;
+              unlockButton.disabled = false; // Re-enable before returning
             } else if (data.signedUrl) {
               errorMsg.textContent =
                 data.message || '🔓 Root access granted. You’re now the system.';
               errorMsg.style.color = 'green';
-
               const h2 = document.querySelector('h2');
               if (h2) {
                 h2.textContent = 'ACCESS GRANTED';
                 h2.classList.remove('access-denied');
                 h2.classList.add('glitch');
 
-                // Start the animation
-                requestAnimationFrame(() => {
+                // Directly chain animation steps with setTimeout
+                setTimeout(() => {
+                  h2.classList.remove('glitch');
+                  h2.classList.add('access-granted');
+                  document.body.classList.add('fade-out');
+
                   setTimeout(() => {
-                    h2.classList.remove('glitch');
-                    h2.classList.add('access-granted');
-                    document.body.classList.add('fade-out');
-
-                    // Delay to let animation play smoothly before redirect
-                    setTimeout(() => {
-                      window.location.href = data.signedUrl;
-                    }, 1500);
-                  }, 400); // Faster trigger for smoother UX
-                });
+                    window.location.href = data.signedUrl;
+                  }, 1600); // Match your fade-out duration + a bit buffer
+                }, 600); // Let glitch run long enough to look cool
               }
-
-              unlockButton.classList.remove('processing');
-              unlockButton.disabled = false;
             }
           } else {
             errorMsg.textContent = 'Unexpected response. Try again.';
