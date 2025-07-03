@@ -510,16 +510,17 @@
                 h2.classList.remove('access-denied');
                 h2.classList.add('glitch');
 
-                // Directly chain animation steps with setTimeout
+                // Let glitch animation run long enough to look cool (600ms)
                 setTimeout(() => {
                   h2.classList.remove('glitch');
                   h2.classList.add('access-granted');
                   document.body.classList.add('fade-out');
 
+                  // Wait for fade-out animation to finish (1.8s) + buffer, then redirect
                   setTimeout(() => {
                     window.location.href = data.signedUrl;
-                  }, 1600); // Match your fade-out duration + a bit buffer
-                }, 600); // Let glitch run long enough to look cool
+                  }, 1800);
+                }, 600);
               }
             }
           } else {
