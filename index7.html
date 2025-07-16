@@ -2,9 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
     />
     <meta name="robots" content="noindex, nofollow" />
     <meta name="googlebot" content="noindex, nofollow" />
@@ -27,6 +28,14 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+      }
+
+      body,
+      .lock-container,
+      .submit-btn,
+      h2 {
+        will-change: transform, opacity;
+        transform: translateZ(0);
       }
 
       body {
@@ -82,7 +91,6 @@
         transition: border-color 0.3s ease, background-color 0.3s ease;
       }
 
-      /* Red error style */
       input[type='password'].error {
         border-color: #ff4d4d;
         background-color: rgba(255, 77, 77, 0.1);
@@ -99,101 +107,15 @@
         cursor: pointer;
         box-shadow: 0 0 5px #00ff88;
         transition: all 0.3s ease;
+        animation: breathe 4s ease-in-out infinite, hueShift 10s linear infinite;
+        position: relative;
+        overflow: hidden;
       }
 
       .submit-btn.processing {
         background-color: #00ff88;
         color: #000;
         box-shadow: 0 0 8px #00ff88, 0 0 15px #00ff88;
-      }
-
-      .error-msg {
-        margin-top: 1rem;
-        color: #ff4d4d;
-        font-size: 0.9rem;
-        display: none;
-      }
-
-      .hidden-content {
-        display: none;
-        color: #d1f7c4;
-        text-align: center;
-        margin-top: 2rem;
-      }
-
-      .glitch {
-        animation: glitch 2s infinite;
-      }
-
-      @keyframes glitch {
-        0% {
-          text-shadow: 1px 1px 0 #00ff88, -1px -1px 0 #000;
-        }
-
-        25% {
-          text-shadow: 2px 0px 0 #00ff88, -2px 0px 0 #000;
-        }
-
-        50% {
-          text-shadow: -1px 2px 0 #00ff88, 1px -2px 0 #000;
-        }
-
-        75% {
-          text-shadow: 2px -2px 0 #00ff88, -2px 2px 0 #000;
-        }
-
-        100% {
-          text-shadow: 0px 0px 0 #00ff88, 0px 0px 0 #000;
-        }
-      }
-
-      @keyframes flicker {
-        0% {
-          opacity: 1;
-        }
-
-        50% {
-          opacity: 0.95;
-        }
-
-        100% {
-          opacity: 1;
-        }
-      }
-
-      .shake {
-        animation: shake 0.5s ease-in-out;
-      }
-
-      @keyframes shake {
-        0% {
-          transform: translateX(0);
-        }
-
-        25% {
-          transform: translateX(-5px);
-        }
-
-        50% {
-          transform: translateX(5px);
-        }
-
-        75% {
-          transform: translateX(-5px);
-        }
-
-        100% {
-          transform: translateX(0);
-        }
-      }
-
-      .submit-btn {
-        animation: breathe 4s ease-in-out infinite, hueShift 10s linear infinite;
-      }
-
-      .submit-btn {
-        position: relative;
-        overflow: hidden;
       }
 
       .submit-btn::before {
@@ -213,10 +135,23 @@
         0% {
           left: -75%;
         }
-
         100% {
           left: 125%;
         }
+      }
+
+      .error-msg {
+        margin-top: 1rem;
+        color: #ff4d4d;
+        font-size: 0.9rem;
+        display: none;
+      }
+
+      .hidden-content {
+        display: none;
+        color: #d1f7c4;
+        text-align: center;
+        margin-top: 2rem;
       }
 
       .fade-in {
@@ -228,22 +163,69 @@
           opacity: 0;
           transform: translateY(20px);
         }
-
         100% {
           opacity: 1;
           transform: translateY(0);
         }
       }
 
-      /* text change from denied to granted */
+      .shake {
+        animation: shake 0.5s ease-in-out;
+      }
+
+      @keyframes shake {
+        0% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-5px);
+        }
+        50% {
+          transform: translateX(5px);
+        }
+        75% {
+          transform: translateX(-5px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      .glitch {
+        animation: glitch 2s infinite;
+      }
+
+      @keyframes glitch {
+        0% {
+          text-shadow: 1px 1px 0 #00ff88, -1px -1px 0 #000;
+        }
+        25% {
+          text-shadow: 2px 0px 0 #00ff88, -2px 0px 0 #000;
+        }
+        50% {
+          text-shadow: -1px 2px 0 #00ff88, 1px -2px 0 #000;
+        }
+        75% {
+          text-shadow: 2px -2px 0 #00ff88, -2px 2px 0 #000;
+        }
+        100% {
+          text-shadow: 0px 0px 0 #00ff88, 0px 0px 0 #000;
+        }
+      }
+
+      @keyframes flicker {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.95;
+        }
+      }
+
       h2.glitch {
         animation: glitchSwap 0.6s steps(2, end);
         transform: none;
-      }
-
-      h2.access-granted {
-        color: #0f0;
-        text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0;
       }
 
       @keyframes glitchSwap {
@@ -251,12 +233,10 @@
           transform: skewX(-5deg);
           opacity: 0.7;
         }
-
         50% {
           transform: skewX(5deg);
           opacity: 0.4;
         }
-
         100% {
           transform: none;
           opacity: 1;
@@ -268,8 +248,6 @@
         text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0, 0 0 40px #0f0;
       }
 
-      /* granted animation */
-      /* granted animation */
       body.fade-out {
         animation: glitchFade 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       }
