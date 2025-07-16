@@ -110,6 +110,10 @@
         animation: breathe 4s ease-in-out infinite, hueShift 10s linear infinite;
         position: relative;
         overflow: hidden;
+
+        will-change: transform, opacity, left;
+        backface-visibility: hidden;
+        transform: translateZ(0);
       }
 
       .submit-btn.processing {
@@ -129,8 +133,11 @@
         transform: skewX(-20deg);
         animation: light-sweep 3s linear infinite;
         pointer-events: none;
-      }
 
+        will-change: left, transform;
+        backface-visibility: hidden;
+        transform: translateZ(0) skewX(-20deg);
+      }
       @keyframes light-sweep {
         0% {
           left: -75%;
