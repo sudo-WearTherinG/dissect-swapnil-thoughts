@@ -2,34 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
     />
     <meta name="robots" content="noindex, nofollow" />
     <meta name="googlebot" content="noindex, nofollow" />
     <title>.: Access The Mind :.</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
-      rel="stylesheet"
+      rel="https://cdn.jsdelivr.net/gh/sudo-WearTherinG/dissect-swapnil-thoughts@main/stylesheet"
     />
     <link rel="icon" href="data:," />
     <link rel="stylesheet" href="style-index.css" />
-    <script src="script-index.js" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/gh/sudo-WearTherinG/dissect-swapnil-thoughts@main/script-index.js"
+      defer
+    ></script>
     <style>
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-      }
-
-      body,
-      .lock-container,
-      .submit-btn,
-      h2 {
-        will-change: transform, opacity;
-        transform: translateZ(0);
       }
 
       body {
@@ -54,7 +48,11 @@
         text-align: center;
         width: 100%;
         max-width: 400px;
+
+        /* GPU hint for smoother animation */
         animation: flicker 1.5s infinite alternate;
+        will-change: opacity;
+        backface-visibility: hidden;
       }
 
       h2 {
@@ -85,6 +83,7 @@
         transition: border-color 0.3s ease, background-color 0.3s ease;
       }
 
+      /* Red error style */
       input[type='password'].error {
         border-color: #ff4d4d;
         background-color: rgba(255, 77, 77, 0.1);
@@ -102,83 +101,17 @@
         box-shadow: 0 0 5px #00ff88;
         transition: all 0.3s ease;
 
-        will-change: transform, opacity, left;
-        backface-visibility: hidden;
-        transform: translateZ(0);
-
-        contain: layout paint style;
-
         animation: breathe 4s ease-in-out infinite, hueShift 10s linear infinite;
-
+        will-change: opacity, transform;
+        backface-visibility: hidden;
         position: relative;
         overflow: hidden;
-        /* Force GPU composite */
-        -webkit-transform-style: preserve-3d;
-        transform-style: preserve-3d;
       }
 
       .submit-btn.processing {
         background-color: #00ff88;
         color: #000;
         box-shadow: 0 0 8px #00ff88, 0 0 15px #00ff88;
-      }
-
-      .submit-btn::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -75%;
-        width: 50%;
-        height: 100%;
-        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-
-        transform: translateZ(0) skewX(-20deg);
-        will-change: left, transform, opacity;
-        backface-visibility: hidden;
-
-        animation: light-sweep 3s linear infinite;
-        pointer-events: none;
-
-        contain: layout paint style;
-
-        /* Force GPU composite */
-        -webkit-transform-style: preserve-3d;
-        transform-style: preserve-3d;
-      }
-
-      @keyframes breathe {
-        0%,
-        100% {
-          transform: scale3d(1, 1, 1);
-          opacity: 1;
-        }
-        50% {
-          transform: scale3d(1.05, 1.05, 1);
-          opacity: 0.85;
-        }
-      }
-
-      @keyframes hueShift {
-        0% {
-          filter: hue-rotate(0deg);
-        }
-        100% {
-          filter: hue-rotate(360deg);
-        }
-      }
-
-      @keyframes light-sweep {
-        0% {
-          left: -75%;
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.7;
-        }
-        100% {
-          left: 125%;
-          opacity: 1;
-        }
       }
 
       .error-msg {
@@ -195,23 +128,46 @@
         margin-top: 2rem;
       }
 
-      .fade-in {
-        animation: fadeIn 0.7s ease-in both;
+      .glitch {
+        animation: glitch 2s infinite;
+        will-change: text-shadow, transform;
+        backface-visibility: hidden;
       }
 
-      @keyframes fadeIn {
+      @keyframes glitch {
         0% {
-          opacity: 0;
-          transform: translateY(20px);
+          text-shadow: 1px 1px 0 #00ff88, -1px -1px 0 #000;
+        }
+        25% {
+          text-shadow: 1.5px 0 0 #00ff88, -1.5px 0 0 #000;
+        }
+        50% {
+          text-shadow: -1px 1.5px 0 #00ff88, 1px -1.5px 0 #000;
+        }
+        75% {
+          text-shadow: 1.5px -1.5px 0 #00ff88, -1.5px 1.5px 0 #000;
+        }
+        100% {
+          text-shadow: 0 0 0 #00ff88, 0 0 0 #000;
+        }
+      }
+
+      @keyframes flicker {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.97; /* Slightly less aggressive to reduce redraw load */
         }
         100% {
           opacity: 1;
-          transform: translateY(0);
         }
       }
 
       .shake {
         animation: shake 0.5s ease-in-out;
+        will-change: transform;
+        backface-visibility: hidden;
       }
 
       @keyframes shake {
@@ -232,41 +188,55 @@
         }
       }
 
-      .glitch {
-        animation: glitch 2s infinite;
+      .submit-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -75%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transform: skewX(-20deg);
+        animation: light-sweep 3s linear infinite;
+        pointer-events: none;
+
+        will-change: transform;
+        backface-visibility: hidden;
       }
 
-      @keyframes glitch {
+      @keyframes light-sweep {
         0% {
-          text-shadow: 1px 1px 0 #00ff88, -1px -1px 0 #000;
-        }
-        25% {
-          text-shadow: 2px 0px 0 #00ff88, -2px 0px 0 #000;
-        }
-        50% {
-          text-shadow: -1px 2px 0 #00ff88, 1px -2px 0 #000;
-        }
-        75% {
-          text-shadow: 2px -2px 0 #00ff88, -2px 2px 0 #000;
+          left: -75%;
         }
         100% {
-          text-shadow: 0px 0px 0 #00ff88, 0px 0px 0 #000;
+          left: 125%;
         }
       }
 
-      @keyframes flicker {
-        0%,
+      .fade-in {
+        animation: fadeIn 0.7s ease-in both;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
         100% {
           opacity: 1;
-        }
-        50% {
-          opacity: 0.95;
+          transform: translateY(0);
         }
       }
 
+      /* text change from denied to granted */
       h2.glitch {
         animation: glitchSwap 0.6s steps(2, end);
         transform: none;
+      }
+
+      h2.access-granted {
+        color: #0f0;
+        text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0;
       }
 
       @keyframes glitchSwap {
@@ -289,8 +259,11 @@
         text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0, 0 0 40px #0f0;
       }
 
+      /* granted animation */
       body.fade-out {
         animation: glitchFade 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        will-change: opacity, transform;
+        backface-visibility: hidden;
       }
 
       @keyframes glitchFade {
@@ -300,32 +273,51 @@
           filter: none;
           clip-path: inset(0 0 0 0);
         }
-
         20% {
           clip-path: inset(15% 0 75% 0);
           transform: translate(-6px, -3px) skew(-7deg);
           filter: drop-shadow(3px 0 red);
           opacity: 0.9;
         }
-
         45% {
           clip-path: inset(75% 0 15% 0);
           transform: translate(6px, 3px) skew(7deg);
           filter: drop-shadow(-3px 0 cyan);
           opacity: 0.8;
         }
-
         70% {
           clip-path: inset(0 0 0 0);
           transform: translate(0, 0) skew(0);
           filter: none;
           opacity: 0.5;
         }
-
         100% {
           opacity: 0;
           transform: scale(0.9);
           clip-path: inset(100% 0 0 0);
+        }
+      }
+
+      /* breathe and hueShift keyframes for submit-btn */
+
+      @keyframes breathe {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.85;
+          transform: scale(0.98);
+        }
+      }
+
+      @keyframes hueShift {
+        0% {
+          filter: hue-rotate(0deg);
+        }
+        100% {
+          filter: hue-rotate(360deg);
         }
       }
     </style>
