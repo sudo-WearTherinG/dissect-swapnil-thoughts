@@ -15,14 +15,8 @@
       rel="stylesheet"
     />
     <link rel="icon" href="data:," />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/sudo-WearTherinG/dissect-swapnil-thoughts@main/style-index.css"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/gh/sudo-WearTherinG/dissect-swapnil-thoughts@main/script-index.js"
-      defer
-    ></script>
+    <link rel="stylesheet" href="style-index.css" />
+    <script src="script-index.js" defer></script>
     <style>
       * {
         margin: 0;
@@ -107,13 +101,20 @@
         cursor: pointer;
         box-shadow: 0 0 5px #00ff88;
         transition: all 0.3s ease;
-        animation: breathe 4s ease-in-out infinite, hueShift 10s linear infinite;
-        position: relative;
-        overflow: hidden;
 
         will-change: transform, opacity, left;
         backface-visibility: hidden;
         transform: translateZ(0);
+
+        contain: layout paint style;
+
+        animation: breathe 4s ease-in-out infinite, hueShift 10s linear infinite;
+
+        position: relative;
+        overflow: hidden;
+        /* Force GPU composite */
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
       }
 
       .submit-btn.processing {
@@ -130,20 +131,53 @@
         width: 50%;
         height: 100%;
         background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-        transform: skewX(-20deg);
+
+        transform: translateZ(0) skewX(-20deg);
+        will-change: left, transform, opacity;
+        backface-visibility: hidden;
+
         animation: light-sweep 3s linear infinite;
         pointer-events: none;
 
-        will-change: left, transform;
-        backface-visibility: hidden;
-        transform: translateZ(0) skewX(-20deg);
+        contain: layout paint style;
+
+        /* Force GPU composite */
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
       }
+
+      @keyframes breathe {
+        0%,
+        100% {
+          transform: scale3d(1, 1, 1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale3d(1.05, 1.05, 1);
+          opacity: 0.85;
+        }
+      }
+
+      @keyframes hueShift {
+        0% {
+          filter: hue-rotate(0deg);
+        }
+        100% {
+          filter: hue-rotate(360deg);
+        }
+      }
+
       @keyframes light-sweep {
         0% {
           left: -75%;
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
         }
         100% {
           left: 125%;
+          opacity: 1;
         }
       }
 
