@@ -9,7 +9,7 @@
     <meta name="robots" content="noindex, nofollow" />
     <meta name="googlebot" content="noindex, nofollow" />
     <script
-      src="https://cdn.jsdelivr.net/gh/sudo-WearTherinG/dissect-swapnil-thoughts@main/script-index.js"
+      src="script-index.js"
       defer
     ></script>
     <title>Prologue : Alienated</title>
@@ -25,6 +25,10 @@
         color: #bbb;
         font-family: 'Consolas', 'Courier New', monospace, 'Segoe UI', Tahoma, Geneva, Verdana,
           sans-serif;
+      }
+
+      .nowrap {
+        white-space: nowrap;
       }
 
       main {
@@ -153,8 +157,7 @@
       <h1>PROLOGUE</h1>
       <h3 id="study-heading" class="intro-subtitle glitch-fade">
         The Study Of,
-        <span id="emotion-word">Distance</span>
-        .
+        <span id="emotion-word"><span class="nowrap">Distance.</span></span>
       </h3>
 
       <p>I came here to study. To understand. To look beneath the surface.</p>
@@ -257,14 +260,16 @@
         'Fear',
         'Despair',
         'Pain',
+        'Being Broken',
         'Obsessions',
         'Trust',
         'Being Judged',
         'Being Unique',
         'Being Alive',
         'This Is Enough',
-        'I Felt All',
-        'End',
+        'I Felt Everything.',
+        'I lived it all',
+        'End.',
       ];
       const wordEl = document.getElementById('emotion-word');
       let index = 0;
@@ -273,7 +278,10 @@
         wordEl.style.opacity = 0;
         setTimeout(() => {
           index = (index + 1) % words.length;
-          wordEl.textContent = words[index];
+          const word = words[index];
+          const needsDot = !word.endsWith('.') && !['End', 'I Felt Everything'].includes(word);
+          const displayWord = needsDot ? `${word}.` : word;
+          wordEl.innerHTML = `<span class="nowrap">${displayWord}</span>`;
           wordEl.style.opacity = 1;
         }, 500);
       }, 2500);
