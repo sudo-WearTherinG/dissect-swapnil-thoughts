@@ -269,7 +269,6 @@
       }
 
       /* granted animation */
-      /* granted animation */
       body.fade-out {
         will-change: opacity, transform, clip-path;
         backface-visibility: hidden;
@@ -517,6 +516,12 @@
                 setTimeout(() => {
                   h2.classList.remove('glitch');
                   h2.classList.add('access-granted');
+
+                  // PAUSE flicker animation before fade-out
+                  const lockContainer = document.querySelector('.lock-container');
+                  if (lockContainer) {
+                    lockContainer.style.animationPlayState = 'paused';
+                  }
 
                   document.body.classList.add('fade-out');
                   document.body.addEventListener(
