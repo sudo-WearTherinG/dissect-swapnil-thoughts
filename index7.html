@@ -52,10 +52,9 @@
         width: 100%;
         max-width: 400px;
 
-        animation: flicker 3s infinite alternate; /* Slow it down */
-        animation-timing-function: ease-in-out; /* Smooth easing */
-        will-change: opacity; /* Hint GPU */
-        transform: translateZ(0); /* Force GPU layer */
+        animation: flicker 4s ease-in-out infinite;
+        will-change: opacity;
+        transform: translateZ(0);
       }
 
       h2 {
@@ -152,16 +151,16 @@
       }
 
       @keyframes flicker {
-        0% {
-          opacity: 1;
-        }
-
-        50% {
-          opacity: 0.95;
-        }
-
+        0%,
         100% {
           opacity: 1;
+        }
+        25%,
+        75% {
+          opacity: 0.96;
+        }
+        50% {
+          opacity: 0.93;
         }
       }
 
