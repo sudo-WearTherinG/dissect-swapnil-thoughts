@@ -271,6 +271,9 @@
       /* granted animation */
       /* granted animation */
       body.fade-out {
+        will-change: opacity, transform, clip-path;
+        backface-visibility: hidden;
+        transform-style: preserve-3d;
         animation: glitchFade 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       }
 
