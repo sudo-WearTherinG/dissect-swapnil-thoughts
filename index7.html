@@ -516,9 +516,13 @@
                   h2.classList.add('access-granted');
 
                   document.body.classList.add('fade-out');
-                  setTimeout(() => {
-                    window.location.href = data.signedUrl;
-                  }, 1500);
+                  document.body.addEventListener(
+                    'animationend',
+                    () => {
+                      window.location.href = data.signedUrl;
+                    },
+                    { once: true }
+                  );
                 }, 600);
               }
             }
