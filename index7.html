@@ -51,10 +51,7 @@
         text-align: center;
         width: 100%;
         max-width: 400px;
-
-        animation: flicker 6s ease-in-out infinite;
-        will-change: opacity;
-        transform: translate3d(0, 0, 0);
+        animation: flicker 1.5s infinite alternate;
       }
 
       h2 {
@@ -151,16 +148,16 @@
       }
 
       @keyframes flicker {
-        0%,
-        100% {
+        0% {
           opacity: 1;
         }
-        25%,
-        75% {
-          opacity: 0.97;
-        }
+
         50% {
-          opacity: 0.94;
+          opacity: 0.95;
+        }
+
+        100% {
+          opacity: 1;
         }
       }
 
@@ -271,29 +268,55 @@
         text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0, 0 0 40px #0f0;
       }
 
-      .lock-container,
-      body.fade-out {
-        will-change: transform, opacity;
-        backface-visibility: hidden;
-        transform: translateZ(0);
-      }
-
+      /* granted animation */
       /* granted animation */
       body.fade-out {
-        /* Remove filter, clip-path, and transform-style for better WebView performance */
         animation: glitchFade 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       }
 
       @keyframes glitchFade {
         0% {
           opacity: 1;
-          transform: scale(1);
+          transform: none;
+          filter: none;
+          clip-path: inset(0 0 0 0);
+        }
+
+        20% {
+          clip-path: inset(15% 0 75% 0);
+          transform: translate(-6px, -3px) skew(-7deg);
+          filter: drop-shadow(3px 0 red);
+          opacity: 0.9;
+        }
+
+        45% {
+          clip-path: inset(75% 0 15% 0);
+          transform: translate(6px, 3px) skew(7deg);
+          filter: drop-shadow(-3px 0 cyan);
+          opacity: 0.8;
+        }
+
+        70% {
+          clip-path: inset(0 0 0 0);
+          transform: translate(0, 0) skew(0);
+          filter: none;
+          opacity: 0.5;
         }
 
         100% {
           opacity: 0;
-          transform: scale(0.95);
+          transform: scale(0.9);
+          clip-path: inset(100% 0 0 0);
         }
+      }
+
+      /* Animation performance boost for WebView */
+      body.fade-out,
+      h2.glitch,
+      h2.access-granted {
+        will-change: opacity, transform;
+        transform: translateZ(0);
+        backface-visibility: hidden;
       }
     </style>
   </head>
@@ -501,20 +524,10 @@
                   h2.classList.remove('glitch');
                   h2.classList.add('access-granted');
 
-                  // PAUSE flicker animation before fade-out
-                  const lockContainer = document.querySelector('.lock-container');
-                  if (lockContainer) {
-                    lockContainer.style.animationPlayState = 'paused';
-                  }
-
                   document.body.classList.add('fade-out');
-                  document.body.addEventListener(
-                    'animationend',
-                    () => {
-                      window.location.href = data.signedUrl;
-                    },
-                    { once: true }
-                  );
+                  setTimeout(() => {
+                    window.location.href = data.signedUrl;
+                  }, 1500);
                 }, 600);
               }
             }
