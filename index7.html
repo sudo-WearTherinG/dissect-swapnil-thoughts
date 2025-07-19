@@ -40,10 +40,6 @@
         align-items: center;
         overflow: hidden;
         padding: 20px;
-
-        will-change: transform, opacity;
-        backface-visibility: hidden;
-        transform: translateZ(0);
       }
 
       .lock-container {
@@ -56,9 +52,6 @@
         width: 100%;
         max-width: 400px;
         animation: flicker 1.5s infinite alternate;
-
-        will-change: transform, opacity;
-        contain: layout paint style;
       }
 
       h2 {
@@ -67,18 +60,12 @@
         color: #4aff80;
         letter-spacing: 2px;
         transition: all 0.3s ease;
-
-        will-change: transform, opacity;
-        backface-visibility: hidden;
-        transform: translateZ(0);
       }
 
       p {
         font-size: 0.9rem;
         margin-bottom: 1.5rem;
         color: #3aff70;
-
-        contain: layout paint style;
       }
 
       input[type='password'] {
@@ -93,12 +80,9 @@
         outline: none;
         caret-color: #00ff99;
         transition: border-color 0.3s ease, background-color 0.3s ease;
-
-        will-change: transform, opacity;
-        transform: translateZ(0);
-        contain: layout paint style;
       }
 
+      /* Red error style */
       input[type='password'].error {
         border-color: #ff4d4d;
         background-color: rgba(255, 77, 77, 0.1);
@@ -115,33 +99,12 @@
         cursor: pointer;
         box-shadow: 0 0 5px #00ff88;
         transition: all 0.3s ease;
-
-        position: relative;
-        overflow: hidden;
-        animation: breathe 4s ease-in-out infinite, hueShift 10s linear infinite;
-
-        will-change: transform, opacity;
-        transform: translateZ(0);
-        backface-visibility: hidden;
       }
 
       .submit-btn.processing {
         background-color: #00ff88;
         color: #000;
         box-shadow: 0 0 8px #00ff88, 0 0 15px #00ff88;
-      }
-
-      .submit-btn::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -75%;
-        width: 50%;
-        height: 100%;
-        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-        transform: skewX(-20deg);
-        animation: light-sweep 3s linear infinite;
-        pointer-events: none;
       }
 
       .error-msg {
@@ -162,38 +125,23 @@
         animation: glitch 2s infinite;
       }
 
-      .shake {
-        animation: shake 0.5s ease-in-out;
-      }
-
-      .fade-in {
-        animation: fadeIn 0.7s ease-in both;
-      }
-
-      h2.glitch {
-        animation: glitchSwap 0.6s steps(2, end);
-        transform: none;
-      }
-
-      h2.access-granted {
-        color: #0f0;
-        text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0, 0 0 40px #0f0;
-      }
-
-      /* Animations */
       @keyframes glitch {
         0% {
           text-shadow: 1px 1px 0 #00ff88, -1px -1px 0 #000;
         }
+
         25% {
           text-shadow: 2px 0px 0 #00ff88, -2px 0px 0 #000;
         }
+
         50% {
           text-shadow: -1px 2px 0 #00ff88, 1px -2px 0 #000;
         }
+
         75% {
           text-shadow: 2px -2px 0 #00ff88, -2px 2px 0 #000;
         }
+
         100% {
           text-shadow: 0px 0px 0 #00ff88, 0px 0px 0 #000;
         }
@@ -203,58 +151,76 @@
         0% {
           opacity: 1;
         }
+
         50% {
           opacity: 0.95;
         }
+
         100% {
           opacity: 1;
         }
+      }
+
+      .shake {
+        animation: shake 0.5s ease-in-out;
       }
 
       @keyframes shake {
         0% {
           transform: translateX(0);
         }
+
         25% {
           transform: translateX(-5px);
         }
+
         50% {
           transform: translateX(5px);
         }
+
         75% {
           transform: translateX(-5px);
         }
+
         100% {
           transform: translateX(0);
         }
       }
 
-      @keyframes breathe {
-        0%,
-        100% {
-          box-shadow: 0 0 5px #00ff88;
-        }
-        50% {
-          box-shadow: 0 0 15px #00ff88;
-        }
+      .submit-btn {
+        animation: breathe 4s ease-in-out infinite, hueShift 10s linear infinite;
       }
 
-      @keyframes hueShift {
-        0% {
-          filter: hue-rotate(0deg);
-        }
-        100% {
-          filter: hue-rotate(360deg);
-        }
+      .submit-btn {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .submit-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -75%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transform: skewX(-20deg);
+        animation: light-sweep 3s linear infinite;
+        pointer-events: none;
       }
 
       @keyframes light-sweep {
         0% {
           left: -75%;
         }
+
         100% {
           left: 125%;
         }
+      }
+
+      .fade-in {
+        animation: fadeIn 0.7s ease-in both;
       }
 
       @keyframes fadeIn {
@@ -262,10 +228,22 @@
           opacity: 0;
           transform: translateY(20px);
         }
+
         100% {
           opacity: 1;
           transform: translateY(0);
         }
+      }
+
+      /* text change from denied to granted */
+      h2.glitch {
+        animation: glitchSwap 0.6s steps(2, end);
+        transform: none;
+      }
+
+      h2.access-granted {
+        color: #0f0;
+        text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0;
       }
 
       @keyframes glitchSwap {
@@ -273,16 +251,25 @@
           transform: skewX(-5deg);
           opacity: 0.7;
         }
+
         50% {
           transform: skewX(5deg);
           opacity: 0.4;
         }
+
         100% {
           transform: none;
           opacity: 1;
         }
       }
 
+      h2.access-granted {
+        color: #0f0;
+        text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0, 0 0 40px #0f0;
+      }
+
+      /* granted animation */
+      /* granted animation */
       body.fade-out {
         animation: glitchFade 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       }
@@ -294,24 +281,28 @@
           filter: none;
           clip-path: inset(0 0 0 0);
         }
+
         20% {
           clip-path: inset(15% 0 75% 0);
           transform: translate(-6px, -3px) skew(-7deg);
           filter: drop-shadow(3px 0 red);
           opacity: 0.9;
         }
+
         45% {
           clip-path: inset(75% 0 15% 0);
           transform: translate(6px, 3px) skew(7deg);
           filter: drop-shadow(-3px 0 cyan);
           opacity: 0.8;
         }
+
         70% {
           clip-path: inset(0 0 0 0);
           transform: translate(0, 0) skew(0);
           filter: none;
           opacity: 0.5;
         }
+
         100% {
           opacity: 0;
           transform: scale(0.9);
