@@ -51,7 +51,11 @@
         text-align: center;
         width: 100%;
         max-width: 400px;
-        animation: flicker 1.5s infinite alternate;
+
+        animation: flicker 3s infinite alternate; /* Slow it down */
+        animation-timing-function: ease-in-out; /* Smooth easing */
+        will-change: opacity; /* Hint GPU */
+        transform: translateZ(0); /* Force GPU layer */
       }
 
       h2 {
