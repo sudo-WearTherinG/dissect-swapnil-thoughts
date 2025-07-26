@@ -275,45 +275,53 @@
 
       /* WebView uses lighter glitchFade */
       body.webview.fade-out {
-        animation: glitchFade 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        filter: brightness(1.1) contrast(0.9);
-        opacity: 0.8; /* Slightly less opaque during animation */
+        animation: webviewGlitchUpgrade 1.5s ease forwards;
+        filter: brightness(1.05) contrast(0.95);
+      }
+
+      @media (prefers-reduced-motion: reduce), (max-resolution: 150dpi) {
+        body.webview.fade-out {
+          animation: none !important;
+          opacity: 1 !important;
+          filter: none !important;
+        }
       }
 
       /* Optional: tweak keyframes to soften the effect */
-      @keyframes glitchFade {
+      @keyframes webviewGlitchUpgrade {
         0% {
           opacity: 1;
-          transform: none;
           filter: none;
-          clip-path: inset(0 0 0 0);
+          transform: translateX(0) skew(0deg);
+          text-shadow: none;
         }
-
         20% {
-          clip-path: inset(10% 0 65% 0); /* less severe */
-          transform: translate(-3px, -2px) skew(-3deg);
-          filter: drop-shadow(2px 0 red);
-          opacity: 0.95;
-        }
-
-        45% {
-          clip-path: inset(65% 0 10% 0);
-          transform: translate(3px, 2px) skew(3deg);
-          filter: drop-shadow(-2px 0 cyan);
           opacity: 0.9;
+          filter: drop-shadow(2px 0 red);
+          transform: translateX(-2px) skew(-2deg);
+          text-shadow: 2px 0 red;
         }
-
-        70% {
-          clip-path: inset(0 0 0 0);
-          transform: translate(0, 0) skew(0);
+        40% {
+          opacity: 0.85;
+          filter: drop-shadow(-2px 0 cyan);
+          transform: translateX(2px) skew(2deg);
+          text-shadow: -2px 0 cyan;
+        }
+        60% {
+          opacity: 0.9;
+          filter: drop-shadow(1px 0 magenta);
+          transform: translateX(-1px) skew(-1deg);
+          text-shadow: 1px 0 magenta;
+        }
+        80% {
+          opacity: 0.95;
           filter: none;
-          opacity: 0.7;
+          transform: translateX(0) skew(0deg);
+          text-shadow: none;
         }
-
         100% {
           opacity: 0;
           transform: scale(0.95);
-          clip-path: inset(100% 0 0 0);
         }
       }
     </style>
