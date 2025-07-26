@@ -268,27 +268,12 @@
         text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0, 0 0 40px #0f0;
       }
 
-      /* Original glitchFade for all */
+      /* granted animation */
+      /* granted animation */
       body.fade-out {
         animation: glitchFade 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       }
 
-      /* WebView uses lighter glitchFade */
-      body.webview.fade-out {
-        animation: glitchFade 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        filter: brightness(1.1) contrast(0.9);
-        opacity: 0.8; /* Slightly less opaque during animation */
-      }
-
-      @media (prefers-reduced-motion: reduce), (max-resolution: 150dpi) {
-        body.webview.fade-out {
-          animation: none !important;
-          opacity: 1 !important;
-          filter: none !important;
-        }
-      }
-
-      /* Optional: tweak keyframes to soften the effect */
       @keyframes glitchFade {
         0% {
           opacity: 1;
@@ -298,29 +283,29 @@
         }
 
         20% {
-          clip-path: inset(10% 0 65% 0); /* less severe */
-          transform: translate(-3px, -2px) skew(-3deg);
-          filter: drop-shadow(2px 0 red);
-          opacity: 0.95;
+          clip-path: inset(15% 0 75% 0);
+          transform: translate(-6px, -3px) skew(-7deg);
+          filter: drop-shadow(3px 0 red);
+          opacity: 0.9;
         }
 
         45% {
-          clip-path: inset(65% 0 10% 0);
-          transform: translate(3px, 2px) skew(3deg);
-          filter: drop-shadow(-2px 0 cyan);
-          opacity: 0.9;
+          clip-path: inset(75% 0 15% 0);
+          transform: translate(6px, 3px) skew(7deg);
+          filter: drop-shadow(-3px 0 cyan);
+          opacity: 0.8;
         }
 
         70% {
           clip-path: inset(0 0 0 0);
           transform: translate(0, 0) skew(0);
           filter: none;
-          opacity: 0.7;
+          opacity: 0.5;
         }
 
         100% {
           opacity: 0;
-          transform: scale(0.95);
+          transform: scale(0.9);
           clip-path: inset(100% 0 0 0);
         }
       }
