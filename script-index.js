@@ -1,16 +1,3 @@
-// detect web view for animation.
-(function detectWebView() {
-  const userAgent = navigator.userAgent || '';
-  const isWebView =
-    (/(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(userAgent)) || // iOS webview
-    (/; wv\)/i.test(userAgent)) || // Android webview common signature
-    (/Android.*Version\/[\d.]+.*Chrome/i.test(userAgent) && !/Chrome\/[\d.]+/i.test(userAgent)); // alternative Android webview check
-
-  if (isWebView) {
-    document.body.classList.add('webview');
-  }
-})();
-
 
 // Reveal sections on scroll
 document.addEventListener('DOMContentLoaded', () => {
