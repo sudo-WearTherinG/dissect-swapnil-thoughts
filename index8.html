@@ -309,6 +309,23 @@
           clip-path: inset(100% 0 0 0);
         }
       }
+
+      @keyframes smoothFade {
+        0% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.97);
+        }
+      }
+
+      /* WebView gets this simpler animation */
+      body.webview.fade-out {
+        animation: smoothFade 1.2s ease forwards !important;
+        will-change: opacity, transform;
+      }
     </style>
   </head>
 
@@ -400,6 +417,15 @@
           localStorage.setItem('sessionId', sessionId);
         }
         return sessionId;
+      }
+
+      function isWebView() {
+        const ua = navigator.userAgent || '';
+        return /wv|WebView|Android.*AppleWebKit/.test(ua);
+      }
+
+      if (isWebView()) {
+        document.body.classList.add('webview');
       }
 
       async function submitPassword() {
