@@ -268,12 +268,19 @@
         text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0, 0 0 40px #0f0;
       }
 
-      /* granted animation */
-      /* granted animation */
+      /* Original glitchFade for all */
       body.fade-out {
         animation: glitchFade 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       }
 
+      /* WebView uses lighter glitchFade */
+      body.webview.fade-out {
+        animation: glitchFade 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        filter: brightness(1.1) contrast(0.9);
+        opacity: 0.8; /* Slightly less opaque during animation */
+      }
+
+      /* Optional: tweak keyframes to soften the effect */
       @keyframes glitchFade {
         0% {
           opacity: 1;
@@ -283,80 +290,31 @@
         }
 
         20% {
-          clip-path: inset(15% 0 75% 0);
-          transform: translate(-6px, -3px) skew(-7deg);
-          filter: drop-shadow(3px 0 red);
-          opacity: 0.9;
+          clip-path: inset(10% 0 65% 0); /* less severe */
+          transform: translate(-3px, -2px) skew(-3deg);
+          filter: drop-shadow(2px 0 red);
+          opacity: 0.95;
         }
 
         45% {
-          clip-path: inset(75% 0 15% 0);
-          transform: translate(6px, 3px) skew(7deg);
-          filter: drop-shadow(-3px 0 cyan);
-          opacity: 0.8;
+          clip-path: inset(65% 0 10% 0);
+          transform: translate(3px, 2px) skew(3deg);
+          filter: drop-shadow(-2px 0 cyan);
+          opacity: 0.9;
         }
 
         70% {
           clip-path: inset(0 0 0 0);
           transform: translate(0, 0) skew(0);
           filter: none;
-          opacity: 0.5;
+          opacity: 0.7;
         }
 
         100% {
           opacity: 0;
-          transform: scale(0.9);
+          transform: scale(0.95);
           clip-path: inset(100% 0 0 0);
         }
-      }
-
-      @keyframes smoothFade {
-        0% {
-          opacity: 1;
-          transform: scale(1);
-        }
-        100% {
-          opacity: 0;
-          transform: scale(0.97);
-        }
-      }
-
-      @keyframes webviewGlitchFade {
-        0% {
-          opacity: 1;
-          transform: translateX(0) scale(1);
-          filter: none;
-          text-shadow: none;
-        }
-        25% {
-          opacity: 0.85;
-          transform: translateX(-3px) scale(0.98);
-          filter: drop-shadow(2px 0 red);
-          text-shadow: 1px 0 red;
-        }
-        50% {
-          opacity: 0.7;
-          transform: translateX(3px) scale(0.97);
-          filter: drop-shadow(-2px 0 cyan);
-          text-shadow: -1px 0 cyan;
-        }
-        75% {
-          opacity: 0.5;
-          transform: translateX(-2px) scale(0.95);
-          filter: drop-shadow(1px 0 magenta);
-          text-shadow: 1px 0 magenta;
-        }
-        100% {
-          opacity: 0;
-          transform: translateX(0) scale(0.9);
-          filter: none;
-          text-shadow: none;
-        }
-      }
-
-      body.webview.fade-out {
-        animation: webviewGlitchFade 1.5s ease forwards !important;
-        will-change: opacity, transform, filter, text-shadow;
       }
     </style>
   </head>
@@ -449,15 +407,6 @@
           localStorage.setItem('sessionId', sessionId);
         }
         return sessionId;
-      }
-
-      function isWebView() {
-        const ua = navigator.userAgent || '';
-        return /wv|WebView|Android.*AppleWebKit/.test(ua);
-      }
-
-      if (isWebView()) {
-        document.body.classList.add('webview');
       }
 
       async function submitPassword() {
