@@ -321,10 +321,42 @@
         }
       }
 
-      /* WebView gets this simpler animation */
+      @keyframes webviewGlitchFade {
+        0% {
+          opacity: 1;
+          transform: translateX(0) scale(1);
+          filter: none;
+          text-shadow: none;
+        }
+        25% {
+          opacity: 0.85;
+          transform: translateX(-3px) scale(0.98);
+          filter: drop-shadow(2px 0 red);
+          text-shadow: 1px 0 red;
+        }
+        50% {
+          opacity: 0.7;
+          transform: translateX(3px) scale(0.97);
+          filter: drop-shadow(-2px 0 cyan);
+          text-shadow: -1px 0 cyan;
+        }
+        75% {
+          opacity: 0.5;
+          transform: translateX(-2px) scale(0.95);
+          filter: drop-shadow(1px 0 magenta);
+          text-shadow: 1px 0 magenta;
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(0) scale(0.9);
+          filter: none;
+          text-shadow: none;
+        }
+      }
+
       body.webview.fade-out {
-        animation: smoothFade 1.2s ease forwards !important;
-        will-change: opacity, transform;
+        animation: webviewGlitchFade 1.5s ease forwards !important;
+        will-change: opacity, transform, filter, text-shadow;
       }
     </style>
   </head>
