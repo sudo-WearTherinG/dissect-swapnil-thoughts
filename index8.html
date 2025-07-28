@@ -14,10 +14,7 @@
       rel="stylesheet"
     />
     <link rel="icon" href="data:," />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/sudo-WearTherinG/dissect-swapnil-thoughts@main/style-index.css"
-    />
+    <link rel="stylesheet" href="style-index.css" />
     <script
       src="https://cdn.jsdelivr.net/gh/sudo-WearTherinG/dissect-swapnil-thoughts@main/script-index.js"
       defer
@@ -387,39 +384,58 @@
 
       const passwordInput = document.getElementById('passwordInput');
       const errorMsg = document.getElementById('errorMsg');
+
       let currentIndex = 0;
       let charIndex = 0;
       let isDeleting = false;
+      let placeholderTimer = 0;
+      let lastTimestamp = null;
 
-      function typePlaceholder() {
+      function animatePlaceholder(timestamp) {
+        if (!lastTimestamp) lastTimestamp = timestamp;
+        const delta = timestamp - lastTimestamp;
+        lastTimestamp = timestamp;
+        placeholderTimer += delta;
+
+        const typingSpeed = isDeleting ? 30 : 80;
+        const pauseDuration = isDeleting ? 300 : 2000;
+
         const current = placeholders[currentIndex];
         const visibleText = current.substring(0, charIndex);
         const cursor = '_';
         passwordInput.setAttribute('placeholder', visibleText + cursor);
 
-        if (!isDeleting) {
-          if (charIndex < current.length) {
+        if (!isDeleting && charIndex < current.length) {
+          if (placeholderTimer >= typingSpeed) {
             charIndex++;
-            setTimeout(typePlaceholder, 80);
-          } else {
-            setTimeout(() => {
-              isDeleting = true;
-              typePlaceholder();
-            }, 2000);
+            placeholderTimer = 0;
           }
-        } else {
-          if (charIndex > 0) {
+        } else if (!isDeleting && charIndex === current.length) {
+          if (placeholderTimer >= pauseDuration) {
+            isDeleting = true;
+            placeholderTimer = 0;
+          }
+        } else if (isDeleting && charIndex > 0) {
+          if (placeholderTimer >= typingSpeed / 1.5) {
             charIndex--;
-            setTimeout(typePlaceholder, 30);
-          } else {
+            placeholderTimer = 0;
+          }
+        } else if (isDeleting && charIndex === 0) {
+          if (placeholderTimer >= pauseDuration / 2) {
             isDeleting = false;
             currentIndex = (currentIndex + 1) % placeholders.length;
-            setTimeout(typePlaceholder, 300);
+            placeholderTimer = 0;
           }
         }
+
+        requestAnimationFrame(animatePlaceholder);
       }
 
-      typePlaceholder();
+      requestAnimationFrame(animatePlaceholder);
+
+      window.onload = () => {
+        passwordInput.focus();
+      };
 
       let deviceFingerprint = localStorage.getItem('deviceFingerprint');
       if (!deviceFingerprint) {
@@ -511,6 +527,21 @@
             errorMsg.textContent = data.message;
             errorMsg.style.color = 'red';
             triggerInputError();
+
+            // Shake and red flash the H2 "ACCESS DENIED"
+            const h2 = document.getElementById('statusText');
+            h2.textContent = 'ACCESS DENIED';
+            h2.style.color = '#ff3333';
+
+            h2.classList.remove('shake');
+            void h2.offsetWidth; // trigger reflow for animation restart
+            h2.classList.add('shake');
+
+            // revert color back after animation ends (~500ms)
+            setTimeout(() => {
+              h2.style.color = '#4aff80';
+              h2.classList.remove('shake');
+            }, 600);
 
             if (data.playAudio) {
               let audio;
