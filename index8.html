@@ -502,7 +502,8 @@
           if (data.status === 'master') {
             // Show the master message specially — override errors or success
             errorMsg.textContent = data.message;
-            errorMsg.style.color = 'black'; // Master override color — rare and divine
+            // errorMsg.style.color = 'black'; // Master override color — rare and divine - replaced for bottom
+            errorMsg.style.color = data.color || 'black'; // use backend color or black fallback
             unlockButton.classList.remove('processing');
             unlockButton.disabled = false; // re-enable submit button
             // You can add any special animation or UI here if you want
