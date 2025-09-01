@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Backend logging logic wrapped once only
+// Session Tracker v1.4 | collect analytics & device type for analytics and quick server responses + debugging. 
+// No personal data collected or shared with 3rd party.
 (function () {
   function generateRandomID(length = 8) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -90,3 +92,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   logVisitorData();
 })();
+
