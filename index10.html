@@ -52,7 +52,7 @@
         width: 100%;
         max-width: 400px;
         animation: flicker 1.5s infinite alternate;
-		user-select: none; /* prevents text selection */
+        user-select: none; /* prevents text selection */
       }
 
       h2 {
@@ -209,19 +209,19 @@
         animation: light-sweep 3s linear infinite;
         pointer-events: none;
       }
-	  
-	  /* Text selection */
-		::selection {
-		  background: linear-gradient(90deg, rgba(0, 255, 204, 0.5), rgba(0, 255, 170, 0.4));
-		  color: #00ffcc;
-		  text-shadow: 0 0 4px #00ffcc;
-		}
 
-		::-moz-selection {
-		  background: linear-gradient(90deg, rgba(0, 255, 204, 0.5), rgba(0, 255, 170, 0.4));
-		  color: #00ffcc;
-		  text-shadow: 0 0 4px #00ffcc;
-		}
+      /* Text selection */
+      ::selection {
+        background: linear-gradient(90deg, rgba(0, 255, 204, 0.5), rgba(0, 255, 170, 0.4));
+        color: #00ffcc;
+        text-shadow: 0 0 4px #00ffcc;
+      }
+
+      ::-moz-selection {
+        background: linear-gradient(90deg, rgba(0, 255, 204, 0.5), rgba(0, 255, 170, 0.4));
+        color: #00ffcc;
+        text-shadow: 0 0 4px #00ffcc;
+      }
 
       @keyframes light-sweep {
         0% {
@@ -398,6 +398,13 @@
         'Not sure? Try typing a hint...',
         'Nothing to hide...',
       ];
+
+      // preload success audio
+      const successAudio = new Audio(
+        'https://ftlpntiymqcrtcsxfchv.supabase.co/storage/v1/object/public/assets/lock-unlock-1.mp3'
+      );
+      successAudio.volume = 0.6;
+      successAudio.load();
 
       const passwordInput = document.getElementById('passwordInput');
       const errorMsg = document.getElementById('errorMsg');
@@ -582,7 +589,7 @@
               errorMsg.textContent = data.message;
               errorMsg.style.color = 'blue';
               unlockButton.classList.remove('processing');
-              unlockButton.disabled = false; // Re-enable before returning
+              unlockButton.disabled = false;
             } else if (data.signedUrl) {
               errorMsg.textContent =
                 data.message || '🔓 Root access granted. You’re now the system.';
@@ -593,17 +600,21 @@
                 h2.textContent = 'ACCESS GRANTED';
                 h2.classList.remove('access-denied');
                 h2.classList.add('glitch');
-
-                setTimeout(() => {
-                  h2.classList.remove('glitch');
-                  h2.classList.add('access-granted');
-
-                  document.body.classList.add('fade-out');
-                  setTimeout(() => {
-                    window.location.href = data.signedUrl;
-                  }, 1500);
-                }, 600);
               }
+
+              // ✅ Play preloaded success audio
+              successAudio.play().catch(() => {
+                console.warn('Audio play blocked by browser.');
+              });
+
+              setTimeout(() => {
+                h2?.classList.remove('glitch');
+                h2?.classList.add('access-granted');
+                document.body.classList.add('fade-out');
+                setTimeout(() => {
+                  window.location.href = data.signedUrl;
+                }, 1700);
+              }, 600);
             }
           } else {
             errorMsg.textContent = 'Unexpected response. Try again.';
