@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="googlebot" content="noindex, nofollow" />
+    <title>Born Again, Against Our Will</title>
+
+    <!-- Start Of CSS and JS loading. -->
+    <!-- Load CSS from fixed HASH and if failed switch to local file. -->
+    <script>
+      (function () {
+        // --- CSS FILES ---
+        const cssCDN =
+          'https://cdn.jsdelivr.net/gh/sudo-WearTherinG/dissect-swapnil-thoughts@28c9314/style-index.css';
+        const cssLocal = 'style-index.css';
+
+        // Create local fallback, initially disabled
+        const localCSS = document.createElement('link');
+        localCSS.rel = 'stylesheet';
+        localCSS.href = cssLocal;
+        localCSS.disabled = true;
+        document.head.insertBefore(localCSS, document.head.firstChild);
+
+        // Load CDN CSS
+        const cdnCSS = document.createElement('link');
+        cdnCSS.rel = 'stylesheet';
+        cdnCSS.href = cssCDN;
+        cdnCSS.onload = () => console.log(`✅ CSS loaded: ${cssCDN}`);
+        cdnCSS.onerror = () => {
+          console.warn(`❌ CSS failed: ${cssCDN}`);
+          localCSS.disabled = false;
+
+          // check if local CSS actually loads
+          localCSS.onload = () => console.log('⚙️ Local REPO CSS loaded as fallback.');
+          localCSS.onerror = () => console.error('🚨 Both CDN and Local CSS failed to load.');
+        };
+        document.head.appendChild(cdnCSS);
+
+        // --- JS FILES ---
+        const jsCDN =
+          'https://cdn.jsdelivr.net/gh/sudo-WearTherinG/dissect-swapnil-thoughts@28c9314/script-index.js';
+        const jsLocal = 'script-index.js';
+
+        function loadJS(src) {
+          return new Promise(resolve => {
+            const s = document.createElement('script');
+            s.src = src;
+            s.defer = true;
+            s.onload = () => {
+              console.log(`✅ JS loaded: ${src}`);
+              resolve(true);
+            };
+            s.onerror = () => {
+              console.warn(`❌ JS failed: ${src}`);
+              resolve(false);
+            };
+            document.head.appendChild(s);
+          });
+        }
+
+        // JS load with honest fallback logs
+        loadJS(jsCDN).then(success => {
+          if (!success) {
+            loadJS(jsLocal).then(localSuccess => {
+              if (localSuccess) console.log('⚙️ Local REPO JS loaded as fallback.');
+              else console.error('🚨 Both CDN and Local JS failed to load.');
+            });
+          }
+        });
+      })();
+    </script>
+    <!-- End Of CSS and JS loading. -->
+
+    <style>
+      body {
+        background: #111;
+        color: #f5f5f5;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.8;
+        padding: 40px 20px;
+        max-width: 900px;
+        margin: auto;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 2em;
+        color: #00ffcc;
+        margin-bottom: 1.5em;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      p {
+        margin-bottom: 1.4em;
+        font-size: 1.1em;
+        text-align: justify;
+        word-spacing: 0.3em;
+      }
+
+      p::first-letter {
+        font-size: 1.5em;
+        color: #00ffaa;
+        font-weight: bold;
+      }
+
+      /* Text selection */
+      ::selection {
+        background: linear-gradient(90deg, rgba(0, 255, 204, 0.5), rgba(0, 255, 170, 0.4));
+        color: #00ffcc;
+        text-shadow: 0 0 4px #00ffcc;
+      }
+
+      ::-moz-selection {
+        background: linear-gradient(90deg, rgba(0, 255, 204, 0.5), rgba(0, 255, 170, 0.4));
+        color: #00ffcc;
+        text-shadow: 0 0 4px #00ffcc;
+      }
+
+      @media screen and (max-width: 600px) {
+        body {
+          padding: 20px 10px;
+        }
+
+        p {
+          font-size: 1em;
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 1.5s ease-in both;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="fade-in">Lessons We Refuse to Learn</h1>
+
+    <div class="fade-in">
+      <div class="section-divider">
+        <span>I'm Chasing Meaning, Not Money.</span>
+      </div>
+
+      <p>
+        Why do humans chase money? Well, to get a better lifestyle, right? But I think differently.
+        I often ask myself: Why do we exist in the first place? And what happens after death? No one
+        has any idea. I once asked my sister, and she said, “You’re either burned to dust,
+        vaporized, or become worm food.” I said, “Yes, that’s true for the body. But after that...
+        what happens?”
+      </p>
+
+      <p>
+        We know death is unavoidable. You take nothing with you, and all you leave behind are the
+        memories and the things you’ve gained. From here, we have two paths. One is the view my
+        sister holds: that after death, there’s nothing. The other is the path Shree Krishna talks
+        about: that life is a cycle, and death isn’t the end, but a transition to something beyond.
+      </p>
+
+      <p>
+        I’m agnostic. I don’t believe in your Gods, not the ones humans created. People go there to
+        beg, to ask for favors, or when they’re in financial trouble. It’s always the same: always
+        asking for something, always expecting something in return. No one really goes to them for
+        their presence; it’s always to make a complaint, to ask for help, or to demand some sort of
+        favor. It’s like a transactional relationship; one-sided and selfish.
+      </p>
+
+      <p>
+        I never asked them for anything, because I don’t believe in them that way. I don’t even pray
+        to them. For me, it comes from within myself. I don’t need to fold my hands or chant words.
+        I speak to them with my heart, my eyes, and my inner voice. That’s my way.
+      </p>
+
+      <p>
+        Lord Krishna talked about life. That this human experience is temporary, an illusion,
+        something to see through. He spoke about the soul, about how this body isn’t you; it’s just
+        something you’re wearing for now. What matters is what’s behind it. And to find that, you
+        have to look beyond your wants, your image, your attachments. Because the truth isn’t in
+        what you gain, but in what you let go of.
+      </p>
+
+      <p>
+        Your soul keeps changing bodies. That’s what they say. But I always wondered: why? And I
+        think I’ve found the answer. It’s simple, really. In a sense, both the body and the soul are
+        cursed. The body suffers through the hardships of life, and the soul suffers by being forced
+        to move from one body to another. Not because it wants to, but because it hasn’t learned how
+        to break free or let it go...
+      </p>
+
+      <p>
+        So this makes me wonder: why does this keep happening to us? If the soul doesn’t want to
+        return, then why must it? Maybe it’s not punishment, but something unfinished. Something we
+        keep missing. Like a loop we can’t escape because we haven’t understood the lesson. Not just
+        about right and wrong, but about letting go. Of anger, of pride, of wanting. Maybe that’s
+        the only way out.
+      </p>
+
+      <p>Maybe it’s not the answers we find, but the questions we learn to live with.</p>
+
+      <br />
+    </div>
+
+    <div class="button-container">
+      <a href="index3.html" class="nav-button">⟵ Previous</a>
+      <a href="index5.html" class="nav-button">Next ⟶</a>
+    </div>
+
+    <!--  
+  Breadcrumb #5:  
+  I’m not chasing wealth.  
+  I’m chasing meaning.  
+  Everyone runs after comfort,  
+  but I’m still trying to figure out  
+  why we’re even here.  
+  I think I found the answer,  
+  but I don’t know how right I am.  
+  Let me gamble with all I’ve got.  
+-->
+
+    <footer
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        color: #888;
+        font-size: 0.9rem;
+      "
+    >
+      <p style="word-spacing: 0.4em">— Why Do We Exist —</p>
+    </footer>
+  </body>
+</html>
