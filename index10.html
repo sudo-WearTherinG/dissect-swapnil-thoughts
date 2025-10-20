@@ -283,10 +283,17 @@
       }
 
       .submit-btn {
+        margin-top: 1.5rem;
+        padding: 0.5rem 2rem;
+        font-size: 1rem;
+        background: transparent;
+        border: 1px solid #00ff88;
+        color: #00ff88;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 0 5px #00ff88;
+        transition: all 0.3s ease;
         animation: breathe 4s ease-in-out infinite, hueShift 10s linear infinite;
-      }
-
-      .submit-btn {
         position: relative;
         overflow: hidden;
       }
@@ -690,25 +697,42 @@
               errorMsg.style.color = 'green';
               const h2 = document.querySelector('h2');
 
+              // ✅ Play preloaded success audio
+              // ✅ SUCCESS: Flip text and play audio in sync
               if (h2) {
+                // 1. Prepare final visual state
                 h2.textContent = 'ACCESS GRANTED';
                 h2.classList.remove('access-denied');
+
+                // 2. Force reflow to restart animation (safety)
+                h2.classList.remove('glitch');
+                void h2.offsetWidth;
+
+                // 3. Start glitchSwap animation
                 h2.classList.add('glitch');
+
+                // 4. Play audio exactly when glitchSwap finishes
+                function onGlitchEnd() {
+                  successAudio.currentTime = 0;
+                  successAudio.play().catch(() => console.warn('Audio play blocked by browser.'));
+
+                  h2.removeEventListener('animationend', onGlitchEnd);
+
+                  // Apply final visual state
+                  h2.classList.remove('glitch');
+                  h2.classList.add('access-granted');
+
+                  // Fade out body
+                  document.body.classList.add('fade-out');
+
+                  // Redirect after fade-out
+                  setTimeout(() => {
+                    window.location.href = data.signedUrl;
+                  }, 1700);
+                }
+
+                h2.addEventListener('animationend', onGlitchEnd);
               }
-
-              // ✅ Play preloaded success audio
-              successAudio.play().catch(() => {
-                console.warn('Audio play blocked by browser.');
-              });
-
-              setTimeout(() => {
-                h2?.classList.remove('glitch');
-                h2?.classList.add('access-granted');
-                document.body.classList.add('fade-out');
-                setTimeout(() => {
-                  window.location.href = data.signedUrl;
-                }, 1700);
-              }, 600);
             }
           } else {
             errorMsg.textContent = 'Unexpected response. Try again.';
@@ -767,6 +791,9 @@
      must have left them here just for you.
      Password: restinpeace
      Password: goodbyehelloworld
+	 Password: myimagevault
+	 Password: whatislife
+	 Password: theexistentialone
    -->
   </body>
 </html>
