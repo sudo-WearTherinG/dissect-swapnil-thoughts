@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="googlebot" content="noindex, nofollow" />
+    <title>I Don’t Remember Signing Up for This</title>
+
+    <!-- Start Of CSS and JS loading. -->
+    <!-- Load CSS from fixed HASH and if failed switch to local file. -->
+	
+	<!-- // v2 - give CDN a bit more time if it's not totally garbage -->
+
+    <script>
+      (async function loadAssetsWithFallback() {
+        const assets = {
+          js: {
+            cdn: 'https://cdn.jsdelivr.net/gh/sudo-WearTherinG/dissect-swapnil-thoughts@28c9314/script-index.js',
+            local: 'script-index.js',
+          },
+          css: {
+            cdn: 'https://cdn.jsdelivr.net/gh/sudo-WearTherinG/dissect-swapnil-thoughts@28c9314/style-index.css',
+            local: 'style-index.css',
+          },
+        };
+
+        const CDN_TIMEOUT = 2500; // v2 - give CDN a bit more time if it's not totally garbage
+
+        async function loadResource(type, url, timeout = CDN_TIMEOUT) {
+          return new Promise(resolve => {
+            const existing = document.querySelector(
+              type === 'js' ? `script[src="${url}"]` : `link[href="${url}"]`
+            );
+            if (existing) return resolve(true);
+
+            let el,
+              settled = false;
+
+            if (type === 'js') {
+              el = document.createElement('script');
+              el.src = url;
+              el.defer = true;
+            } else {
+              el = document.createElement('link');
+              el.rel = 'stylesheet';
+              el.href = url;
+            }
+
+            if (url.startsWith('https://cdn.')) el.crossOrigin = 'anonymous';
+
+            const fail = reason => {
+              if (!settled) {
+                console.error(`❌ ${reason}: ${url}`);
+                settled = true;
+                resolve(false);
+              }
+            };
+
+            const timeoutId = setTimeout(() => fail('Timeout'), timeout);
+
+            el.onload = () => {
+              if (!settled) {
+                clearTimeout(timeoutId);
+                console.log(`✅ Loaded: ${url}`);
+                settled = true;
+                resolve(true);
+              }
+            };
+
+            el.onerror = () => {
+              clearTimeout(timeoutId);
+              fail('Load error');
+            };
+
+            document.head.insertBefore(el, document.head.querySelector('style'));
+          });
+        }
+
+        // Load CSS first (avoid FOUC)
+        const cssLoaded = await loadResource('css', assets.css.cdn);
+        if (!cssLoaded) {
+          console.warn('↩️ Falling back to local CSS...');
+          const localCSS = await loadResource('css', assets.css.local);
+          if (localCSS) console.log('⚙️ Local CSS loaded as fallback.');
+          else console.error('🚨 Both CDN and Local CSS failed.');
+          await new Promise(r => setTimeout(r, 100)); // let browser apply CSS
+        }
+
+        // Then load JS
+        const jsLoaded = await loadResource('js', assets.js.cdn);
+        if (!jsLoaded) {
+          console.warn('↩️ Falling back to local JS...');
+          const localJS = await loadResource('js', assets.js.local);
+          if (localJS) console.log('⚙️ Local JS loaded as fallback.');
+          else console.error('🚨 Both CDN and Local JS failed.');
+        }
+      })();
+    </script>
+
+    <!-- End Of CSS and JS loading. -->
+
+
+    <style>
+      body {
+        background: #111;
+        color: #f5f5f5;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.8;
+        padding: 40px 20px;
+        max-width: 900px;
+        margin: auto;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 2em;
+        color: #00ffcc;
+        margin-bottom: 1.5em;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      p {
+        margin-bottom: 1.4em;
+        font-size: 1.1em;
+        text-align: justify;
+        word-spacing: 0.3em;
+      }
+
+      p::first-letter {
+        font-size: 1.5em;
+        color: #00ffaa;
+        font-weight: bold;
+      }
+
+      /* Text selection */
+      ::selection {
+        background: linear-gradient(90deg, rgba(0, 255, 204, 0.5), rgba(0, 255, 170, 0.4));
+        color: #00ffcc;
+        text-shadow: 0 0 4px #00ffcc;
+      }
+
+      ::-moz-selection {
+        background: linear-gradient(90deg, rgba(0, 255, 204, 0.5), rgba(0, 255, 170, 0.4));
+        color: #00ffcc;
+        text-shadow: 0 0 4px #00ffcc;
+      }
+
+      @media screen and (max-width: 600px) {
+        body {
+          padding: 20px 10px;
+        }
+
+        p {
+          font-size: 1em;
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 1.5s ease-in both;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="fade-in">Paid in Promises, Living on Hope</h1>
+
+    <div class="fade-in">
+      <div class="section-divider">
+        <span>Maybe The Answers I Seek Are Not Here.</span>
+      </div>
+
+      <p>
+        What “Success” Means Here vs There? They say you made it if you have the car, the title, the
+        lifestyle. But that’s only here. That’s success in a world built on illusions. What about
+        there, in the after-life, if it’s even true? What if success for the soul isn’t about what
+        you gain, but about what you no longer need? What if it’s about walking away lighter,
+        emptier, freer? If you still need to hold on to something, if you’re still bound, maybe
+        you’re coming back here again, until you learn to let go.
+      </p>
+
+      <p>
+        And if the point of life here is just chasing comfort, power, and recognition, I want no
+        part of it. The material world offers nothing worth running for anymore. I’m looking for
+        something bigger, even if it costs me everything. Maybe it’s not even in this world.
+      </p>
+
+      <p>
+        When you feel like everything you desire is pointless and leads to nothing real, that’s when
+        the soul stops wanting and leaves with no attachments. That’s the real win.
+      </p>
+
+      <p>
+        What if You’re Close to the End? Sometimes I wonder... maybe the reason I’m even thinking
+        like this, questioning all of it, is because I’m close. Not close like dying, but close to
+        understanding. Close to cracking the code. What if the moment you start asking “why am I
+        here?” that’s when you’re finally ready to leave?
+      </p>
+
+      <p>
+        I know, it might sound like a fairytale. Something that doesn’t quite fit with the reality
+        we know. But there’s this feeling I can’t shake. A quiet truth, almost hidden, that makes me
+        think maybe it's not all just random. Maybe the real question isn’t about what you’ve done
+        in this life, but about what you’re ready to let go of. And if you think this is just a
+        delusion of mine, then explain this: why do we keep gods in our homes? Why pray, offer, and
+        hold onto something if none of it matters?
+      </p>
+
+      <br />
+
+      <div class="section-divider">
+        <span>Why Are You Here? Spoiler: They Decided</span>
+      </div>
+
+      <p>
+        There’s only one way into this world. You’re born without choosing, thrown into a world
+        already running, already decided. They hand you a name, teach you how to sit, smile, obey.
+        And before you even understand what you are, they’ve already mapped out your life: school,
+        job, marriage, bills, maybe a vacation or two if you’re lucky, then die quietly. That’s what
+        they call normal.
+      </p>
+
+      <p>
+        But why does normal feel so hollow? Why are there a thousand ways to leave this world but
+        only one way to enter it? Why does waking up every day feel like playing a part you never
+        auditioned for? And deep down, why does everything feel like survival, not living?
+      </p>
+
+      <p>
+        You scroll, you work, you laugh when you’re supposed to, but it’s like something real is
+        missing. And no one talks about it. Maybe that’s why we pray. Not because we’re devout, but
+        because some part of us is tired. Tired of pretending this is enough. Tired of not knowing
+        if it ever gets better. Tired of being here and not knowing why.
+      </p>
+
+      <p>Tell me, why do you exist other than following a script which they handed you?</p>
+
+      <p>One question. One answer. One life. One soul.</p>
+
+      <br />
+    </div>
+
+    <div class="button-container">
+      <a href="index4.html" class="nav-button">⟵ Previous</a>
+      <a href="index6.html" class="nav-button">Next ⟶</a>
+    </div>
+
+    <!--  
+  Breadcrumb #6:  
+  We know we are born into this with no say.  
+  But no one asked me.  
+  A name, a script, a system—  
+  handed over before I could even think.  
+  I don’t want the life they mapped out.  
+  I’m not chasing titles or comfort.  
+  I’m trying to understand what this even is.  
+  Maybe the answers aren’t here.  
+  But I’ll keep digging anyway.  
+  My questions make people uncomfortable.  
+  Like I’m pulling at threads they’ve taped over.  
+  I shared my these pages with other's
+  they read it, then vanished.  
+  Like I said too much,  
+  or reminded them of what they avoid.  
+  so why they have no problem asking me,
+  why don't I have a job?
+-->
+
+    <footer
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        color: #888;
+        font-size: 0.9rem;
+      "
+    >
+      <p style="word-spacing: 0.4em">— I'm Dissecting Human Source Code —</p>
+    </footer>
+  </body>
+</html>
