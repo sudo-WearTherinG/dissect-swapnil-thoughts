@@ -136,11 +136,46 @@
         font-weight: bold;
       }
 
-      .pass-key {
-        color: #00cc66;
+      /* pass-key-container and keys */
+      .pass-key-container {
+        display: flex;
+        flex-wrap: nowrap; /* force a single line */
+        gap: 0.6em; /* breathing room */
+        overflow-x: auto; /* horizontal scroll */
+        -webkit-overflow-scrolling: touch; /* smooth iOS/Android scroll */
+        padding-bottom: 0.2em; /* avoid text hitting scrollbar */
+        margin-top: 1.2em; /* separation from paragraph */
+        scrollbar-width: thin; /* Firefox */
+        scrollbar-color: rgba(0, 255, 170, 0.3) transparent; /* subtle scrollbar */
       }
 
-      /* Text selection */
+      .pass-key-container::-webkit-scrollbar {
+        height: 6px;
+      }
+
+      .pass-key-container::-webkit-scrollbar-thumb {
+        background: rgba(0, 255, 170, 0.3);
+        border-radius: 3px;
+      }
+
+      .pass-key {
+        flex: 0 0 auto; /* no shrinking, stays on one line */
+        background: rgba(0, 255, 170, 0.08);
+        color: #00ffcc;
+        padding: 0.2em 0.5em;
+        border-radius: 4px;
+        font-weight: 500;
+        font-size: 0.95em;
+        transition: background 0.2s, transform 0.2s;
+        white-space: nowrap;
+      }
+
+      .pass-key:hover {
+        background: rgba(0, 255, 170, 0.15);
+        transform: translateY(-1px);
+      }
+
+      /* Text selection*/
       ::selection {
         background: linear-gradient(90deg, rgba(0, 255, 204, 0.5), rgba(0, 255, 170, 0.4));
         color: #00ffcc;
@@ -270,18 +305,14 @@
         that feels honest. This part is for them. For the minds living between questions, for the
         hearts that beat quieter than the world expects. If you’ve ever felt meaning where others
         see only moments, these fragments are yours:
-
-        <br />
-        [
-        <span class="pass-key">whatislife</span>
-        ] [
-        <span class="pass-key">theexistentialone</span>
-        ] [
-        <span class="pass-key">thequiteintrovert</span>
-        ]
       </p>
 
-      <br />
+      <div class="pass-key-container">
+        <span class="pass-key">whatislife</span>
+        <span class="pass-key">theexistentialone</span>
+        <span class="pass-key">thequiteintrovert</span>
+        <span class="pass-key">lettheworldburn</span>
+      </div>
     </div>
 
     <div class="button-container">
@@ -310,5 +341,3 @@
     </footer>
   </body>
 </html>
-
-
