@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta
+      name="description"
+      content="Swapnil's mind lockscreen. Enter the key to access thoughts and insights and private letters."
+    />
+    <title>.: Access The Mind :.</title>
+    <link rel="icon" href="data:," />
+
+    <!-- Load CSS & JS from local files. -->
+    <link rel="stylesheet" href="assets/css/lockscreen.css" />
+    <script src="assets/js/lockscreen.js" defer></script>
+    <script src="assets/js/script-index.js" defer></script>
+    <!-- End Of CSS and JS loading. -->
+  </head>
+
+  <body>
+    <script>
+      function isWebView() {
+        const ua = navigator.userAgent || '';
+        if (/Android/.test(ua)) {
+          return /\bwv\b/.test(ua) || (!/Version\/[\d\.]+.*Safari/.test(ua) && /Chrome/.test(ua));
+        }
+        if (/iPhone|iPad|iPod/.test(ua)) {
+          return !/Safari/.test(ua);
+        }
+        return false;
+      }
+
+      if (isWebView()) {
+        document.body.classList.add('webview');
+      }
+    </script>
+    <main>
+      <div class="fade-in">
+        <div class="lock-container glitch">
+          <h2 id="statusText" class="access-denied">ACCESS DENIED</h2>
+          <p>“Swapnil's mind is locked. The key is all you need. Did he give it to you?”</p>
+          <form
+            autocomplete="off"
+            onsubmit="
+              submitPassword();
+              return false;
+            "
+          >
+            <input
+              type="text"
+              name="username"
+              autocomplete="username"
+              tabindex="-1"
+              style="position: absolute; left: -9999px"
+            />
+            <input
+              type="password"
+              id="passwordInput"
+              placeholder="Type the word..."
+              maxlength="17"
+              autocomplete="off"
+            />
+            <button type="submit" class="submit-btn">UNLOCK</button>
+          </form>
+          <div class="error-msg" id="errorMsg"></div>
+        </div>
+        <div class="button-container">
+          <a href="index9.html" class="nav-button">⟵ Previous</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Password Hints... for public pages.
+
+    Oh look, you knew where to look,
+     must have left them here just for you.
+	   Use direct links if API of password page stops working.
+     in case of something unexpected.
+
+     Same project available on:
+    { https://reddit-7u8kqmctjg7u8kqmce39rszg7u8kqm.netlify.app }
+    { https://sudo-wearthering.github.io/dissect-swapnil-thoughts/index.html }
+
+
+    Android version of the same project, packaged as a simple WebView wrapper for the website.
+    The APK is not distributed via the Play Store, so 'Google Play Protect' may display a generic warning for sideloaded apps.
+    This is expected behavior for apps installed outside the Play Store.
+    { https://ftlpntiymqcrtcsxfchv.supabase.co/storage/v1/object/public/applications/monologue_github_master.apk }
+
+    These are public access keys...
+
+	 Password: goodbyehelloworld
+	 { https://gbw-p9x1m3v5-t6y0c7d2e8b4u1z3n9w5r6q7.netlify.app/ }
+
+	 Password: whatislife
+	 { https://wil-n4t1y0z3-v7x8m2w5r9k0u1s6i4o7d3c8.netlify.app/ }
+
+	 Password: thefabricatedlife
+	 { https://fm-9zq02xf7rkl5ptn3ywc1bj4sd6mh0qevxb.netlify.app/ }
+
+	 Password: theexistentialone
+	 { https://teo-7b0nyl2grmqc6zwvea9dxjkihf48tp1sh.netlify.app/ }
+
+	 Password: thequiteintrovert
+	 { https://lfp-wgj8ry9e0nlz1xxk2akuv6ca4pfh5msqr.netlify.app/ }
+
+	 Password: lettheworldburn
+	 { https://ltwb-d84c73a10bf5e98c412ad7e60b321fd8.netlify.app/ }
+
+	 Password: myimagevault
+	 { https://miv-93vdz8mu10xlkfp0r4wnbes62gtjvch9i.netlify.app/ }
+
+	 Password: joinmeonmybench
+	 { https://swm-4v3qz9b5m1x6r7v3p0f2n8t4j1s6g9b0c.netlify.app/ }
+
+	 Password: restinpeace
+	 { https://shrine-wymr92pxh7q5nbts8c06lezoifkvd2.netlify.app/ }
+   -->
+  </body>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>Prologue : Alienated – Dissect Swapnil Thoughts</title>
+    <meta
+      name="description"
+      content="A detached prologue exploring human behavior, societal illusions, personal alienation, and the quiet collapse beneath modern life."
+    />
+
+    <!-- Load CSS & JS from local files. -->
+    <script src="assets/js/script-index.js" defer></script>
+    <!-- End Of CSS and JS loading. -->
+
+    <style>
+      body {
+        margin: 0;
+        padding: 60px 20px;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        background: linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+        color: #bbb;
+        font-family: 'Consolas', 'Courier New', monospace, 'Segoe UI', Tahoma, Geneva, Verdana,
+          sans-serif;
+      }
+
+      .nowrap {
+        white-space: nowrap;
+      }
+
+      main {
+        max-width: 680px;
+        width: 90vw;
+        background: #181818;
+        padding: 30px 40px;
+        border-left: 5px solid #444;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+        user-select: text;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        margin: 0 0 1em;
+        color: #44d9b6;
+        font-weight: 700;
+        font-size: 2.2rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      p {
+        margin-bottom: 1.3em;
+        line-height: 1.7;
+        font-size: 1.15rem;
+        letter-spacing: 0.03em;
+        color: #999;
+      }
+
+      p strong {
+        color: #bbb;
+      }
+
+      /* Minimal reset for buttons */
+      button,
+      .btn {
+        all: unset; /* nukes default styles */
+        display: inline-block;
+        padding: 12px 28px;
+        background: #2f3a36;
+        color: #8fd8cc;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border-radius: 5px;
+        box-shadow: 0 0 8px #1f2a27aa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        user-select: none;
+        cursor: pointer;
+        transition: background 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;
+        animation: slowBreath 4s ease-in-out infinite;
+        border: 1px solid #3e544d;
+        text-align: center;
+        box-sizing: border-box;
+      }
+
+      /* Hover/focus states */
+      .btn::after {
+        content: ' ➞';
+        font-weight: 700;
+        font-size: 1.1em;
+        transition: transform 0.3s ease;
+        display: inline-block;
+        margin-left: 6px;
+        vertical-align: middle;
+      }
+
+      .btn:hover::after {
+        transform: translateX(5px);
+      }
+
+      /* Responsive tweak */
+      @media (max-width: 480px) {
+        button,
+        .btn {
+          padding: 10px 22px;
+          font-size: 0.9rem;
+          letter-spacing: 0.08em;
+        }
+      }
+
+      /* Breathing animation */
+      @keyframes slowBreath {
+        0%,
+        100% {
+          box-shadow: 0 0 6px #1f2a27aa;
+          background-color: #2f3a36;
+        }
+        50% {
+          box-shadow: 0 0 14px #5db2a1cc;
+          background-color: #374f48;
+        }
+      }
+
+      #emotion-word {
+        transition: opacity 0.5s ease;
+      }
+
+      .fade-in {
+        animation: fadeIn 1.5s ease-in both;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 40px 10px;
+        }
+        main {
+          padding: 20px 25px;
+          border-left-width: 3px;
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+        }
+        h1 {
+          font-size: 1.8rem;
+          letter-spacing: 0.15em;
+        }
+        p {
+          font-size: 1rem;
+          line-height: 1.5;
+          color: #aaa;
+        }
+      }
+
+      .intro-subtitle {
+        font-family: 'Courier New', monospace;
+        font-weight: 600;
+        font-size: 1.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: #ccc;
+        user-select: none;
+        margin-bottom: 1rem;
+      }
+
+      ::selection {
+        background: #44d9b6; /* teal glow */
+        color: #121212; /* dark text for contrast */
+      }
+
+      ::-moz-selection {
+        background: #44d9b6;
+        color: #121212;
+      }
+
+      .glitch-fade {
+        position: relative;
+        color: #aaa;
+        animation: fadeIn 2s ease forwards;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          filter: blur(2px);
+          transform: translateY(-10px);
+        }
+        100% {
+          opacity: 1;
+          filter: blur(0);
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="fade-in">
+      <h1>PROLOGUE</h1>
+      <h3 id="study-heading" class="intro-subtitle glitch-fade">
+        The Study Of,
+        <span id="emotion-word"><span class="nowrap">Distance.</span></span>
+      </h3>
+
+      <p>
+        I watch humans like a child watches ants, fascinated, curious, confused, wondering why they
+        never stop carrying things back to a place that never changes.
+      </p>
+      <p>What I found was not what I expected.</p>
+      <p>
+        This world, this so-called civilization, is a patchwork of broken promises and manufactured
+        desperation.
+        <br />
+        A system built on habits, rituals, illusions, routines and scripts.
+      </p>
+      <p>
+        Progress? Maybe.
+        <br />
+        But progress towards what? A better cage?
+      </p>
+      <p>
+        They sell comfort, success, meaning, but all I see are shadows playing on walls.
+        <br />
+        People chasing ghosts in crowded rooms, clapping at illusions.
+      </p>
+      <p>
+        <strong>I’m an outsider looking in.</strong>
+        <br />
+        A student of a society obsessed with degrees, salaries, and status, none of which I ever
+        cared for.
+        <br />
+      </p>
+      <p>
+        No fanfare. No grand revelations.
+        <br />
+        Just quiet observations and a sinking feeling.
+      </p>
+      <p>
+        This is what the world offers.
+        <br />
+        Nothing more. Nothing less.
+      </p>
+      <p>
+        And to the ones still clinging-
+        <br />
+        To the 9-to-5 grind parent,
+        <br />
+        chasing promotions like gods,
+        <br />
+        hoping purpose waits at the end of the week.
+        <br />
+        To the believers of systems,
+        <br />
+        rules, ranks, rituals-
+        <br />
+        who mistake obedience for progress.
+        <br />
+        To those who keep going
+        <br />
+        not because they want to,
+        <br />
+        but because they forgot how to stop.
+      </p>
+      <p>
+        *I’m not judging.*
+        <br />
+        *I’m just watching.*
+        <br />
+        *And wondering if they see it too.*
+      </p>
+      <p>Maybe they think I’m the strange one. Maybe they’re right.</p>
+      <p>
+        Humans mimic concern.
+        <br />
+        But the behavior shows detachment.
+        <br />
+        Patterns matter more than people.
+      </p>
+      <p>
+        I don’t feel like I belong here.
+        <br />
+        But I’ve learned to watch from the edges - just waiting to fall.
+      </p>
+
+      <p style="text-align: center; margin-top: 2em">
+        <a href="index1.html" class="btn">Click To Continue</a>
+      </p>
+    </main>
+    <script>
+      const words = [
+        'Distance',
+        'Silence',
+        'Anger',
+        'Sadness',
+        'Loss',
+        'Love',
+        'Falling In Love',
+        'Fondness',
+        'Regret',
+        'Feelings',
+        'Emptiness',
+        'Betrayal',
+        'Grief',
+        'Nostalgia',
+        'Hope',
+        'Fear',
+        'Despair',
+        'Pain',
+        'Being Broken',
+        'Obsessions',
+        'Trust',
+        'Being Judged',
+        'Being Unique',
+        'Being Alive',
+        'This Is Enough',
+        'I Felt Everything.',
+        'I lived it all',
+        'Human Life',
+        'End.',
+      ];
+      const wordEl = document.getElementById('emotion-word');
+      let index = 0;
+
+      setInterval(() => {
+        wordEl.style.opacity = 0;
+        setTimeout(() => {
+          index = (index + 1) % words.length;
+          const word = words[index];
+          const needsDot = !word.endsWith('.') && !['End', 'I Felt Everything'].includes(word);
+          const displayWord = needsDot ? `${word}.` : word;
+          wordEl.innerHTML = `<span class="nowrap">${displayWord}</span>`;
+          wordEl.style.opacity = 1;
+        }, 500);
+      }, 2500);
+    </script>
+    <!--
+  Breadcrumb #1:
+  Alone, I’m quiet,
+  a space they don’t reach.
+  Around others, I change how I act,
+  doing what they expect,
+  hiding what I really need.
+  It’s not pretending.
+  It’s figuring out how to get by,
+  on a planet that they call home,
+  where noise is what keeps them comfortable,
+  and grind which give them meaning.
+-->
+
+    <!-- same project:
+  { https://reddit-7u8kqmctjg7u8kqmce39rszg7u8kqm.netlify.app }
+  { https://sudo-wearthering.github.io/dissect-swapnil-thoughts/index.html }
+    -->
+  </body>
+</html>
