@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="googlebot" content="noindex, nofollow" />
+    <title>Fourteen Years in Plain Sight</title>
+
+    <!-- Load CSS & JS from local files. -->
+    <script src="../assets/js/script-index.js" defer></script>
+    <!-- End Of CSS and JS loading. -->
+
+    <style>
+      @font-face {
+        font-family: "Courier Prime";
+        src: url("./assets/fonts/CourierPrime-Bold.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Courier Prime";
+        src: url("./assets/fonts/CourierPrime-Regular.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #0a0a0a;
+        color: #eee;
+        font-family: "Courier Prime", monospace;
+        line-height: 1.6;
+        overflow-x: hidden;
+        overflow-y: auto;
+        cursor: none;
+        min-height: 100%;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 60px 20px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        z-index: 2;
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
+      }
+
+      .line {
+        font-size: 1.2rem;
+        margin: 0;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
+      }
+
+      .line.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .glitch-word {
+        color: #ff4c4c;
+        font-weight: bold;
+        display: inline-block;
+        position: relative;
+        animation: glitch 2s infinite;
+        cursor: pointer;
+      }
+
+      .glitch-word:hover {
+        text-shadow:
+          0 0 6px #ff4c4c,
+          0 0 12px #ff4c4c;
+        transform: scale(1.05);
+        transition: all 0.3s ease;
+      }
+
+      @keyframes glitch {
+        0% {
+          transform: translate(0, 0) skew(0deg);
+          opacity: 1;
+        }
+        20% {
+          transform: translate(-1px, 1px) skew(-2deg);
+          opacity: 0.6;
+        }
+        40% {
+          transform: translate(1px, -1px) skew(1deg);
+          opacity: 0.8;
+        }
+        60% {
+          transform: translate(-2px, 0) skew(3deg);
+          opacity: 0.5;
+        }
+        80% {
+          transform: translate(1px, 2px) skew(-1deg);
+          opacity: 0.7;
+        }
+        100% {
+          transform: translate(0, 0) skew(0deg);
+          opacity: 1;
+        }
+      }
+
+      .stanza-break {
+        text-align: center;
+        margin: 1.2rem 0;
+        color: #666;
+        letter-spacing: 6px;
+        font-size: 1.2rem;
+        position: relative;
+      }
+
+      .stanza-break::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(to right, transparent, #555, transparent);
+        margin-top: 4px;
+        opacity: 0.5;
+      }
+
+      .closing {
+        margin-top: 2rem;
+        font-size: 1rem;
+        font-style: italic;
+        color: #aaa;
+        text-align: center;
+        animation: glowClosing 2s ease-in-out infinite alternate;
+      }
+
+      @keyframes glowClosing {
+        from {
+          text-shadow: 0 0 3px #888;
+        }
+        to {
+          text-shadow: 0 0 8px #aaa;
+        }
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #ff4c4c;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        transition: transform 0.1s linear;
+        z-index: 9999;
+      }
+
+      .particles,
+      .particles-back {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .particle,
+      .particle-back {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(216, 11, 11, 0.05);
+        box-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
+      }
+
+      /* soft-gap for readability */
+      .soft-gap {
+        display: block;
+        height: 1.2rem;
+      }
+
+      @media (max-width: 600px) {
+        .line {
+          font-size: 1rem;
+        }
+        .stanza-break {
+          font-size: 1rem;
+          letter-spacing: 4px;
+        }
+        .container {
+          padding: 80px 20px;
+          border-radius: 10px;
+        }
+        .soft-gap {
+          height: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="particles"></div>
+    <div class="particles-back"></div>
+
+    <div class="container" id="textContainer">
+      <p class="line">Dropping my mask... 🎭</p>
+      <span class="soft-gap"></span>
+
+      <p class="line">
+        What's the perfect place to hide? For me, it's always been in
+        <span class="glitch-word">Plain Sight</span>
+        and behind polite
+        <span class="glitch-word">Smiles</span>
+        .
+      </p>
+      <span class="soft-gap"></span>
+
+      <p class="line">
+        What did it cost me? 14 pages. 14 years after trauma, first 6 years
+        alone in a room under the same roof. Detachment became habit.
+      </p>
+      <span class="soft-gap"></span>
+
+      <p class="line">
+        9 years of existential crisis. Living in Solitude became normal.
+      </p>
+      <span class="soft-gap"></span>
+
+      <p class="line">
+        1 year turning it all into words for a certain someone in Poddar to
+        read.
+      </p>
+      <span class="soft-gap"></span>
+
+      <p class="line">Someday, I hope IT really gets me. ❤️🤞</p>
+      <span class="soft-gap"></span>
+
+      <p class="line">
+        If someone asked, I’d say Soul Connection… the kind of feeling that
+        quietly holds you.
+      </p>
+      <span class="soft-gap"></span>
+
+      <p class="line">
+        All Platonic, yet it feels like someone finally sees you.
+      </p>
+      <span class="soft-gap"></span>
+
+      <p class="line">
+        It wasn’t romantic to be sacred. Not a love story. A connection.
+      </p>
+      <span class="soft-gap"></span>
+
+      <div class="stanza-break">____ x __ X ____</div>
+
+      <p class="line">
+        I don’t chase. I observe. I exist quietly between chaos and silence.
+      </p>
+      <span class="soft-gap"></span>
+
+      <p class="line">
+        I don’t want what everyone else is running after. They chase money,
+        fame, power, and eventually sustain themselves on what they’ve gathered.
+        I’m not built for that. I want answers.
+      </p>
+      <span class="soft-gap"></span>
+
+      <p class="line">
+        I want to understand life, not own it. Let them chase gold. I’ll chase
+        the questions, even if it’s silent or tough.
+      </p>
+      <span class="soft-gap"></span>
+
+      <p class="line">
+        I don't belong here. Because nothing holds me here. I walk with myself.
+      </p>
+      <span class="soft-gap"></span>
+
+      <p class="line">
+        Because others are not like me. Because our paths are different. One
+        leads to stay and chase shiny things, and the other teaches me to leave
+        and find.
+      </p>
+      <span class="soft-gap"></span>
+
+      <p class="line">For me, leaving always meant dying.</p>
+      <span class="soft-gap"></span>
+
+      <p class="line">
+        <span class="glitch-word">Death said to me:</span>
+        “To find a silence so complete it feels like home.”
+      </p>
+      <span class="soft-gap"></span>
+
+      <div class="stanza-break">____ x __ X ____</div>
+
+      <p class="line">Funny, isn't it?</p>
+      <span class="soft-gap"></span>
+
+      <p class="line">
+        They talk about God in the human realm, but are afraid of one thing that
+        gets them closer to them whom they seek.
+      </p>
+      <span class="soft-gap"></span>
+
+      <p class="line">
+        They pray to meet their maker but tremble at the only door that leads
+        there.
+      </p>
+      <span class="soft-gap"></span>
+
+      <p class="line">Goodbye, YOU.</p>
+      <span class="soft-gap"></span>
+
+      <p class="line">
+        Or should I say...
+        <span class="glitch-word">Goodnight?</span>
+      </p>
+
+      <div class="closing">— From the quiet observer</div>
+    </div>
+
+    <script>
+      // Scroll reveal
+      const lines = document.querySelectorAll(".line");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.1 },
+      );
+      lines.forEach((line) => observer.observe(line));
+
+      // Particle creation
+      const particleContainer = document.querySelector(".particles");
+      const particleBack = document.querySelector(".particles-back");
+
+      function createParticles(
+        container,
+        count,
+        sizeMin,
+        sizeMax,
+        speedMin,
+        speedMax,
+      ) {
+        for (let i = 0; i < count; i++) {
+          const p = document.createElement("div");
+          p.classList.add(
+            container === particleContainer ? "particle" : "particle-back",
+          );
+          const size = sizeMin + Math.random() * (sizeMax - sizeMin);
+          p.style.width = p.style.height = size + "px";
+          p.style.left = Math.random() * 100 + "vw";
+          p.style.top = Math.random() * 100 + "vh";
+          const duration = speedMin + Math.random() * (speedMax - speedMin);
+          p.style.animation = `float${
+            container === particleContainer ? "" : "Back"
+          } ${duration}s linear infinite`;
+          container.appendChild(p);
+        }
+      }
+      createParticles(particleContainer, 150, 1, 3, 6, 12);
+      createParticles(particleBack, 80, 2, 5, 15, 30);
+
+      const styleEl = document.createElement("style");
+      styleEl.innerHTML = `
+@keyframes float{0%{transform:translateY(100vh) translateX(0);opacity:0;}50%{opacity:0.3;}100%{transform:translateY(-10vh) translateX(50px);opacity:0;}}
+@keyframes floatBack{0%{transform:translateY(100vh) translateX(0);opacity:0;}50%{opacity:0.2;}100%{transform:translateY(-20vh) translateX(-50px);opacity:0;}}
+      `;
+      document.head.appendChild(styleEl);
+
+      document.addEventListener("mousemove", (e) => {
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        particleContainer.style.transform = `translate(${x * 40}px,${y * 40}px)`;
+        particleBack.style.transform = `translate(${x * 15}px,${y * 15}px)`;
+      });
+
+      function flickerWords() {
+        const words = document.querySelectorAll(".glitch-word");
+        words.forEach((w) => {
+          if (Math.random() < 0.05) {
+            w.style.opacity = Math.random();
+            w.style.transform = `translate(${Math.random() * 4 - 2}px,${
+              Math.random() * 4 - 2
+            }px) skew(${Math.random() * 5 - 2}deg)`;
+            setTimeout(() => {
+              w.style.opacity = "";
+              w.style.transform = "";
+            }, 150);
+          }
+        });
+        requestAnimationFrame(flickerWords);
+      }
+      flickerWords();
+    </script>
+  </body>
+</html>
