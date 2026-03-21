@@ -39,23 +39,24 @@ function tryLocalFallback(password) {
   const url = localPasswordMap[password];
 
   if (url) {
+    // Show message
     errorMsg.textContent = 'The admin never trusted the backend. Nothing here depends on it';
     errorMsg.style.color = 'blue';
 
-    // Start fade animation slightly after message shows
+    // Wait 2 seconds for user to read
     setTimeout(() => {
-      document.body.classList.add('fade-out');
-    }, 3000); // let user read the message for ~1.8s
+      document.body.classList.add('fade-out'); // start fade
 
-    // Redirect after fade finishes
-    setTimeout(() => {
-      window.location.href = url;
-    }, 3000); // gives enough breathing room
+      // Redirect after fade completes (let’s give 1 second for fade)
+      setTimeout(() => {
+        window.location.href = url;
+      }, 1000);
+    }, 2000);
 
-    return true;
+    return true; // fallback handled
   }
 
-  return false;
+  return false; // no fallback
 }
 
 // Preload success audio so the sound plays immediately after password success
