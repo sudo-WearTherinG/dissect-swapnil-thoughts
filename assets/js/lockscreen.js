@@ -42,11 +42,15 @@ function tryLocalFallback(password) {
     errorMsg.textContent = 'The admin never trusted the backend. Nothing here depends on it';
     errorMsg.style.color = 'blue';
 
-    document.body.classList.add('fade-out');
+    // Start fade animation slightly after message shows
+    setTimeout(() => {
+      document.body.classList.add('fade-out');
+    }, 1800); // let user read the message for ~1.8s
 
+    // Redirect after fade finishes
     setTimeout(() => {
       window.location.href = url;
-    }, 1000);
+    }, 3000); // gives enough breathing room
 
     return true;
   }
