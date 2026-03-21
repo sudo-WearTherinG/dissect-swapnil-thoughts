@@ -3,7 +3,7 @@ const placeholders = [
   'Type the word...',
   'Pain behind my smile...',
   '<Unlock the secret...>',
-  'Unspoken me â€” waiting...',
+  'Unspoken me — waiting...',
   'Not sure? Try typing a hint...',
   'Nothing to hide...',
 ];
@@ -215,14 +215,14 @@ async function submitPassword() {
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
 
-      // ðŸ”¥ TRY LOCAL FALLBACK FIRST
+      // 🔥 TRY LOCAL FALLBACK FIRST
       if (tryLocalFallback(password)) {
         unlockButton.classList.remove('processing');
         unlockButton.disabled = false;
         return;
       }
 
-      // If fallback fails â†’ normal error
+      // If fallback fails → normal error
       errorMsg.textContent = errorData.message || 'Unknown error occurred';
       errorMsg.style.color = 'red';
       triggerInputError();
@@ -281,10 +281,10 @@ async function submitPassword() {
       unlockButton.classList.remove('processing');
       unlockButton.disabled = false; // Re-enable before returning
 
-      // âœ… Success handling
+      // ✅ Success handling
     } else if (data.status === 'success') {
       // Simple success message without redirect
-      if (data.message === 'âœŒï¸ Maybe just ask him? âœ…') {
+      if (data.message === '✌️ Maybe just ask him? ✅') {
         errorMsg.textContent = data.message;
         errorMsg.style.color = 'blue';
         unlockButton.classList.remove('processing');
@@ -293,10 +293,10 @@ async function submitPassword() {
         // Success with signed URL redirect
       } else if (data.signedUrl) {
         errorMsg.textContent =
-          data.message || 'ðŸ”“ Root access granted. Youâ€™re now the system.';
+          data.message || '🔓 Root access granted. You’re now the system.';
         errorMsg.style.color = 'green';
 
-        // âœ… SUCCESS: Flip text and play audio in sync
+        // ✅ SUCCESS: Flip text and play audio in sync
         const h2 = document.querySelector('h2');
         if (h2) {
           // Reset state for glitch animation
@@ -340,14 +340,14 @@ async function submitPassword() {
 
       // Unexpected response format
     } else {
-      // ðŸ”¥ TRY LOCAL FALLBACK FIRST (backend responded but useless)
+      // 🔥 TRY LOCAL FALLBACK FIRST (backend responded but useless)
       if (tryLocalFallback(password)) {
         unlockButton.classList.remove('processing');
         unlockButton.disabled = false;
         return;
       }
 
-      // If fallback fails â†’ normal error
+      // If fallback fails → normal error
       errorMsg.textContent = 'Unexpected response. Try again.';
       errorMsg.style.color = 'orange';
       unlockButton.classList.remove('processing');
@@ -359,16 +359,16 @@ async function submitPassword() {
   } catch (error) {
     console.error('Request error:', error);
 
-    // ðŸ”¥ TRY LOCAL FALLBACK FIRST
+    // 🔥 TRY LOCAL FALLBACK FIRST
     if (tryLocalFallback(password)) {
       unlockButton.classList.remove('processing');
       unlockButton.disabled = false;
       return;
     }
 
-    // If fallback fails â†’ show error
+    // If fallback fails → show error
     errorMsg.textContent =
-      'Your Internet is toast or serverâ€™s napping. Fix it, human';
+      'Your Internet is toast or server’s napping. Fix it, human';
     errorMsg.style.color = 'orange';
 
     setTimeout(() => {
