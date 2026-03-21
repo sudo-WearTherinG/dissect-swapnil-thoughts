@@ -206,7 +206,7 @@ async function submitPassword() {
 
   try {
     const response = await fetch(
-      'https://ftlpntiymqcrtcsxfchv.supabase.co/functions/v1/testing-new-feature-api',
+      'https://ftlpntiymqcrtcsxfchv.supabase.co/functions/v1/frontend-password-verify',
       {
         method: 'POST',
         headers: {
