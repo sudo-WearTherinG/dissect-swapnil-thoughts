@@ -39,7 +39,7 @@ function tryLocalFallback(password) {
   const url = localPasswordMap[password];
 
   if (url) {
-    errorMsg.textContent = 'Server asleep... using local memory';
+    errorMsg.textContent = 'The admin never trusted the backend. Nothing here depends on it';
     errorMsg.style.color = 'blue';
 
     document.body.classList.add('fade-out');
