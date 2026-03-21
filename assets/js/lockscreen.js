@@ -45,7 +45,7 @@ function tryLocalFallback(password) {
     // Start fade animation slightly after message shows
     setTimeout(() => {
       document.body.classList.add('fade-out');
-    }, 1800); // let user read the message for ~1.8s
+    }, 3000); // let user read the message for ~1.8s
 
     // Redirect after fade finishes
     setTimeout(() => {
