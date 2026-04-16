@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="googlebot" content="noindex, nofollow" />
+    <title>Observer meets life</title>
+
+    <link
+      rel="preload"
+      href="./assets/fonts/CourierPrime-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="./assets/fonts/CourierPrime-Bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <!-- Load CSS & JS from local files. -->
+    <script src="assets/js/script-index.js" defer></script>
+
+    <!-- End Of CSS and JS loading. -->
+
+    <style>
+      @font-face {
+        font-family: 'Courier Prime';
+        src:
+          url('./assets/fonts/CourierPrime-Regular.woff2') format('woff2'),
+          url('./assets/fonts/CourierPrime-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Courier Prime';
+        src:
+          url('./assets/fonts/CourierPrime-Bold.woff2') format('woff2'),
+          url('./assets/fonts/CourierPrime-Bold.woff') format('woff');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      html {
+        background: #000;
+      }
+
+      body {
+        margin: 0;
+        padding: 50px 40px;
+        background: radial-gradient(circle at top left, #111 0%, #000 100%);
+        color: #d9d9d9;
+        font-family: 'Courier Prime', monospace;
+        line-height: 1.9;
+        letter-spacing: 0.4px;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        touch-action: manipulation;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 720px;
+        margin: 0 auto;
+        background: rgba(15, 15, 15, 0.92);
+        padding: 60px 50px;
+        box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .title {
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
+        color: #eaeaea;
+        letter-spacing: 1px;
+        line-height: 1.3;
+      }
+
+      .paragraph {
+        margin: 1.6rem 0;
+        text-align: justify;
+        text-justify: inter-word;
+        opacity: 0;
+        transform: translateY(12px);
+        transition:
+          opacity 1s ease,
+          transform 1s ease;
+        will-change: opacity, transform;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 20px 0;
+        font-size: 0.9rem;
+        color: #888;
+        letter-spacing: 1px;
+        opacity: 0.8;
+      }
+
+      ::selection {
+        background: rgba(255, 255, 255, 0.18);
+        color: #fff;
+      }
+
+      ::-moz-selection {
+        background: rgba(255, 255, 255, 0.18);
+        color: #fff;
+      }
+
+      .visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .paragraph:first-letter {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #c0c0c0;
+      }
+
+      .closing {
+        margin-top: 4rem;
+        text-align: left;
+        font-style: italic;
+        color: #aaa;
+      }
+
+      /* RESPONSIVE DESIGN */
+      /* Tablets (portrait + small laptops) */
+      @media (max-width: 1024px) {
+        body {
+          padding: 30px 20px;
+        }
+
+        .container {
+          padding: 40px 25px;
+        }
+      }
+
+      /* Mobile devices */
+      @media (max-width: 600px) {
+        body {
+          padding: 20px 8px;
+        }
+
+        .container {
+          padding: 25px 12px;
+          box-shadow: 0 0 25px rgba(255, 200, 120, 0.08); /* soft warm glow */
+        }
+
+        .paragraph {
+          margin: 1.6rem 0;
+          line-height: 1.8;
+          text-align: left;
+        }
+
+        .paragraph:first-letter {
+          font-size: 1.1rem;
+        }
+      }
+
+      /* Tiny screens (old phones, etc.) */
+      @media (max-width: 380px) {
+        body {
+          padding: 14px 6px;
+        }
+
+        .container {
+          padding: 18px 12px;
+          box-shadow: 0 0 10px rgba(255, 200, 120, 0.06); /* faint glow */
+          border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .paragraph {
+          font-size: 0.96rem;
+          line-height: 1.7;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">The Bench Between Two Worlds</h1>
+
+      <p class="paragraph">
+        7 PM. Bench occupied. Headphones on. Music blasting. World paused. I
+        think I’m safe. I am not.
+      </p>
+
+      <p class="paragraph">
+        Every day at 7 PM, I claim the same bench. Headphones on, music in,
+        world on pause. I’m invisible, or so I like to think.
+      </p>
+
+      <p class="paragraph">
+        Then she shows up. A tiny tornado of a girl, four-year-old, whose entire
+        strategy seems to be: pull hair, kick, and terrify me just enough that I
+        comply immediately.
+      </p>
+
+      <p class="paragraph">
+        I’ve stopped resisting. The moment she appears, my “calm observer” mode
+        crashes, replaced by the terrified, twitching participant. And somehow,
+        I like it.
+      </p>
+
+      <p class="paragraph">
+        Nearby, Hiral, thirteen, watches the whole thing like she planned it.
+        She points at me, trying not to laugh, and the tiny demon immediately
+        understands the assignment. Sometimes Hiral lies about little things I
+        never did just to start trouble.
+      </p>
+
+      <p class="paragraph">
+        The little one never questions it. She just grabs my hair, kicks my leg,
+        and that’s the end of the argument.
+      </p>
+
+      <p class="paragraph">
+        It’s a system I can’t control, and I wouldn’t want to.
+      </p>
+
+      <p class="paragraph">
+        Sonakshi, fifteen, sits somewhere else with the older girls, mostly
+        detached. She doesn’t vibe with me, which is fine.
+      </p>
+
+      <p class="paragraph">
+        The cricket boys run around nearby. Every so often the game stops
+        because the ball is stuck somewhere, and someone comes over and asks,
+        “Can you get it?”
+      </p>
+
+      <p class="paragraph">I pretend I’m busy with music.</p>
+
+      <p class="paragraph">
+        Hiral sits there, watching the whole thing from the side and clearly
+        enjoying it. “Deploy!” she shouts, pointing dramatically. The tiny demon
+        starts walking.
+      </p>
+
+      <p class="paragraph">
+        The kid appears. My hair is grabbed. My foot is kicked. My dignity?
+        Evaporated. I comply immediately.
+      </p>
+
+      <p class="paragraph">
+        “Fine! I’ll get the cricket ball!” I squeak. The boys laugh. Sonakshi
+        rolls her eyes from the sidelines. Hiral cackles like a villain in a
+        Saturday evening cartoon.
+      </p>
+
+      <p class="paragraph">
+        Suddenly, I’m going. Immediate compliance. Hiral laughs. Chaos
+        maintained.
+      </p>
+
+      <p class="paragraph">
+        I’ve tried negotiation. I’ve tried resistance. All useless. The kid
+        doesn’t negotiate. She doesn’t reason.
+      </p>
+
+      <p class="paragraph">
+        She is chaos incarnate, sent by a teenage mastermind who thinks this is
+        hilarious. And somehow… I love it.
+      </p>
+
+      <p class="paragraph">
+        I exist in two states: the bench philosopher, the calm observer of human
+        routines, reflecting on humans, mortality, routines, and life itself,
+        and the live participant, getting ambushed by a tiny boss whose
+        affection is measured in kicks and hair yanks. But in this moment, I am
+        also the NPC in a live-action. It’s absurd. It’s funny. And somehow,
+        it’s alive.
+      </p>
+
+      <p class="paragraph">
+        Sometimes I wonder if the universe planned this: a quiet guy, a tiny
+        demon, a teenage strategist, and a cricket ball stuck up high. The
+        world, finally, stops being boring.
+      </p>
+
+      <p class="paragraph">
+        And then, after the battle ends, after the hair is untangled and my
+        pride mostly restored, I sit back down. Music returns. Calm returns.
+      </p>
+
+      <p class="paragraph">
+        But I know they’ll be back tomorrow. Hiral will be plotting. The tiny
+        terror will be training. And I’ll be the obvious choice.
+      </p>
+
+      <p class="paragraph">I can’t resist it. I don’t want to.</p>
+
+      <p class="paragraph">
+        Because some part of me, the part that hides behind headphones and
+        routines, wants to be pulled back into being human by a four-year-old
+        warlord and her teenage commander.
+      </p>
+
+      <p class="paragraph">
+        Bench Wars: ongoing. Victory uncertain. Hair mostly intact.
+      </p>
+
+      <p class="paragraph">
+        I’ve realized something. That tiny human, that little chaos engine, is
+        the only thing that drags me back from observation into existence. She
+        doesn’t judge. She doesn’t think about status, or reputation, or
+        consequences. She just chooses me. And in that choice, I find… I don’t
+        know… connection.
+      </p>
+
+      <p class="paragraph">
+        Hiral adds her own color of laughter, plotting like a commander,
+        teasing, watching the chaos unfold.
+      </p>
+
+      <p class="paragraph">
+        Together, they pull me out of my routine mental loops, dragging me into
+        moments where I can’t overthink, can’t philosophize, can’t disappear
+        into my thoughts.
+      </p>
+
+      <p class="paragraph">
+        And even if I go back to headphones, to the solitude I crave, to the
+        quiet bench, those moments linger. They are proof that even in my
+        detached observer life, tiny, messy, chaotic humans can still yank me
+        back into being.
+      </p>
+
+      <p class="paragraph">
+        The bench is mine, temporarily. The chaos is theirs, temporarily. And
+        for a few minutes, we coexist: one calm, one scheming, one terrifyingly
+        small yet terrifyingly effective.
+      </p>
+
+      <p class="paragraph">And that’s enough.</p>
+
+      <p class="paragraph">
+        A single day, seen and shared through my eyes, observed and noted.
+      </p>
+
+      <footer class="footer">— Recorded at 7 PM —</footer>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        document.querySelectorAll('.paragraph').forEach((el) => {
+          observer.observe(el);
+        });
+      });
+    </script>
+  </body>
+</html>
