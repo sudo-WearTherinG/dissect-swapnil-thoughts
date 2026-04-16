@@ -1,0 +1,464 @@
+/*--------------------------------------------------------------
+  Base layout control for html & body.
+  Sets full-height behavior and prevents horizontal scrolling.
+--------------------------------------------------------------*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* (continued) */
+
+/*--------------------------------------------------------------
+  Core page styling for body.
+  Handles fonts, colors, spacing and overall visual theme.
+--------------------------------------------------------------*/
+body {
+  background-color: #000;
+  color: #7aff9b;
+  font-family: 'Share Tech Mono', monospace;
+  line-height: 1.6;
+  font-size: 1.2rem;
+  overflow: hidden;
+  padding: 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/*--------------------------------------------------------------
+  Paragraph default styling.
+  Adjusts spacing and text readability.
+--------------------------------------------------------------*/
+p {
+  margin-bottom: 1.5rem;
+  color: #3aff70;
+  font-size: 0.9rem;
+  word-spacing: normal;
+  letter-spacing: normal;
+}
+
+/*--------------------------------------------------------------
+  Subtle glow effect for emphasized elements.
+--------------------------------------------------------------*/
+.fade-in {
+  animation: fadeIn 0.7s ease-in both;
+  text-shadow: 0 0 5px #00ff88;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*--------------------------------------------------------------
+  Custom scrollbar styling (Chrome/WebKit).
+  Slim neon scrollbar that matches theme.
+--------------------------------------------------------------*/
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #111;
+}
+::-webkit-scrollbar-thumb {
+  background: #00ff88;
+  border-radius: 10px;
+}
+
+/*--------------------------------------------------------------
+  Layout for navigation buttons (Next/Previous).
+  Centers them and adds spacing.
+--------------------------------------------------------------*/
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+  user-select: none;
+}
+
+/* (continued) */
+.nav-button {
+  background: #00ffaa;
+  color: #111;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 1em;
+  font-weight: bold;
+  box-shadow: 0 0 10px #00ffaa66;
+  transition: all 0.3s ease;
+  /* transition: transform 0.1s ease; */
+}
+
+/* (continued) */
+.nav-button:active {
+  transform: translateY(2px);
+}
+
+/* (continued) */
+.nav-button:hover {
+  background: #00cc88;
+  box-shadow: 0 0 20px #00ffaaaa;
+  transform: translateY(5px);
+}
+
+/*--------------------------------------------------------------
+  Responsive adjustments for tablets and smaller screens.
+--------------------------------------------------------------*/
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 1.1rem;
+    padding: 16px;
+  }
+}
+
+/*--------------------------------------------------------------
+  Extra-small screen adjustments (phones).
+  Font size + spacing tweaks for readability.
+--------------------------------------------------------------*/
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  p {
+    line-height: 1.4;
+  }
+}
+
+/* Ends*/
+
+/* -------------------------------------------------------- 
+Index10 Lock Screen Styles
+The following rules are used specifically by the lock screen.
+---------------------------------------------------------- */
+/*--------------------------------------------------------------
+  Custom Font: Share Tech Mono
+  Self-hosted version of the typeface for consistent rendering.
+  Ensures local loading instead of remote Google Fonts delivery.
+--------------------------------------------------------------*/
+@font-face {
+  font-family: 'Share Tech Mono';
+  src: url('../fonts/ShareTechMono-Regular.woff2') format('woff2'),
+    url('../fonts/ShareTechMono-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*--------------------------------------------------------------
+  Lock Screen Container
+  Core layout, glow styling, and flicker animation
+  for the lock screen wrapper.
+--------------------------------------------------------------*/
+.lock-container {
+  background: #0a0a0a;
+  border: 1px solid #004422;
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(0, 255, 100, 0.05);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  animation: flicker 1.5s infinite alternate;
+  user-select: none; /* prevents text selection */
+}
+
+/*--------------------------------------------------------------
+  Headings and Password Input
+  Styles for h2 headers and password fields on the
+  lock screen, including colors, spacing, and transitions.
+--------------------------------------------------------------*/
+h2 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #4aff80;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+input[type='password'] {
+  background: transparent;
+  border: 1px solid #3aff70;
+  padding: 0.75rem;
+  width: 100%;
+  color: #00ff99;
+  text-align: center;
+  font-size: 1rem;
+  border-radius: 4px;
+  outline: none;
+  caret-color: #00ff99;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/*--------------------------------------------------------------
+  Password Input Error States
+  Visual feedback for invalid entries and associated error messages
+  on the lock screen.
+--------------------------------------------------------------*/
+input[type='password'].error {
+  border-color: #ff4d4d;
+  background-color: rgba(255, 77, 77, 0.1);
+}
+
+.error-msg {
+  margin-top: 1rem;
+  color: #ff4d4d;
+  font-size: 0.9rem;
+  display: none;
+}
+
+/*--------------------------------------------------------------
+  Submit Button Styling
+  Handles default, processing, and animated visual effects
+  for the index10 lock screen action button.
+--------------------------------------------------------------*/
+
+.submit-btn {
+  margin-top: 1.5rem;
+  padding: 0.5rem 2rem;
+  font-size: 1rem;
+  background: transparent;
+  border: 1px solid #00ff88;
+  color: #00ff88;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 0 5px #00ff88;
+  transition: all 0.3s ease;
+  animation: breathe 4s ease-in-out infinite, hueShift 10s linear infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn.processing {
+  background-color: #00ff88;
+  color: #000;
+  box-shadow: 0 0 8px #00ff88, 0 0 15px #00ff88;
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: skewX(-20deg);
+  animation: light-sweep 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes light-sweep {
+  0% {
+    left: -75%;
+  }
+
+  100% {
+    left: 125%;
+  }
+}
+
+/*--------------------------------------------------------------
+  Glitch and Flicker Effects
+  Animation rules used for text distortion and ambient flicker
+--------------------------------------------------------------*/
+.glitch {
+  animation: glitch 2s infinite;
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow: 1px 1px 0 #00ff88, -1px -1px 0 #000;
+  }
+
+  25% {
+    text-shadow: 2px 0px 0 #00ff88, -2px 0px 0 #000;
+  }
+
+  50% {
+    text-shadow: -1px 2px 0 #00ff88, 1px -2px 0 #000;
+  }
+
+  75% {
+    text-shadow: 2px -2px 0 #00ff88, -2px 2px 0 #000;
+  }
+
+  100% {
+    text-shadow: 0px 0px 0 #00ff88, 0px 0px 0 #000;
+  }
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.95;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/*--------------------------------------------------------------
+  Shake Animation
+  Used for brief motion feedback on interactive elements
+--------------------------------------------------------------*/
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
+
+  75% {
+    transform: translateX(-5px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/*--------------------------------------------------------------
+  Text Selection Styling
+  Custom highlight and glow effects for text.
+--------------------------------------------------------------*/
+::selection {
+  background: linear-gradient(90deg, rgba(0, 255, 204, 0.5), rgba(0, 255, 170, 0.4));
+  color: #00ffcc;
+  text-shadow: 0 0 4px #00ffcc;
+}
+
+::-moz-selection {
+  background: linear-gradient(90deg, rgba(0, 255, 204, 0.5), rgba(0, 255, 170, 0.4));
+  color: #00ffcc;
+  text-shadow: 0 0 4px #00ffcc;
+}
+
+/*--------------------------------------------------------------
+  Access Granted Header Effects
+  Glow styling and glitch-swap animation used for status text
+  on the index10 lock screen.
+--------------------------------------------------------------*/
+h2.access-granted {
+  color: #0f0;
+  text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0, 0 0 40px #0f0;
+}
+
+h2.glitch {
+  animation: glitchSwap 0.6s steps(2, end);
+  transform: none;
+}
+
+@keyframes glitchSwap {
+  0% {
+    transform: skewX(-5deg);
+    opacity: 0.7;
+  }
+
+  50% {
+    transform: skewX(5deg);
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/*--------------------------------------------------------------
+  WebView Fade-Out Behavior
+  Customized glitch fade animation and reduced-motion fallback
+--------------------------------------------------------------*/
+body.webview.fade-out {
+  animation: glitchFade 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; /* slower */
+  filter: brightness(1.1) contrast(0.9);
+  opacity: 0.9; /* a little more opaque for smoother feel */
+  will-change: opacity, transform, clip-path, filter;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce), (max-resolution: 150dpi) {
+  body.webview.fade-out {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+}
+
+/*--------------------------------------------------------------
+  Global Fade-Out Animation
+  Base glitchFade effect and modified keyframes
+  for lock screen transitions.
+--------------------------------------------------------------*/
+body.fade-out {
+  animation: glitchFade 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Optional: tweak keyframes to soften the effect */
+@keyframes glitchFade {
+  0% {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    clip-path: inset(0 0 0 0);
+  }
+
+  20% {
+    clip-path: inset(10% 0 65% 0); /* less severe */
+    transform: translate(-3px, -2px) skew(-3deg);
+    filter: drop-shadow(2px 0 red);
+    opacity: 0.95;
+  }
+
+  45% {
+    clip-path: inset(65% 0 10% 0);
+    transform: translate(3px, 2px) skew(3deg);
+    filter: drop-shadow(-2px 0 cyan);
+    opacity: 0.9;
+  }
+
+  70% {
+    clip-path: inset(0 0 0 0);
+    transform: translate(0, 0) skew(0);
+    filter: none;
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
+    clip-path: inset(100% 0 0 0);
+  }
+}
