@@ -33,6 +33,8 @@ const localPasswordMap = {
   restinpeace: 'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/Myshrine/index.html',
 
   thefabricatedlife: 'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/thefabricatedlife/index.html',
+
+  metamorphosis: 'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/metamorphosis/index.html'
 };
 
 function tryLocalFallback(password) {
