@@ -160,7 +160,7 @@ section.visible {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-top: 40px;
+  margin-top: 65px; /*old 40*/
   user-select: none;
 }
 
