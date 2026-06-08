@@ -11,30 +11,39 @@ const placeholders = [
 // Local fallback public facing password map.
 // (public routes only. In case backend dies. Project should keep working.)
 const localPasswordMap = {
-
   myimagevault: 'https://miv-93vdz8mu10xlkfp0r4wnbes62gtjvch9i.netlify.app/',
 
   joinmeonmybench: 'https://swm-4v3qz9b5m1x6r7v3p0f2n8t4j1s6g9b0c.netlify.app/',
 
-  whatislife: 'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/whatislife/index.html',
+  whatislife:
+    'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/whatislife/index.html',
 
-  whatisdeath: 'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/whatisdeath/index.html',
+  whatisdeath:
+    'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/whatisdeath/index.html',
 
-  theexistentialone: 'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/theexistentialone/index.html',
+  theexistentialone:
+    'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/theexistentialone/index.html',
 
-  thequiteintrovert: 'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/thequiteintrovert/index.html',
+  thequiteintrovert:
+    'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/thequiteintrovert/index.html',
 
-  observermeetslife: 'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/observermeetslife/index.html',
+  observermeetslife:
+    'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/observermeetslife/index.html',
 
-  lettheworldburn: 'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/lettheworldburn/index.html',
+  lettheworldburn:
+    'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/lettheworldburn/index.html',
 
-  goodbyehelloworld: 'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/goodbyeworld/index.html',
+  goodbyehelloworld:
+    'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/goodbyeworld/index.html',
 
-  restinpeace: 'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/Myshrine/index.html',
+  restinpeace:
+    'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/Myshrine/index.html',
 
-  thefabricatedlife: 'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/thefabricatedlife/index.html',
+  thefabricatedlife:
+    'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/thefabricatedlife/index.html',
 
-  metamorphosis: 'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/metamorphosis/index.html'
+  metamorphosis:
+    'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/metamorphosis/index.html',
 };
 
 function tryLocalFallback(password) {
@@ -42,7 +51,8 @@ function tryLocalFallback(password) {
 
   if (url) {
     // Show message
-    errorMsg.textContent = 'The admin never trusted the backend. Nothing here depends on it';
+    errorMsg.textContent =
+      'The admin never trusted the backend. Nothing here depends on it';
     errorMsg.style.color = 'blue';
 
     // Wait 2 seconds for user to read
@@ -251,7 +261,7 @@ async function submitPassword() {
       // Standard error response
     } else if (data.status === 'error') {
       errorMsg.textContent = data.message;
-      errorMsg.style.color = 'red';
+      errorMsg.style.color = data.color || 'red';
       triggerInputError();
 
       // Visual feedback for "ACCESS DENIED"
