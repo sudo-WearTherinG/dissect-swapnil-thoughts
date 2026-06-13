@@ -16,15 +16,15 @@
 
     <style>
       @font-face {
-        font-family: "Courier Prime";
-        src: url("./assets/fonts/CourierPrime-Bold.woff2") format("woff2");
+        font-family: 'Courier Prime';
+        src: url('./assets/fonts/CourierPrime-Bold.woff2') format('woff2');
         font-weight: 400;
         font-style: normal;
       }
 
       @font-face {
-        font-family: "Courier Prime";
-        src: url("./assets/fonts/CourierPrime-Regular.woff2") format("woff2");
+        font-family: 'Courier Prime';
+        src: url('./assets/fonts/CourierPrime-Regular.woff2') format('woff2');
         font-weight: 700;
         font-style: normal;
       }
@@ -35,7 +35,7 @@
         padding: 0;
         background: #0a0a0a;
         color: #eee;
-        font-family: "Courier Prime", monospace;
+        font-family: 'Courier Prime', monospace;
         line-height: 1.6;
         overflow-x: hidden;
         overflow-y: auto;
@@ -122,7 +122,7 @@
       }
 
       .stanza-break::after {
-        content: "";
+        content: '';
         display: block;
         width: 100%;
         height: 1px;
@@ -150,7 +150,7 @@
       }
 
       body::after {
-        content: "";
+        content: '';
         position: fixed;
         width: 8px;
         height: 8px;
@@ -235,7 +235,7 @@
       <span class="soft-gap"></span>
 
       <p class="line">
-        1 year turning it all into words for a certain someone in Poddar to
+        2 year turning it all into words for a certain someone in Poddar to
         read.
       </p>
       <span class="soft-gap"></span>
@@ -267,20 +267,20 @@
       <span class="soft-gap"></span>
 
       <p class="line">
-        I don’t want what everyone else is running after. They chase money,
-        fame, power, and eventually sustain themselves on what they’ve gathered.
-        I’m not built for that. I want answers.
+        People run after money, fame, and power, then spend the rest of their
+        lives maintaining what they managed to collect. I’m not interested in
+        any of it. I’m not built for that. I want answers.
       </p>
       <span class="soft-gap"></span>
 
       <p class="line">
-        I want to understand life, not own it. Let them chase gold. I’ll chase
-        the questions, even if it’s silent or tough.
+        I want to understand life, not own it. Let them chase wealth. I’ll chase
+        the questions, even when there’s no answer back.
       </p>
       <span class="soft-gap"></span>
 
       <p class="line">
-        I don't belong here. Because nothing holds me here. I walk with myself.
+        I don't belong here. Because nothing holds me here. I walk alone.
       </p>
       <span class="soft-gap"></span>
 
@@ -306,18 +306,18 @@
       <span class="soft-gap"></span>
 
       <p class="line">
-        They talk about God in the human realm, but are afraid of one thing that
-        gets them closer to them whom they seek.
+        They talk about God in the human realm, but delay the only direction
+        that removes distance.
       </p>
       <span class="soft-gap"></span>
 
       <p class="line">
-        They pray to meet their maker but tremble at the only door that leads
-        there.
+        They pray to meet their maker and flinch at the mechanism that completes
+        the request.
       </p>
       <span class="soft-gap"></span>
 
-      <p class="line">Goodbye, YOU.</p>
+      <p class="line">Goodbye, KIPB.</p>
       <span class="soft-gap"></span>
 
       <p class="line">
@@ -330,20 +330,20 @@
 
     <script>
       // Scroll reveal
-      const lines = document.querySelectorAll(".line");
+      const lines = document.querySelectorAll('.line');
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting) entry.target.classList.add("visible");
+            if (entry.isIntersecting) entry.target.classList.add('visible');
           });
         },
-        { threshold: 0.1 },
+        { threshold: 0.1 }
       );
       lines.forEach((line) => observer.observe(line));
 
       // Particle creation
-      const particleContainer = document.querySelector(".particles");
-      const particleBack = document.querySelector(".particles-back");
+      const particleContainer = document.querySelector('.particles');
+      const particleBack = document.querySelector('.particles-back');
 
       function createParticles(
         container,
@@ -351,20 +351,20 @@
         sizeMin,
         sizeMax,
         speedMin,
-        speedMax,
+        speedMax
       ) {
         for (let i = 0; i < count; i++) {
-          const p = document.createElement("div");
+          const p = document.createElement('div');
           p.classList.add(
-            container === particleContainer ? "particle" : "particle-back",
+            container === particleContainer ? 'particle' : 'particle-back'
           );
           const size = sizeMin + Math.random() * (sizeMax - sizeMin);
-          p.style.width = p.style.height = size + "px";
-          p.style.left = Math.random() * 100 + "vw";
-          p.style.top = Math.random() * 100 + "vh";
+          p.style.width = p.style.height = size + 'px';
+          p.style.left = Math.random() * 100 + 'vw';
+          p.style.top = Math.random() * 100 + 'vh';
           const duration = speedMin + Math.random() * (speedMax - speedMin);
           p.style.animation = `float${
-            container === particleContainer ? "" : "Back"
+            container === particleContainer ? '' : 'Back'
           } ${duration}s linear infinite`;
           container.appendChild(p);
         }
@@ -372,14 +372,14 @@
       createParticles(particleContainer, 150, 1, 3, 6, 12);
       createParticles(particleBack, 80, 2, 5, 15, 30);
 
-      const styleEl = document.createElement("style");
+      const styleEl = document.createElement('style');
       styleEl.innerHTML = `
 @keyframes float{0%{transform:translateY(100vh) translateX(0);opacity:0;}50%{opacity:0.3;}100%{transform:translateY(-10vh) translateX(50px);opacity:0;}}
 @keyframes floatBack{0%{transform:translateY(100vh) translateX(0);opacity:0;}50%{opacity:0.2;}100%{transform:translateY(-20vh) translateX(-50px);opacity:0;}}
       `;
       document.head.appendChild(styleEl);
 
-      document.addEventListener("mousemove", (e) => {
+      document.addEventListener('mousemove', (e) => {
         const x = e.clientX / window.innerWidth;
         const y = e.clientY / window.innerHeight;
         particleContainer.style.transform = `translate(${x * 40}px,${y * 40}px)`;
@@ -387,7 +387,7 @@
       });
 
       function flickerWords() {
-        const words = document.querySelectorAll(".glitch-word");
+        const words = document.querySelectorAll('.glitch-word');
         words.forEach((w) => {
           if (Math.random() < 0.05) {
             w.style.opacity = Math.random();
@@ -395,8 +395,8 @@
               Math.random() * 4 - 2
             }px) skew(${Math.random() * 5 - 2}deg)`;
             setTimeout(() => {
-              w.style.opacity = "";
-              w.style.transform = "";
+              w.style.opacity = '';
+              w.style.transform = '';
             }, 150);
           }
         });
