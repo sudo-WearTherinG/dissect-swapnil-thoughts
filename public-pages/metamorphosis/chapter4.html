@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>Chapter IV: He Was A Human — Metamorphosis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Courier+Prime:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: oklch(10% 0.008 260);
+        --text-primary: oklch(80% 0.01 260);
+        --text-secondary: oklch(55% 0.01 260);
+        --text-dim: oklch(38% 0.01 260);
+        --accent: oklch(62% 0.04 180);
+        --accent-soft: oklch(42% 0.025 180);
+        --rule: oklch(22% 0.009 260);
+        --font-body: 'EB Garamond', Georgia, serif;
+        --font-mono: 'Courier Prime', 'Courier New', monospace;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text-primary);
+        font-family: var(--font-body);
+        font-size: 1.2rem;
+        line-height: 1.9;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 999;
+        opacity: 0.4;
+      }
+      .progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 1px;
+        background: var(--accent);
+        z-index: 100;
+        width: 0%;
+        transition: width 0.1s linear;
+      }
+      .page {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 5rem 2rem 8rem;
+        opacity: 0;
+        animation: rise 1s ease forwards 0.2s;
+      }
+      .top-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5rem;
+        user-select: none;
+      }
+      .top-nav a {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        text-decoration: none;
+        transition: color 0.25s ease;
+      }
+      .top-nav a:hover {
+        color: var(--accent);
+      }
+      .chapter-indicator {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      .chapter-header {
+        margin-bottom: 4rem;
+      }
+      .chapter-num {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .chapter-title {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 400;
+        font-style: italic;
+        letter-spacing: -0.01em;
+        line-height: 1.15;
+        color: var(--text-primary);
+        margin-bottom: 2rem;
+      }
+      .chapter-rule {
+        width: 3rem;
+        height: 1px;
+        background: var(--accent-soft);
+      }
+      .opening {
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        color: var(--text-secondary);
+        letter-spacing: 0.06em;
+        font-style: italic;
+        margin-bottom: 3rem;
+        display: block;
+        line-height: 1.7;
+      }
+      .body p {
+        margin-bottom: 1.5em;
+        color: var(--text-primary);
+        font-size: 1.2rem;
+        line-height: 1.9;
+      }
+      .body p.isolated {
+        margin-bottom: 2.5rem;
+        margin-top: 0.5rem;
+      }
+
+      /* Unspoken voice */
+      .unspoken {
+        margin: 2.5rem 0 3rem;
+        padding: 1.5rem 0 1.5rem 2rem;
+        border-left: 1px solid var(--accent-soft);
+      }
+      .unspoken p {
+        font-style: italic;
+        color: var(--text-secondary);
+        font-size: 1.08rem;
+        line-height: 1.85;
+        margin-bottom: 0.7em;
+      }
+      .unspoken p:last-child {
+        margin-bottom: 0;
+      }
+
+      .body p.lonesome {
+        margin-bottom: 0.7em;
+        color: var(--text-secondary);
+      }
+
+      .chapter-footer {
+        margin-top: 5rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--rule);
+      }
+      .footer-tag {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+      }
+      .bottom-nav {
+        margin-top: 4rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        user-select: none;
+      }
+      .bottom-nav a {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        text-decoration: none;
+        padding: 0.9rem 1.5rem;
+        border: 1px solid var(--rule);
+        transition:
+          border-color 0.25s ease,
+          color 0.25s ease;
+        display: inline-block;
+      }
+      .bottom-nav a:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .bottom-nav a.next {
+        color: var(--text-primary);
+        border-color: oklch(30% 0.009 260);
+      }
+      .bottom-nav a.next:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      ::selection {
+        background: var(--accent);
+        color: var(--bg);
+      }
+      @media (max-width: 480px) {
+        body {
+          font-size: 1.08rem;
+        }
+        .page {
+          padding: 3.5rem 1.25rem 6rem;
+        }
+        .body p {
+          font-size: 1.08rem;
+        }
+        .chapter-title {
+          font-size: 1.8rem;
+        }
+        .top-nav {
+          margin-bottom: 3.5rem;
+        }
+        .unspoken {
+          padding-left: 1.25rem;
+        }
+        .unspoken p {
+          font-size: 1rem;
+        }
+      }
+    </style>
+    <script src="assets/js/script-index.js" defer></script>
+  </head>
+  <body>
+    <div class="progress" id="progress"></div>
+
+    <div class="page">
+      <div class="top-nav">
+        <a href="chapter3.html">&larr; Chapter III</a>
+        <span class="chapter-indicator">IV of V</span>
+        <a href="chapter5.html">Next &rarr;</a>
+      </div>
+
+      <header class="chapter-header">
+        <span class="chapter-num">Chapter IV</span>
+        <h1 class="chapter-title">He Was A Human</h1>
+        <div class="chapter-rule"></div>
+      </header>
+
+      <span class="opening">
+        This room was never built for questions like his.
+      </span>
+
+      <div class="body">
+        <p>He has never said any of it out loud.</p>
+        <p>
+          Not because the words don't exist. He has more words than he knows
+          what to do with. Pages of them. But words need a room they can survive
+          in. And this room was built for different conversations.
+        </p>
+        <p>
+          He looks at his father and tries to locate the opening. The moment
+          where he could say, not the argument, not the philosophy, just the
+          plain thing underneath all of it. That existing inside this skin feels
+          like wearing something cut for someone else. That the world everyone
+          moves through with such certainty feels like a stage he wandered onto
+          without being given the script. That some mornings the weight of being
+          conscious is more than he knows what to do with.
+        </p>
+        <p>He tries to find the sentence that would make this land.</p>
+        <p class="isolated">There isn't one.</p>
+        <p>
+          Not because his father is cruel. But because his father lives inside
+          the script completely. Not performing it. Actually inside it. The job,
+          the duty, the forward motion, these are not questions for him. They
+          are the answer. They have always been the answer.
+        </p>
+        <p>And you cannot explain the question to someone who never felt it.</p>
+        <p>He wants to ask just once.</p>
+
+        <div class="unspoken">
+          <p>The life you are telling me to follow.</p>
+          <p>I have seen the people already inside it.</p>
+          <p>
+            I watched them on the train. In the office. At the dinner table.
+          </p>
+          <p>I watched them carry things back to a place that never changes.</p>
+          <p>They don't look free. They don't look arrived.</p>
+          <p>
+            They look like they are still waiting for the part where it makes
+            sense.
+          </p>
+          <p>So what exactly am I supposed to be moving toward?</p>
+          <p>
+            Because every direction felt like being told to keep moving by
+            people who still looked lost themselves.
+          </p>
+        </div>
+
+        <p>He doesn't ask.</p>
+        <p>
+          Because he already knows what would happen. The script has an answer
+          for this too. Something about patience. About dues being paid. About
+          how meaning comes later, after the work, after the sacrifice, after
+          you have proven yourself to a system that will replace you quietly and
+          without ceremony.
+        </p>
+        <p>
+          He has read that answer before. In the eyes of every tired person he
+          has ever watched from the bench.
+        </p>
+        <p>
+          So he sits across from his father in the particular silence of someone
+          who cannot be understood and has stopped expecting otherwise.
+        </p>
+        <p>
+          Not with anger. Just with the quiet recognition that some distances
+          cannot be crossed. That some gaps exist not because people don't love
+          each other. But because they cannot reach each other across what they
+          each believe life is for.
+        </p>
+        <p class="lonesome">And that is its own kind of loneliness.</p>
+        <p class="lonesome">The kind with no villain.</p>
+        <p class="lonesome">The kind that just sits there quietly.</p>
+        <p class="lonesome">
+          The kind that looks exactly like an ordinary evening.
+        </p>
+      </div>
+
+      <div class="chapter-footer">
+        <span class="footer-tag">Chapter IV: He Was A Human</span>
+      </div>
+
+      <div class="bottom-nav">
+        <a href="chapter3.html">&larr; Chapter III</a>
+        <a href="chapter5.html" class="next">Final Chapter &rarr;</a>
+      </div>
+    </div>
+
+    <script>
+      const progress = document.getElementById('progress');
+      window.addEventListener(
+        'scroll',
+        () => {
+          const scrollTop = window.scrollY;
+          const docHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+          progress.style.width =
+            docHeight > 0 ? (scrollTop / docHeight) * 100 + '%' : '0%';
+        },
+        { passive: true }
+      );
+    </script>
+  </body>
+</html>
