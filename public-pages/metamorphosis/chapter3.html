@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>Chapter III: Role Required Belief — Metamorphosis</title>
+    <meta
+      name="description"
+      content="Chapter III: On responsibility, performance, and the quiet recognition that everyone may be learning their lines as they speak."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Courier+Prime:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: oklch(10% 0.008 260);
+        --text-primary: oklch(80% 0.01 260);
+        --text-secondary: oklch(55% 0.01 260);
+        --text-dim: oklch(38% 0.01 260);
+        --accent: oklch(62% 0.04 180);
+        --accent-soft: oklch(42% 0.025 180);
+        --rule: oklch(22% 0.009 260);
+        --font-body: 'EB Garamond', Georgia, serif;
+        --font-mono: 'Courier Prime', 'Courier New', monospace;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text-primary);
+        font-family: var(--font-body);
+        font-size: 1.2rem;
+        line-height: 1.9;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 999;
+        opacity: 0.4;
+      }
+      .progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 1px;
+        background: var(--accent);
+        z-index: 100;
+        width: 0%;
+        transition: width 0.1s linear;
+      }
+      .page {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 5rem 2rem 8rem;
+        opacity: 0;
+        animation: rise 1s ease forwards 0.2s;
+      }
+      .top-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5rem;
+        user-select: none;
+      }
+      .top-nav a {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        text-decoration: none;
+        transition: color 0.25s ease;
+      }
+      .top-nav a:hover {
+        color: var(--accent);
+      }
+      .chapter-indicator {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      .chapter-header {
+        margin-bottom: 4rem;
+      }
+      .chapter-num {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .chapter-title {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 400;
+        font-style: italic;
+        letter-spacing: -0.01em;
+        line-height: 1.15;
+        color: var(--text-primary);
+        margin-bottom: 2rem;
+      }
+      .chapter-rule {
+        width: 3rem;
+        height: 1px;
+        background: var(--accent-soft);
+      }
+      .opening {
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        color: var(--text-secondary);
+        letter-spacing: 0.06em;
+        font-style: italic;
+        margin-bottom: 3rem;
+        display: block;
+        line-height: 1.7;
+      }
+      .body p {
+        margin-bottom: 1.5em;
+        color: var(--text-primary);
+        font-size: 1.2rem;
+        line-height: 1.9;
+      }
+      .body p.isolated {
+        margin-bottom: 0.6em;
+      }
+      .chapter-footer {
+        margin-top: 5rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--rule);
+      }
+      .footer-tag {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+      }
+      .bottom-nav {
+        margin-top: 4rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        user-select: none;
+      }
+      .bottom-nav a {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        text-decoration: none;
+        padding: 0.9rem 1.5rem;
+        border: 1px solid var(--rule);
+        transition:
+          border-color 0.25s ease,
+          color 0.25s ease;
+        display: inline-block;
+      }
+      .bottom-nav a:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .bottom-nav a.next {
+        color: var(--text-primary);
+        border-color: oklch(30% 0.009 260);
+      }
+      .bottom-nav a.next:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      ::selection {
+        background: var(--accent);
+        color: var(--bg);
+      }
+      @media (max-width: 480px) {
+        body {
+          font-size: 1.08rem;
+        }
+        .page {
+          padding: 3.5rem 1.25rem 6rem;
+        }
+        .body p {
+          font-size: 1.08rem;
+        }
+        .chapter-title {
+          font-size: 1.8rem;
+        }
+        .top-nav {
+          margin-bottom: 3.5rem;
+        }
+      }
+    </style>
+    <script src="assets/js/script-index.js" defer></script>
+  </head>
+  <body>
+    <div class="progress" id="progress"></div>
+
+    <div class="page">
+      <div class="top-nav">
+        <a href="chapter2.html">&larr; Chapter II</a>
+        <span class="chapter-indicator">III of V</span>
+        <a href="chapter4.html">Next &rarr;</a>
+      </div>
+
+      <header class="chapter-header">
+        <span class="chapter-num">Chapter III</span>
+        <h1 class="chapter-title">Role Required Belief</h1>
+        <div class="chapter-rule"></div>
+      </header>
+
+      <span class="opening">
+        Maybe knowing and becoming were unrelated things.
+      </span>
+
+      <div class="body">
+        <p>
+          He has heard it enough times that he knows which sentence comes after
+          which. The shape of it. The pauses. Where the voice gets quieter
+          because quiet is supposed to mean serious. Where the words future and
+          responsible and standing on your own feet appear, because they always
+          appear, because this particular speech was never really written for
+          him specifically. It was written for sons in general. He just happens
+          to be the one sitting in the room.
+        </p>
+
+        <p>
+          He listens. Or he produces the version of listening that keeps things
+          moving.
+        </p>
+
+        <p>
+          He understands the argument. He has always understood it. Life
+          requires infrastructure. Survival requires participation. The system
+          is not asking for his agreement, only his compliance. These are not
+          unreasonable observations. The world does work roughly this way.
+        </p>
+
+        <p>
+          He just cannot locate the part of himself that is supposed to respond
+          to them. Not with rebellion. Not with agreement. Just response. The
+          normal forward motion that should follow a father telling a son what
+          life requires. It doesn't come.
+        </p>
+
+        <p>
+          He watches instead. The way he watches from the bench. The gestures.
+          The weight behind the words that isn't quite anger and isn't quite
+          fear but sits somewhere between the two. A man who has lived inside
+          the system long enough to believe in it. Or learned to perform
+          believing in it. He cannot always tell which.
+        </p>
+
+        <p>
+          That uncertainty is new. Or maybe it isn't new. Maybe he just stopped
+          smoothing it over.
+        </p>
+
+        <p>
+          The lecture continues. He nods at the right moments. Produces the
+          sounds that indicate he is receiving the information. The conversation
+          needs these from him and he provides them, same as always, same as
+          everything else that completes itself regardless of how much of him is
+          actually inside it.
+        </p>
+
+        <p>
+          But something sits differently tonight. Not the words. The words are
+          the same.
+        </p>
+
+        <p class="isolated">The man saying them.</p>
+
+        <p>
+          He looks at him and tries to find the thing he is supposed to feel.
+          The thing sons are supposed to feel when fathers speak about the
+          future with that particular exhaustion. Something like love. Something
+          like duty. Something like the clean transfer of wisdom from one
+          generation to the next.
+        </p>
+
+        <p>He finds something. Just not that.</p>
+
+        <p>
+          He finds a man who is also performing. Who has also learned which
+          words to say and when to say them. Who has built a version of himself
+          that functions in the world and stands in rooms and delivers lectures
+          about responsibility.
+        </p>
+
+        <p>
+          He wonders if the man knows. If somewhere underneath the speech there
+          is someone who also cannot locate the part of himself that is supposed
+          to believe what he is saying.
+        </p>
+
+        <p>He doesn't ask.</p>
+
+        <p>
+          The conversation closes the way conversations close. Naturally.
+          Without resolution. Both of them returning to whatever they were
+          before it started.
+        </p>
+
+        <p>
+          He sits with what remains. Not anger. Not sadness. Just the quiet
+          recognition of two people in the same room, both slightly absent from
+          it, both performing presence well enough that neither has to
+          acknowledge the performance.
+        </p>
+
+        <p>
+          He understands now why the lecture never lands. It was never written
+          by someone who arrived at those answers. It was written by someone
+          still looking for them.
+        </p>
+
+        <p>Just like him.</p>
+      </div>
+
+      <div class="chapter-footer">
+        <span class="footer-tag">Chapter III: Role Required Belief</span>
+      </div>
+
+      <div class="bottom-nav">
+        <a href="chapter2.html">&larr; Chapter II</a>
+        <a href="chapter4.html" class="next">Chapter IV &rarr;</a>
+      </div>
+    </div>
+
+    <script>
+      const progress = document.getElementById('progress');
+      window.addEventListener(
+        'scroll',
+        () => {
+          const scrollTop = window.scrollY;
+          const docHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+          progress.style.width =
+            docHeight > 0 ? (scrollTop / docHeight) * 100 + '%' : '0%';
+        },
+        { passive: true }
+      );
+    </script>
+  </body>
+</html>

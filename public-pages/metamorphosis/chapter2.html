@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>Chapter II: The Shape of Silence — Metamorphosis</title>
+    <meta
+      name="description"
+      content="Chapter II: On words, translation, and the quiet loss that happens between thought and understanding."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Courier+Prime:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: oklch(10% 0.008 260);
+        --text-primary: oklch(80% 0.01 260);
+        --text-secondary: oklch(55% 0.01 260);
+        --text-dim: oklch(38% 0.01 260);
+        --accent: oklch(62% 0.04 180);
+        --accent-soft: oklch(42% 0.025 180);
+        --rule: oklch(22% 0.009 260);
+        --font-body: 'EB Garamond', Georgia, serif;
+        --font-mono: 'Courier Prime', 'Courier New', monospace;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text-primary);
+        font-family: var(--font-body);
+        font-size: 1.2rem;
+        line-height: 1.9;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 999;
+        opacity: 0.4;
+      }
+      .progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 1px;
+        background: var(--accent);
+        z-index: 100;
+        width: 0%;
+        transition: width 0.1s linear;
+      }
+      .page {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 5rem 2rem 8rem;
+        opacity: 0;
+        animation: rise 1s ease forwards 0.2s;
+      }
+      .top-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5rem;
+        user-select: none;
+      }
+      .top-nav a {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        text-decoration: none;
+        transition: color 0.25s ease;
+      }
+      .top-nav a:hover {
+        color: var(--accent);
+      }
+      .chapter-indicator {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      .chapter-header {
+        margin-bottom: 4rem;
+      }
+      .chapter-num {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .chapter-title {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 400;
+        font-style: italic;
+        letter-spacing: -0.01em;
+        line-height: 1.15;
+        color: var(--text-primary);
+        margin-bottom: 2rem;
+      }
+      .chapter-rule {
+        width: 3rem;
+        height: 1px;
+        background: var(--accent-soft);
+      }
+      .opening {
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        color: var(--text-secondary);
+        letter-spacing: 0.06em;
+        font-style: italic;
+        margin-bottom: 3rem;
+        display: block;
+        line-height: 1.7;
+      }
+      .body p {
+        margin-bottom: 1.5em;
+        color: var(--text-primary);
+        font-size: 1.2rem;
+        line-height: 1.9;
+      }
+      .chapter-footer {
+        margin-top: 5rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--rule);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .footer-tag {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+      }
+      .bottom-nav {
+        margin-top: 4rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        user-select: none;
+      }
+      .bottom-nav a {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        text-decoration: none;
+        padding: 0.9rem 1.5rem;
+        border: 1px solid var(--rule);
+        transition:
+          border-color 0.25s ease,
+          color 0.25s ease;
+        display: inline-block;
+      }
+      .bottom-nav a:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .bottom-nav a.next {
+        color: var(--text-primary);
+        border-color: oklch(30% 0.009 260);
+      }
+      .bottom-nav a.next:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      ::selection {
+        background: var(--accent);
+        color: var(--bg);
+      }
+      @media (max-width: 480px) {
+        body {
+          font-size: 1.08rem;
+        }
+        .page {
+          padding: 3.5rem 1.25rem 6rem;
+        }
+        .body p {
+          font-size: 1.08rem;
+        }
+        .chapter-title {
+          font-size: 1.8rem;
+        }
+        .top-nav {
+          margin-bottom: 3.5rem;
+        }
+      }
+    </style>
+    <script src="assets/js/script-index.js" defer></script>
+  </head>
+  <body>
+    <div class="progress" id="progress"></div>
+
+    <div class="page">
+      <div class="top-nav">
+        <a href="chapter1.html">&larr; Chapter I</a>
+        <span class="chapter-indicator">II of V</span>
+        <a href="chapter3.html">Next &rarr;</a>
+      </div>
+
+      <header class="chapter-header">
+        <span class="chapter-num">Chapter II</span>
+        <h1 class="chapter-title">The Shape of Silence</h1>
+        <div class="chapter-rule"></div>
+      </header>
+
+      <span class="opening">Something was getting lost in translation.</span>
+
+      <div class="body">
+        <p>
+          He started noticing that saying things out loud didn't change much
+          about how they landed, like whatever left his mouth had already been
+          softened or adjusted before it reached anyone else.
+        </p>
+
+        <p>
+          Words went out, and something slightly different came back, close
+          enough to pass but not quite matching the shape it left in his head.
+        </p>
+
+        <p>
+          Not wrong, not exactly, just already adjusted in a way that made
+          correction feel unnecessary.
+        </p>
+
+        <p>
+          Like they had been translated a step before he finished speaking, as
+          if the meaning had passed through a filter that didn’t need his
+          approval.
+        </p>
+
+        <p>
+          He didn’t correct it, not because he agreed, but because trying to
+          pull it back into alignment felt pointless. After a while, the absence
+          of resistance made that feel obvious.
+        </p>
+
+        <p>
+          Conversations still moved forward either way, carrying on their own
+          momentum even when parts of him weren’t fully inside them.
+        </p>
+
+        <p>
+          He would answer questions, and the answers would be accepted in
+          whatever form they arrived, as long as they stayed within the general
+          shape of what was expected.
+        </p>
+
+        <p>
+          Sometimes he realized later that what he meant and what remained were
+          not identical, not even close in small ways that didn’t matter enough
+          to interrupt anything.
+        </p>
+
+        <p>
+          But it didn’t create any interruption in how things continued, so the
+          difference stayed unmentioned, like something acknowledged internally
+          but never required externally.
+        </p>
+
+        <p>
+          There didn’t seem to be any change attached to addressing it, and over
+          time that made the absence of correction feel natural.
+        </p>
+
+        <p>
+          He also noticed that repeating himself didn’t improve clarity. If
+          anything, it expanded the distance between intention and outcome.
+        </p>
+
+        <p>
+          It only increased effort, while the result stayed almost the same,
+          just redistributed into slightly different words.
+        </p>
+
+        <p>
+          So he stopped repeating as much, not as a decision he made in a clear
+          moment, but as something that phased out naturally over time.
+        </p>
+
+        <p>
+          Not deliberately, just because it didn’t seem to produce anything
+          different, and repetition without change eventually stops feeling like
+          input and starts feeling like noise.
+        </p>
+
+        <p>
+          At some point, interaction began to feel like something that completed
+          itself regardless of his exact input, like the system had enough
+          information to continue without needing perfect transmission.
+        </p>
+
+        <p>
+          He was still part of it, still present in it in the basic sense, still
+          technically included in every exchange.
+        </p>
+
+        <p>
+          Just not required to hold all of it together anymore, like his role
+          had quietly reduced from authoring to merely appearing inside it.
+        </p>
+      </div>
+
+      <div class="chapter-footer">
+        <span class="footer-tag">Chapter II: The Shape of Silence</span>
+      </div>
+
+      <div class="bottom-nav">
+        <a href="chapter1.html">&larr; Chapter I</a>
+        <a href="chapter3.html" class="next">Chapter III &rarr;</a>
+      </div>
+    </div>
+
+    <script>
+      const progress = document.getElementById('progress');
+      window.addEventListener(
+        'scroll',
+        () => {
+          const scrollTop = window.scrollY;
+          const docHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+          progress.style.width =
+            docHeight > 0 ? (scrollTop / docHeight) * 100 + '%' : '0%';
+        },
+        { passive: true }
+      );
+    </script>
+  </body>
+</html>

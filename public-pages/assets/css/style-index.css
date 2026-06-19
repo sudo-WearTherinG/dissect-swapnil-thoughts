@@ -1,0 +1,360 @@
+/*--------------------------------------------------------------
+  Base layout control for html & body.
+  Sets full-height behavior and prevents horizontal scrolling.
+--------------------------------------------------------------*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* (continued) */
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/*--------------------------------------------------------------
+Univerval Styling from index1 > index9
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+  Core page styling for body.
+  Handles fonts, colors, spacing and overall visual theme.
+--------------------------------------------------------------*/
+body {
+  background-color: #111;
+  color: #f5f5f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.8; /* tightened */
+  font-size: 1.2rem;
+  overflow-x: hidden;
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/*--------------------------------------------------------------
+Styles for main heading (h1)
+--------------------------------------------------------------*/
+h1 {
+  text-align: center;
+  font-size: 2em;
+  color: #00ffcc;
+  margin-bottom: 1.5em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/*--------------------------------------------------------------
+  Paragraph default styling.
+  Adjusts spacing and text readability.
+--------------------------------------------------------------*/
+p {
+  margin-bottom: 1.4em;
+  font-size: 1.1em;
+  text-align: justify;
+  word-spacing: 0.3em;
+}
+
+p::first-letter {
+  font-size: 1.5em;
+  color: #00ffaa;
+  font-weight: bold;
+}
+
+/*--------------------------------------------------------------
+  Text Selection Styling
+  Custom highlight and glow effects for text.
+--------------------------------------------------------------*/
+::selection {
+  background: linear-gradient(90deg, rgba(0, 255, 204, 0.5), rgba(0, 255, 170, 0.4));
+  color: #00ffcc;
+  text-shadow: 0 0 4px #00ffcc;
+}
+
+::-moz-selection {
+  background: linear-gradient(90deg, rgba(0, 255, 204, 0.5), rgba(0, 255, 170, 0.4));
+  color: #00ffcc;
+  text-shadow: 0 0 4px #00ffcc;
+}
+
+/*--------------------------------------------------------------
+  Footer styling.
+  Low-contrast text centered at bottom of page.
+--------------------------------------------------------------*/
+footer {
+  text-align: center;
+  color: #555;
+  margin-top: 6rem;
+  font-size: 1rem;
+}
+
+/*--------------------------------------------------------------
+  Container layout.
+  Centers the content and defines the max readable width.
+--------------------------------------------------------------*/
+.container {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 4rem 0;
+}
+
+/*--------------------------------------------------------------
+  Section appearance + scroll animation.
+  Sections start hidden and fade in when made visible.
+--------------------------------------------------------------*/
+section {
+  margin-bottom: 6rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+/* (continued) */
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*--------------------------------------------------------------
+  Hero section styling.
+  Larger typography and centered layout for intro text.
+--------------------------------------------------------------*/
+/* .hero {
+  text-align: center;
+  font-size: 2rem;
+  line-height: 1.4;
+  margin-bottom: 6rem;
+} */
+
+/*--------------------------------------------------------------
+  Subtle glow effect for emphasized elements.
+--------------------------------------------------------------*/
+.fade-in {
+  text-shadow: 0 0 0px #00ff88, 0 0 0px #00ff88, 0 0 5px #00ff88;
+}
+
+/*--------------------------------------------------------------
+  Custom scrollbar styling (Chrome/WebKit).
+  Slim neon scrollbar that matches theme.
+--------------------------------------------------------------*/
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #00ff88;
+  border-radius: 10px;
+}
+
+/*--------------------------------------------------------------
+  Layout for navigation buttons (Next/Previous).
+  Centers them and adds spacing.
+--------------------------------------------------------------*/
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+  user-select: none;
+}
+
+/* (continued) */
+.nav-button {
+  background: #00ffaa;
+  color: #111;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 1em;
+  font-weight: bold;
+  box-shadow: 0 0 10px #00ffaa66;
+  transition: all 0.3s ease;
+  /* transition: transform 0.1s ease; */
+}
+
+/* (continued) */
+.nav-button:active {
+  transform: translateY(2px);
+}
+
+/* (continued) */
+.nav-button:hover {
+  background: #00cc88;
+  box-shadow: 0 0 20px #00ffaaaa;
+  transform: translateY(5px);
+}
+
+/*--------------------------------------------------------------
+  Section divider styling.
+  Horizontal line with centered text to break content blocks.
+--------------------------------------------------------------*/
+.section-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 2rem 0;
+  color: #00ff00;
+  font-weight: 600;
+  font-size: 1rem;
+}
+/* Section Header in Paragraph */
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #00ff00;
+  margin: 0 1rem;
+}
+
+/* --------------------------------------------------------------
+  Rabbit box container.
+  Styled text box with neon border & soft glow.
+--------------------------------------------------------------*/
+.rabbit-box {
+  background-color: #0d0d0d;
+  border: 2px solid #00ffcc;
+  border-radius: 16px;
+  padding: 24px;
+  margin: 40px auto;
+  max-width: 90%;
+  width: 100%;
+  color: #e0ffff;
+  font-family: 'Courier New', monospace;
+  line-height: 1.5;
+  box-shadow: 0 0 12px #00ffcc, 0 0 30px rgba(0, 255, 204, 0.3);
+}
+
+/* (continued) */
+/* Rabbit Story Text */
+.story-text {
+  font-size: 1rem;
+  line-height: 1.5;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  text-align: left;
+}
+
+/* --------------------------------------------------------------
+  Pass-key container with horizontal scroll and glowing keys.
+  Keys highlight and lift slightly on hover for interactivity.
+--------------------------------------------------------------*/
+.pass-key-container {
+  display: flex;
+  flex-wrap: nowrap; /* force a single line */
+  gap: 0.6em; /* breathing room */
+  overflow-x: auto; /* horizontal scroll */
+  -webkit-overflow-scrolling: touch; /* smooth iOS/Android scroll */
+  padding-bottom: 0.2em; /* avoid text hitting scrollbar */
+  margin-top: 1.2em; /* separation from paragraph */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(0, 255, 170, 0.3) transparent; /* subtle scrollbar */
+}
+
+.pass-key-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.pass-key-container::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 170, 0.3);
+  border-radius: 3px;
+}
+
+.pass-key {
+  flex: 0 0 auto; /* no shrinking, stays on one line */
+  background: rgba(0, 255, 170, 0.08);
+  color: #00ffcc;
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.95em;
+  transition: background 0.2s, transform 0.2s;
+  white-space: nowrap;
+}
+
+.pass-key:hover {
+  background: rgba(0, 255, 170, 0.15);
+  transform: translateY(-1px);
+}
+
+/*--------------------------------------------------------------
+  Responsive adjustments for tablets and smaller screens.
+--------------------------------------------------------------*/
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 1.1rem;
+    padding: 16px;
+  }
+
+  .container {
+    padding: 2rem 0;
+  }
+
+  p {
+    margin-bottom: 1.25rem;
+  }
+
+  .hero {
+    font-size: 1.6rem;
+    margin-bottom: 4rem;
+  }
+}
+
+/* --------------------------------------------------------------
+  Responsive tweaks for small screens & fade-in animation.
+  Smoothly lifts elements from below while fading them in.
+--------------------------------------------------------------*/
+@media screen and (max-width: 600px) {
+  body {
+    padding: 20px 10px;
+  }
+
+  p {
+    font-size: 1em;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1.5s ease-in both;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*--------------------------------------------------------------
+  Extra-small screen adjustments (phones).
+  Font size + spacing tweaks for readability.
+--------------------------------------------------------------*/
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 1rem;
+    padding: 12px;
+  }
+  .story-text,
+  .rabbit-box,
+  p {
+    line-height: 1.4;
+    margin-bottom: 1rem;
+  }
+
+  .hero {
+    font-size: 1.4rem;
+    margin-bottom: 3rem;
+  }
+}
+
+/* Ends*/
