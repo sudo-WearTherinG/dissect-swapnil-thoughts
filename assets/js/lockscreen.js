@@ -142,6 +142,33 @@ function animatePlaceholder(timestamp) {
 // Start the animation loop
 requestAnimationFrame(animatePlaceholder);
 
+// FIX: restore page properly when user presses Back
+window.addEventListener("pageshow", () => {
+  document.body.classList.remove("fade-out");
+
+  document.body.style.opacity = "";
+  document.body.style.transform = "";
+  document.body.style.clipPath = "";
+  document.body.style.filter = "";
+
+  const h2 = document.querySelector("h2");
+  if (h2) {
+    h2.classList.remove("glitch");
+  }
+
+  const unlockButton = document.querySelector(".submit-btn");
+  if (unlockButton) {
+    unlockButton.disabled = false;
+    unlockButton.classList.remove("processing");
+  }
+});
+
+// Automatically focus password input when the page loads
+window.onload = () => {
+  passwordInput.focus();
+};
+// fix ends here. testing
+
 // Automatically focus password input when the page loads
 window.onload = () => {
   passwordInput.focus();
