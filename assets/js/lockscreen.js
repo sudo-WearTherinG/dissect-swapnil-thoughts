@@ -433,3 +433,9 @@ passwordInput.addEventListener('input', function () {
     passwordInput.value = sanitized;
   }
 });
+
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) {
+    window.location.reload();
+  }
+});
