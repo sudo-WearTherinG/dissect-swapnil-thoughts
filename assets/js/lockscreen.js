@@ -433,3 +433,30 @@ passwordInput.addEventListener('input', function () {
     passwordInput.value = sanitized;
   }
 });
+
+
+// Reset the lockscreen UI when restored from browser back/forward cache (bfcache).
+// Without this, pressing back after a successful unlock shows a frozen/black page
+// because the browser restores the exact DOM state mid-fade-out instead of reloading.
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) {
+    document.body.classList.remove('fade-out');
+
+    const h2 = document.getElementById('statusText');
+    h2.textContent = 'ACCESS DENIED';
+    h2.classList.remove('glitch', 'access-granted', 'shake');
+    h2.style.color = '';
+
+    errorMsg.textContent = '';
+    errorMsg.style.display = 'none';
+
+    passwordInput.value = '';
+    passwordInput.classList.remove('error', 'shake');
+
+    const unlockButton = document.querySelector('.submit-btn');
+    unlockButton.disabled = false;
+    unlockButton.classList.remove('processing');
+
+    passwordInput.focus();
+  }
+});
