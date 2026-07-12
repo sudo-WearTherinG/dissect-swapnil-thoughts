@@ -44,6 +44,10 @@ const localPasswordMap = {
 
   metamorphosis:
     'https://sudo-wearthering.github.io/dissect-swapnil-thoughts/public-pages/metamorphosis/index.html',
+
+  // extra
+  monologue:
+    'https://github.com/sudo-WearTherinG/dissect-swapnil-thoughts/releases/download/v.alpha/monologue_github_master.apk',
 };
 
 //
