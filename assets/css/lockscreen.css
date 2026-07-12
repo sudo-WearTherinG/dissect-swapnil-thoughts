@@ -431,10 +431,11 @@ h2.glitch {
 }
 
 /*--------------------------------------------------------------
+  Global Fade-Out Animation - for lock screen transitions.
   WebView Fade-Out Behavior
   Customized glitch fade animation and reduced-motion fallback
 --------------------------------------------------------------*/
-body.webview.fade-out {
+body.fade-out {
   animation: glitchFade 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; /* slower */
   filter: brightness(1.1) contrast(0.9);
   opacity: 0.9; /* a little more opaque for smoother feel */
@@ -443,21 +444,12 @@ body.webview.fade-out {
   backface-visibility: hidden;
 }
 
-@media (prefers-reduced-motion: reduce), (max-resolution: 150dpi) {
-  body.webview.fade-out {
+@media (prefers-reduced-motion: reduce) {
+  body.fade-out {
     animation: none !important;
     opacity: 1 !important;
     filter: none !important;
   }
-}
-
-/*--------------------------------------------------------------
-  Global Fade-Out Animation
-  Base glitchFade effect and modified keyframes
-  for lock screen transitions.
---------------------------------------------------------------*/
-body.fade-out {
-  animation: glitchFade 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* Optional: tweak keyframes to soften the effect */
