@@ -10,7 +10,7 @@ const placeholders = [
 
 // Local fallback public facing password map
 // ( public routes only. In case backend dies. Project should be able to keep working )
-const localPasswordMap = {
+const localPasswordMap = Object.assign(Object.create(null), {
   myimagevault: 'https://miv-93vdz8mu10xlkfp0r4wnbes62gtjvch9i.netlify.app/',
 
   joinmeonmybench: 'https://swm-4v3qz9b5m1x6r7v3p0f2n8t4j1s6g9b0c.netlify.app/',
@@ -48,7 +48,7 @@ const localPasswordMap = {
   // extra
   monologue:
     'https://github.com/sudo-WearTherinG/dissect-swapnil-thoughts/releases/download/v.alpha/monologue_github_master.apk',
-};
+});
 
 //
 function tryLocalFallback(password) {
