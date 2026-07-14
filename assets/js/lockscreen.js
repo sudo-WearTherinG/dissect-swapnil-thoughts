@@ -55,6 +55,7 @@ const localPasswordMap = Object.assign(Object.create(null), {
     'https://github.com/sudo-WearTherinG/dissect-swapnil-thoughts/releases/download/v.alpha/monologue_github_master.apk',
 });
 
+// Redirect locally when a public password exists.
 function tryLocalFallback(password) {
   const url = localPasswordMap[password];
   if (!url) return false;
