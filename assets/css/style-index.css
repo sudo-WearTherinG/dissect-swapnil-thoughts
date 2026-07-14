@@ -119,9 +119,10 @@ section.visible {
 
 /* Glow effect for elements. */
 .fade-in {
+  animation: fadeIn 1.5s ease-in both;
   text-shadow:
-    0 0 0px #00ff88,
-    0 0 0px #00ff88,
+    0 0 0 #00ff88,
+    0 0 0 #00ff88,
     0 0 5px #00ff88;
 }
 
@@ -263,10 +264,6 @@ section.visible {
   p {
     font-size: 1em;
   }
-}
-
-.fade-in {
-  animation: fadeIn 1.5s ease-in both;
 }
 
 @keyframes fadeIn {
