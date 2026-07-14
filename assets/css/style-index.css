@@ -1,14 +1,10 @@
-/*--------------------------------------------------------------
-  Base layout control for html & body.
-  Sets full-height behavior and prevents horizontal scrolling.
---------------------------------------------------------------*/
+/* html & body. RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* (continued) */
 html,
 body {
   height: 100%;
@@ -16,12 +12,10 @@ body {
 }
 
 /*--------------------------------------------------------------
-Univerval Styling from index1 > index9
+Universal Styling from index1 > index9
 --------------------------------------------------------------*/
-/*--------------------------------------------------------------
-  Core page styling for body.
-  Handles fonts, colors, spacing and overall visual theme.
---------------------------------------------------------------*/
+
+/* main body */
 body {
   background-color: #111;
   color: #f5f5f5;
@@ -35,9 +29,7 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/*--------------------------------------------------------------
-Styles for main heading (h1)
---------------------------------------------------------------*/
+/* Styles for main heading (h1) */
 h1 {
   text-align: center;
   font-size: 2em;
@@ -47,10 +39,7 @@ h1 {
   letter-spacing: 2px;
 }
 
-/*--------------------------------------------------------------
-  Paragraph default styling.
-  Adjusts spacing and text readability.
---------------------------------------------------------------*/
+/* html paragraphs */
 p {
   margin-bottom: 1.4em;
   font-size: 1.1em;
@@ -64,10 +53,7 @@ p::first-letter {
   font-weight: bold;
 }
 
-/*--------------------------------------------------------------
-  Text Selection Styling
-  Custom highlight and glow effects for text.
---------------------------------------------------------------*/
+/* Text Selection Styling */
 ::selection {
   background: linear-gradient(
     90deg,
@@ -88,10 +74,7 @@ p::first-letter {
   text-shadow: 0 0 4px #00ffcc;
 }
 
-/*--------------------------------------------------------------
-  Footer styling.
-  Low-contrast text centered at bottom of page.
---------------------------------------------------------------*/
+/* Footer styling. */
 footer {
   text-align: center;
   color: #555;
@@ -99,10 +82,7 @@ footer {
   font-size: 1rem;
 }
 
-/*--------------------------------------------------------------
-  Container layout.
-  Centers the content and defines the max readable width.
---------------------------------------------------------------*/
+/* Container layout. */
 .container {
   width: 90%;
   max-width: 800px;
@@ -110,10 +90,7 @@ footer {
   padding: 4rem 0;
 }
 
-/*--------------------------------------------------------------
-  Section appearance + scroll animation.
-  Sections start hidden and fade in when made visible.
---------------------------------------------------------------*/
+/* Section appearance + scroll animation. */
 section {
   margin-bottom: 6rem;
   opacity: 0;
@@ -140,9 +117,7 @@ section.visible {
   margin-bottom: 6rem;
 } */
 
-/*--------------------------------------------------------------
-  Subtle glow effect for emphasized elements.
---------------------------------------------------------------*/
+/* Glow effect for elements. */
 .fade-in {
   text-shadow:
     0 0 0px #00ff88,
@@ -150,10 +125,7 @@ section.visible {
     0 0 5px #00ff88;
 }
 
-/*--------------------------------------------------------------
-  Custom scrollbar styling (Chrome/WebKit).
-  Slim neon scrollbar that matches theme.
---------------------------------------------------------------*/
+/* Custom scrollbar styling (Chrome/WebKit). */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -165,10 +137,7 @@ section.visible {
   border-radius: 10px;
 }
 
-/*--------------------------------------------------------------
-  Layout for navigation buttons (Next/Previous).
-  Centers them and adds spacing.
---------------------------------------------------------------*/
+/* navigation buttons (Next/Previous). */
 .button-container {
   display: flex;
   justify-content: center;
@@ -177,7 +146,7 @@ section.visible {
   user-select: none;
 }
 
-/* (continued) */
+/* nav-button */
 .nav-button {
   background: #00ffaa;
   color: #111;
@@ -192,22 +161,19 @@ section.visible {
   /* transition: transform 0.1s ease; */
 }
 
-/* (continued) */
+/* when active */
 .nav-button:active {
   transform: translateY(2px);
 }
 
-/* (continued) */
+/* when hover */
 .nav-button:hover {
   background: #00cc88;
   box-shadow: 0 0 20px #00ffaaaa;
   transform: translateY(5px);
 }
 
-/*--------------------------------------------------------------
-  Section divider styling.
-  Horizontal line with centered text to break content blocks.
---------------------------------------------------------------*/
+/* Paragraph section divider styles. */
 .section-divider {
   display: flex;
   align-items: center;
@@ -217,6 +183,7 @@ section.visible {
   font-weight: 600;
   font-size: 1rem;
 }
+
 /* Section Header in Paragraph */
 .section-divider::before,
 .section-divider::after {
@@ -226,20 +193,17 @@ section.visible {
   margin: 0 1rem;
 }
 
-/* --------------------------------------------------------------
-  Pass-key container with horizontal scroll and glowing keys.
-  Keys highlight and lift slightly on hover for interactivity.
---------------------------------------------------------------*/
+/* Pass-key container with horizontal scroll and public keys. */
 .pass-key-container {
   display: flex;
-  flex-wrap: nowrap; /* force a single line */
-  gap: 0.6em; /* breathing room */
-  overflow-x: auto; /* horizontal scroll */
-  -webkit-overflow-scrolling: touch; /* smooth iOS/Android scroll */
-  padding-bottom: 0.2em; /* avoid text hitting scrollbar */
-  margin-top: 1.2em; /* separation from paragraph */
+  flex-wrap: nowrap;
+  gap: 0.6em;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.2em;
+  margin-top: 1.2em;
   scrollbar-width: thin; /* Firefox */
-  scrollbar-color: rgba(0, 255, 170, 0.3) transparent; /* subtle scrollbar */
+  scrollbar-color: rgba(0, 255, 170, 0.3) transparent;
 }
 
 .pass-key-container::-webkit-scrollbar {
@@ -270,9 +234,7 @@ section.visible {
   transform: translateY(-1px);
 }
 
-/*--------------------------------------------------------------
-  Responsive adjustments for tablets and smaller screens.
---------------------------------------------------------------*/
+/* Responsive adjustments for tablets and smaller phone. */
 @media screen and (max-width: 768px) {
   body {
     font-size: 1.1rem;
@@ -293,10 +255,6 @@ section.visible {
   }
 }
 
-/* --------------------------------------------------------------
-  Responsive tweaks for small screens & fade-in animation.
-  Smoothly lifts elements from below while fading them in.
---------------------------------------------------------------*/
 @media screen and (max-width: 600px) {
   body {
     padding: 20px 10px;
@@ -322,10 +280,6 @@ section.visible {
   }
 }
 
-/*--------------------------------------------------------------
-  Extra-small screen adjustments (phones).
-  Font size + spacing tweaks for readability.
---------------------------------------------------------------*/
 @media screen and (max-width: 480px) {
   body {
     font-size: 1rem;
