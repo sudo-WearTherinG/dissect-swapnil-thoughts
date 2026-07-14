@@ -50,7 +50,7 @@ const localPasswordMap = Object.assign(Object.create(null), {
     'https://github.com/sudo-WearTherinG/dissect-swapnil-thoughts/releases/download/v.alpha/monologue_github_master.apk',
 });
 
-//
+// Redirect locally when a public password exists.
 function tryLocalFallback(password) {
   const url = localPasswordMap[password];
 
@@ -95,7 +95,6 @@ let placeholderTimer = 0;
 let lastTimestamp = null;
 
 // Animates the placeholder text using a typewriter style effect.
-// Types out each string of placeholders, pauses, deletes it, then cycles to the next (forever)
 // it's fine it's 2026
 function animatePlaceholder(timestamp) {
   if (!lastTimestamp) lastTimestamp = timestamp;
@@ -179,7 +178,6 @@ function getSessionId() {
 
 // Sends verification request
 // Handles error, and success responses
-// Triggers UI feedback, animations, and redirects
 async function submitPassword() {
   const password = passwordInput.value.trim().replace(/\s/g, '');
   const unlockButton = document.querySelector('.submit-btn');
