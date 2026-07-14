@@ -8,7 +8,7 @@ const placeholders = [
   'Nothing to hide...',
 ];
 
-// quick connect
+// quick backend connect
 const API_URL =
   'https://ftlpntiymqcrtcsxfchv.supabase.co/functions/v1/frontend-password-verify';
 
@@ -74,7 +74,7 @@ function tryLocalFallback(password) {
   return true;
 }
 
-// preload both auio so nothing fetches mid-animation
+// preload both audio so nothing fetches mid-animation
 const successAudio = new Audio(
   'https://ftlpntiymqcrtcsxfchv.supabase.co/storage/v1/object/public/assets/lock-unlock-1.mp3'
 );
