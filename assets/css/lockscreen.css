@@ -1,19 +1,11 @@
-/*--------------------------------------------------------------
-  Base layout control for html & body.
-  Sets full-height behavior and prevents horizontal scrolling.
---------------------------------------------------------------*/
+/* html & body. */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* (continued) */
-
-/*--------------------------------------------------------------
-  Core page styling for body.
-  Handles fonts, colors, spacing and overall visual theme.
---------------------------------------------------------------*/
+/* main body */
 body {
   background-color: #000;
   color: #7aff9b;
@@ -30,10 +22,7 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/*--------------------------------------------------------------
-  Paragraph default styling.
-  Adjusts spacing and text readability.
---------------------------------------------------------------*/
+/* html paragraphs */
 p {
   margin-bottom: 1.5rem;
   color: #3aff70;
@@ -42,9 +31,7 @@ p {
   letter-spacing: normal;
 }
 
-/*--------------------------------------------------------------
-  Subtle glow effect for emphasized elements.
---------------------------------------------------------------*/
+/* Glow effect for elements. */
 .fade-in {
   animation: fadeIn 0.7s ease-in both;
   text-shadow: 0 0 5px #00ff88;
@@ -62,10 +49,7 @@ p {
   }
 }
 
-/*--------------------------------------------------------------
-  Custom scrollbar styling (Chrome/WebKit).
-  Slim neon scrollbar that matches theme.
---------------------------------------------------------------*/
+/* Custom scrollbar styling (Chrome/WebKit). */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -77,10 +61,7 @@ p {
   border-radius: 10px;
 }
 
-/*--------------------------------------------------------------
-  Layout for navigation buttons (Next/Previous).
-  Centers them and adds spacing.
---------------------------------------------------------------*/
+/* navigation buttons (Next/Previous). */
 .button-container {
   display: flex;
   justify-content: center;
@@ -89,7 +70,7 @@ p {
   user-select: none;
 }
 
-/* (continued) */
+/* nav-button */
 .nav-button {
   background: #00ffaa;
   color: #111;
@@ -104,21 +85,19 @@ p {
   /* transition: transform 0.1s ease; */
 }
 
-/* (continued) */
+/* when active */
 .nav-button:active {
   transform: translateY(2px);
 }
 
-/* (continued) */
+/* on hover */
 .nav-button:hover {
   background: #00cc88;
   box-shadow: 0 0 20px #00ffaaaa;
   transform: translateY(5px);
 }
 
-/*--------------------------------------------------------------
-  Responsive adjustments for tablets and smaller screens.
---------------------------------------------------------------*/
+/* Responsive adjustments for tablets and smaller phone. */
 @media screen and (max-width: 768px) {
   body {
     font-size: 1.1rem;
@@ -126,10 +105,6 @@ p {
   }
 }
 
-/*--------------------------------------------------------------
-  Extra-small screen adjustments (phones).
-  Font size + spacing tweaks for readability.
---------------------------------------------------------------*/
 @media screen and (max-width: 480px) {
   body {
     font-size: 1rem;
@@ -147,11 +122,8 @@ p {
 Index10 Lock Screen Styles
 The following rules are used specifically by the lock screen.
 ---------------------------------------------------------- */
-/*--------------------------------------------------------------
-  Custom Font: Share Tech Mono
-  Self-hosted version of the typeface for consistent rendering.
-  Ensures local loading instead of remote Google Fonts delivery.
---------------------------------------------------------------*/
+
+/* Self-hosted fonts*/
 @font-face {
   font-family: 'Share Tech Mono';
   src:
@@ -162,11 +134,7 @@ The following rules are used specifically by the lock screen.
   font-display: swap;
 }
 
-/*--------------------------------------------------------------
-  Lock Screen Container
-  Core layout, glow styling, and flicker animation
-  for the lock screen wrapper.
---------------------------------------------------------------*/
+/* Lock Screen Container */
 .lock-container {
   background: #0a0a0a;
   border: 1px solid #004422;
@@ -180,11 +148,7 @@ The following rules are used specifically by the lock screen.
   user-select: none; /* prevents text selection */
 }
 
-/*--------------------------------------------------------------
-  Headings and Password Input
-  Styles for h2 headers and password fields on the
-  lock screen, including colors, spacing, and transitions.
---------------------------------------------------------------*/
+/* Headings and Password Input */
 h2 {
   margin-bottom: 1rem;
   font-size: 1.2rem;
@@ -209,15 +173,13 @@ input[type='password'] {
     background-color 0.3s ease;
 }
 
+/* new rule */
+/* Hide caret while shaking.  */
 input[type='password'].shake {
   caret-color: transparent; /* only while shaking */
 }
 
-/*--------------------------------------------------------------
-  Password Input Error States
-  Visual feedback for invalid entries and associated error messages
-  on the lock screen.
---------------------------------------------------------------*/
+/* Password error state */
 input[type='password'].error {
   border-color: #ff4d4d;
   background-color: rgba(255, 77, 77, 0.1);
@@ -230,12 +192,7 @@ input[type='password'].error {
   display: none;
 }
 
-/*--------------------------------------------------------------
-  Submit Button Styling
-  Handles default, processing, and animated visual effects
-  for the index10 lock screen action button.
---------------------------------------------------------------*/
-
+/* Password submit Button. */
 .submit-btn {
   margin-top: 1.5rem;
   padding: 0.5rem 2rem;
@@ -290,10 +247,7 @@ input[type='password'].error {
   }
 }
 
-/*--------------------------------------------------------------
-  Glitch and Flicker Effects
-  Animation rules used for text distortion and ambient flicker
---------------------------------------------------------------*/
+/* Glitch and Flicker Effects */
 .glitch {
   animation: glitch 2s infinite;
 }
@@ -344,10 +298,7 @@ input[type='password'].error {
   }
 }
 
-/*--------------------------------------------------------------
-  Shake Animation
-  Used for brief motion feedback on interactive elements
---------------------------------------------------------------*/
+/* Shake Animation */
 .shake {
   animation: shake 0.5s ease-in-out;
 }
@@ -374,10 +325,7 @@ input[type='password'].error {
   }
 }
 
-/*--------------------------------------------------------------
-  Text Selection Styling
-  Custom highlight and glow effects for text.
---------------------------------------------------------------*/
+/* Text Selection Styling */
 ::selection {
   background: linear-gradient(
     90deg,
@@ -398,11 +346,7 @@ input[type='password'].error {
   text-shadow: 0 0 4px #00ffcc;
 }
 
-/*--------------------------------------------------------------
-  Access Granted Header Effects
-  Glow styling and glitch-swap animation used for status text
-  on the index10 lock screen.
---------------------------------------------------------------*/
+/* Access Granted Effects */
 h2.access-granted {
   color: #0f0;
   text-shadow:
@@ -434,15 +378,12 @@ h2.glitch {
   }
 }
 
-/*--------------------------------------------------------------
-  Global Fade-Out Animation - for lock screen transitions.
-  WebView Fade-Out Behavior
-  Customized glitch fade animation and reduced-motion fallback
---------------------------------------------------------------*/
+/* Global Fade-Out Animation for lock screen transitions.
+  WebView Fade-Out Behavior */
 body.fade-out {
   animation: glitchFade 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; /* slower */
   filter: brightness(1.1) contrast(0.9);
-  opacity: 0.9; /* a little more opaque for smoother feel */
+  opacity: 0.9;
   will-change: opacity, transform, clip-path, filter;
   transform: translateZ(0);
   backface-visibility: hidden;
@@ -456,7 +397,6 @@ body.fade-out {
   }
 }
 
-/* Optional: tweak keyframes to soften the effect */
 @keyframes glitchFade {
   0% {
     opacity: 1;
