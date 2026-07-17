@@ -78,10 +78,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      line-height: 1;
-      padding-bottom: 3px;
       color: #999;
-      font-size: 1.4rem;
       cursor: pointer;
       background: rgba(20,20,20,.55);
       border: 1px solid rgba(255,255,255,.12);
@@ -108,6 +105,41 @@
     .cm-toggle:focus-visible {
       color: #e6e6e6;
       border-color: rgba(255,255,255,.3);
+    }
+
+    .cm-toggle-icon {
+      position: relative;
+      width: 16px;
+      height: 12px;
+    }
+
+    .cm-toggle-icon span {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 1.5px;
+      background: currentColor;
+      border-radius: 1px;
+      transition:
+        transform .3s cubic-bezier(.22,1,.36,1),
+        opacity .2s ease,
+        top .3s cubic-bezier(.22,1,.36,1);
+    }
+
+    .cm-toggle-icon span:nth-child(1) { top: 0; }
+    .cm-toggle-icon span:nth-child(2) { top: 5.5px; }
+    .cm-toggle-icon span:nth-child(3) { top: 11px; }
+
+    .cm-toggle[aria-expanded="true"] .cm-toggle-icon span:nth-child(1) {
+      top: 5.5px;
+      transform: rotate(45deg);
+    }
+    .cm-toggle[aria-expanded="true"] .cm-toggle-icon span:nth-child(2) {
+      opacity: 0;
+    }
+    .cm-toggle[aria-expanded="true"] .cm-toggle-icon span:nth-child(3) {
+      top: 5.5px;
+      transform: rotate(-45deg);
     }
 
     .cm-overlay {
@@ -230,7 +262,7 @@
       border-radius: 50%;
       background: #ccc;
     }
-    
+
     @media (max-width:480px) {
       .cm-toggle {
         width: 40px;
@@ -259,9 +291,13 @@
   toggle.id = 'cmToggle';
   toggle.className = 'cm-toggle';
   toggle.type = 'button';
-  toggle.textContent = '☰';
   toggle.setAttribute('aria-label', 'Open chapter menu');
   toggle.setAttribute('aria-expanded', 'false');
+
+  const toggleIcon = document.createElement('span');
+  toggleIcon.className = 'cm-toggle-icon';
+  toggleIcon.innerHTML = '<span></span><span></span><span></span>';
+  toggle.appendChild(toggleIcon);
 
   const nav = document.createElement('nav');
   nav.id = 'cmMenu';
@@ -316,7 +352,7 @@
       });
 
       link.addEventListener('pointerup', (e) => {
-        if (moved) return; // was a scroll/drag, not a real tap
+        if (moved) return;
         e.preventDefault();
         window.location.href = link.href;
       });
@@ -363,6 +399,7 @@
 
       toggle.classList.add('visible');
       toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Close chapter menu');
       nav.setAttribute('aria-hidden', 'false');
     }
 
@@ -383,6 +420,7 @@
       delete document.documentElement.dataset.cmScrollY;
 
       toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open chapter menu');
       nav.setAttribute('aria-hidden', 'true');
 
       scheduleHide();
@@ -485,7 +523,7 @@
         )}px)`;
       }
 
-      if (distance > 70) {
+      if (distance > 70 && !nav.classList.contains('open')) {
         openMenu();
         nav.classList.add('dragging');
       }
@@ -495,11 +533,17 @@
       if (!edgeDragging) return;
 
       edgeDragging = false;
-
       nav.classList.remove('dragging');
 
-      if (nav.classList.contains('open')) {
+      const distance = edgeStartX - edgeCurrentX;
+
+      if (distance > menuWidth * 0.35) {
+        if (!nav.classList.contains('open')) {
+          openMenu();
+        }
         resetMenuTransform();
+      } else if (nav.classList.contains('open')) {
+        closeMenu();
       } else {
         nav.style.transform = '';
       }
