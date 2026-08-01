@@ -448,3 +448,12 @@ passwordInput.addEventListener('input', function () {
     passwordInput.value = sanitized;
   }
 });
+
+// just start typing for ux when submit isn't focused
+window.addEventListener('keydown', (event) => {
+  if (document.activeElement === passwordInput) return;
+  if (event.ctrlKey || event.metaKey || event.altKey) return;
+  if (event.key.length !== 1) return;
+
+  passwordInput.focus();
+});
