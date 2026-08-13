@@ -1,7 +1,7 @@
 // placeholder texts, cycle forever
 const placeholders = [
   'Type the word...',
-  'Pain behind my smile...',
+  'Still trying to understand...'
   '<Unlock the secret...>',
   'Unspoken me... waiting...',
   'Not sure? Try typing a hint...',
