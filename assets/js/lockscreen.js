@@ -3,7 +3,7 @@ const placeholders = [
   'Type the word...',
   'Pain behind my smile...',
   '<Unlock the secret...>',
-  'Unspoken me — waiting...',
+  'Unspoken me... waiting...',
   'Not sure? Try typing a hint...',
   'Nothing to hide...',
 ];
