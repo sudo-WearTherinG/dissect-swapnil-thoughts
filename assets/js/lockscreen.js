@@ -61,7 +61,7 @@ function tryLocalFallback(password) {
   if (!url) return false;
 
   showMessage(
-    'The admin never trusted the backend. Nothing here depends on it',
+    'The Narrator never trusted the backend. Nothing here depends on it',
     'blue'
   );
 
@@ -79,8 +79,31 @@ function tryLocalFallback(password) {
 const successAudio = new Audio(
   'https://ftlpntiymqcrtcsxfchv.supabase.co/storage/v1/object/public/assets/lock-unlock-1.mp3'
 );
-successAudio.volume = 0.6;
+successAudio.volume = 1;
 successAudio.load();
+
+// local fail-safe copy of the same success sound
+const successAudioFallback = new Audio(
+  './assets/unlock-audio/lock-unlock-1.mp3'
+);
+successAudioFallback.volume = 1;
+successAudioFallback.load();
+
+// Plays the success sound. Tries the Supabase copy first,
+async function playSuccessAudio() {
+  try {
+    successAudio.currentTime = 0;
+    await successAudio.play();
+  } catch (error) {
+    console.warn('Supabase audio failed, using local fallback.', error);
+    try {
+      successAudioFallback.currentTime = 0;
+      await successAudioFallback.play();
+    } catch (fallbackError) {
+      console.warn('Local fallback audio also failed.', fallbackError);
+    }
+  }
+}
 
 const giggleAudio = new Audio(
   'https://ftlpntiymqcrtcsxfchv.supabase.co/storage/v1/object/public/assets/giggle.mp3'
@@ -359,8 +382,7 @@ function handleDenied(data) {
 }
 
 function redirectAfterSuccess(url) {
-  successAudio.currentTime = 0;
-  successAudio.play().catch(() => console.warn('Audio play blocked'));
+  playSuccessAudio();
 
   document.body.classList.add('fade-out');
 
