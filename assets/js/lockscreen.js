@@ -66,6 +66,7 @@ function tryLocalFallback(password) {
   );
 
   setTimeout(() => {
+    playSuccessAudio();
     document.body.classList.add('fade-out');
     setTimeout(() => {
       window.location.href = url;
@@ -320,9 +321,6 @@ function handleNetworkFailure(password) {
     'Your Internet is toast or server’s napping. Fix it, human',
     'orange'
   );
-  setTimeout(() => {
-    errorMsg.style.display = 'none';
-  }, 7000);
   resetButton();
 }
 
