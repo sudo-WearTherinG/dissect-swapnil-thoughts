@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>My Shrine – Dissect Swapnil Thoughts</title>
+    <meta
+      name="description"
+      content="A visual shrine to the person behind these writings, shaped by observation, questions, and reflection."
+    />
+
+    <!-- Local CSS and JS -->
+    <script src="./assets/js/script-index.js" defer></script>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      :root {
+        color-scheme: dark;
+        --background: #090909;
+        --surface: #111111;
+        --text: #e8e5e2;
+        --muted: #77716e;
+        --accent: #a8323e;
+        --border: #292525;
+      }
+
+      html {
+        min-height: 100%;
+        background: var(--background);
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 48px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow-x: hidden;
+        background:
+          radial-gradient(ellipse at 50% 35%, #191113 0%, transparent 55%),
+          var(--background);
+        color: var(--text);
+        font-family: 'Courier New', monospace;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      main {
+        width: min(100%, 470px);
+        margin: auto;
+        text-align: center;
+        opacity: 1;
+        transition: opacity 2s ease;
+      }
+
+      .eyebrow {
+        margin: 0 0 14px;
+        color: var(--accent);
+        font-size: 10px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        text-shadow: 0 0 12px #a8323e35;
+      }
+
+      .glitch-text {
+        display: block;
+        margin: 0;
+        color: #f5e9e8;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: clamp(2.2rem, 8vw, 3.2rem);
+        font-weight: 400;
+        letter-spacing: -0.055em;
+        line-height: 1.1;
+        text-shadow:
+          0 0 24px #a8323e26,
+          0 0 2px #ffffff30;
+        animation: title-flicker 7s infinite;
+      }
+
+      .subtitle {
+        margin: 14px 0 32px;
+        color: #a69a98;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        line-height: 1.8;
+      }
+
+      .carousel {
+        position: relative;
+        width: min(100%, 370px);
+        aspect-ratio: 4 / 5;
+        margin: 0 auto 30px;
+        overflow: hidden;
+        border: 1px solid #493036;
+        border-radius: 5px;
+        background: #101010;
+        box-shadow:
+          0 24px 70px #000b,
+          0 0 0 5px #a8323e08,
+          0 0 38px #a8323e18;
+      }
+
+      .carousel img {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        opacity: 0;
+        transform: scale(1.025);
+        transition:
+          opacity 1s ease,
+          transform 5s ease;
+      }
+
+      .carousel img.active {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .carousel::after {
+        position: absolute;
+        inset: 0;
+        content: '';
+        pointer-events: none;
+        background: linear-gradient(
+          180deg,
+          #12090a08 45%,
+          #12090a24 75%,
+          #09060680 100%
+        );
+        box-shadow: inset 0 0 35px #09060620;
+      }
+
+      .archive-label {
+        position: absolute;
+        z-index: 2;
+        right: 14px;
+        bottom: 13px;
+        color: #ffffffb5;
+        font-size: 9px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .metadata {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        margin: 0;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+      }
+
+      .metadata-item {
+        min-width: 0;
+        padding: 15px 12px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .metadata-item:nth-child(odd) {
+        border-right: 1px solid var(--border);
+      }
+
+      .metadata dt {
+        margin-bottom: 7px;
+        color: #96817f;
+        font-size: 9px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .metadata dd {
+        margin: 0;
+        color: #e0d5d2;
+        font-size: 11px;
+        line-height: 1.6;
+        overflow-wrap: anywhere;
+      }
+
+      .metadata-item:last-child {
+        border-right: 0;
+      }
+
+      .metadata-item:nth-last-child(-n + 2) {
+        border-bottom: 0;
+      }
+
+      .footer-note {
+        margin: 25px 0 0;
+        color: #817371;
+        font-size: 10px;
+        letter-spacing: 0.04em;
+        line-height: 1.8;
+      }
+
+      .restart-button,
+      #replay-button {
+        border: 1px solid #493036;
+        background: #0c0b0b;
+        color: #d0b9b7;
+        font:
+          11px 'Courier New',
+          monospace;
+        letter-spacing: 0.06em;
+        cursor: pointer;
+        transition:
+          color 0.2s,
+          border-color 0.2s,
+          background 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .restart-button {
+        margin-top: 22px;
+        padding: 11px 15px;
+      }
+
+      .restart-button:hover,
+      #replay-button:hover {
+        color: #fff;
+        border-color: var(--accent);
+        background: #180d0f;
+        box-shadow: 0 0 20px #a8323e20;
+      }
+
+      #replay-button {
+        position: fixed;
+        z-index: 100;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 14px 20px;
+        background: #0b0b0b;
+      }
+
+      #replay-button[hidden] {
+        display: none;
+      }
+
+      body.fade-to-black main {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      @keyframes title-flicker {
+        0%,
+        94%,
+        96%,
+        100% {
+          opacity: 1;
+        }
+
+        95% {
+          opacity: 0.75;
+        }
+      }
+
+      ::selection {
+        background: #a8323e66;
+        color: white;
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 32px 18px;
+        }
+
+        .carousel {
+          width: min(100%, 330px);
+        }
+
+        .metadata-item {
+          padding: 13px 10px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <h1 class="glitch-text">Rest in Chaos.</h1>
+
+      <p class="subtitle">I am a stranger to the person continuing my life.</p>
+
+      <div class="carousel" id="shrine-carousel">
+        <img
+          src="assets/me/shrine1.webp"
+          class="active"
+          alt="Archive image 1"
+          width="300"
+          height="375"
+        />
+
+        <img
+          src="assets/me/shrine2.webp"
+          alt="Archive image 2"
+          width="300"
+          height="375"
+          loading="lazy"
+        />
+
+        <img
+          src="assets/me/shrine3.webp"
+          alt="Archive image 3"
+          width="300"
+          height="375"
+          loading="lazy"
+        />
+
+        <img
+          src="assets/me/shrine4.webp"
+          alt="Archive image 4"
+          width="300"
+          height="375"
+          loading="lazy"
+        />
+
+        <img
+          src="assets/me/shrine5.webp"
+          alt="Archive image 5"
+          width="300"
+          height="375"
+          loading="lazy"
+        />
+
+        <img
+          src="assets/me/shrine6.webp"
+          alt="Archive image 6"
+          width="300"
+          height="375"
+          loading="lazy"
+        />
+
+        <img
+          src="assets/me/shrine7.webp"
+          alt="Archive image 7"
+          width="300"
+          height="375"
+          loading="lazy"
+        />
+
+        <img
+          src="assets/me/shrine8.webp"
+          alt="Archive image 8"
+          width="300"
+          height="375"
+          loading="lazy"
+        />
+
+        <span class="archive-label">FIG. 01 / 08</span>
+      </div>
+
+      <dl class="metadata">
+        <div class="metadata-item">
+          <dt>Identity</dt>
+          <dd>Swapnil</dd>
+        </div>
+
+        <div class="metadata-item">
+          <dt>Status</dt>
+          <dd>Missing, maybe hiding</dd>
+        </div>
+
+        <div class="metadata-item">
+          <dt>Origin</dt>
+          <dd>Not important</dd>
+        </div>
+
+        <div class="metadata-item">
+          <dt>Purpose</dt>
+          <dd>Unreadable</dd>
+        </div>
+
+        <div class="metadata-item">
+          <dt>Favorite season</dt>
+          <dd>Rain</dd>
+        </div>
+
+        <div class="metadata-item">
+          <dt>Breadcrumbs</dt>
+          <dd>True</dd>
+        </div>
+
+        <div class="metadata-item">
+          <dt>Question</dt>
+          <dd>Does everything have a cause?</dd>
+        </div>
+
+        <div class="metadata-item">
+          <dt>Last seen</dt>
+          <dd>Watching. Always watching</dd>
+        </div>
+      </dl>
+
+      <p class="footer-note">
+        404: Purpose not found.
+        <br />
+        Some things are better left unresolved.
+      </p>
+
+      <button class="restart-button" id="leave-shrine" type="button">
+        ← &nbsp; leave shrine
+      </button>
+    </main>
+
+    <button id="replay-button" type="button" hidden>
+      ↻ &nbsp; descend into the cave again
+    </button>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const images = [...document.querySelectorAll('#shrine-carousel img')];
+        const replayButton = document.getElementById('replay-button');
+        const counter = document.querySelector('.archive-label');
+        const leaveButton = document.getElementById('leave-shrine');
+
+        leaveButton.addEventListener('click', () => {
+          if (window.history.length > 1) {
+            window.history.back();
+          } else {
+            window.location.href = '/';
+          }
+        });
+
+        let current = 0;
+        let carouselTimer;
+        let fadeTimer;
+        let finishTimer;
+
+        function stopTimers() {
+          clearInterval(carouselTimer);
+          clearTimeout(fadeTimer);
+          clearTimeout(finishTimer);
+        }
+
+        function showImage(index) {
+          images.forEach((image, i) => {
+            image.classList.toggle('active', i === index);
+          });
+
+          current = index;
+
+          if (counter) {
+            counter.textContent = `FIG. ${String(current + 1).padStart(2, '0')} / ${String(images.length).padStart(2, '0')}`;
+          }
+        }
+
+        function replay() {
+          stopTimers();
+
+          document.body.classList.remove('fade-to-black');
+          replayButton.hidden = true;
+
+          showImage(0);
+
+          carouselTimer = setInterval(() => {
+            showImage((current + 1) % images.length);
+          }, 4000);
+
+          fadeTimer = setTimeout(() => {
+            document.body.classList.add('fade-to-black');
+            clearInterval(carouselTimer);
+
+            finishTimer = setTimeout(() => {
+              replayButton.hidden = false;
+            }, 2000);
+          }, 32000);
+        }
+
+        replayButton.addEventListener('click', replay);
+
+        replay();
+      });
+    </script>
+
+    <!--
+    Here lies the shrine, forever fading.
+    404: Purpose Not Found
+    Reason to leave: Chasing Didn't Made Sense To Me.
+    Surrounded With Pretentious Blood Wearing Caring Mask.
+    But Behaviour Shows Detachments.
+    I decided not to stay here, I was curious what comes after.
+
+    https://sudo-wearthering.github.io/dissect-swapnil-thoughts/index.html
+
+    I hope that link is alive and password logic still working.
+    Are you Sleeping Supabase? Ping?...
+  -->
+
+    <!--
+  These eight photographs were taken in 2025.
+
+  When they were taken, they were merely records of moments
+  passing through time. There was no shrine, no collection,
+  no reason to imagine they would eventually be placed here.
+  At least, no reason that I could recognize.
+
+  I have never been particularly fond of photographs of myself,
+  or of finding myself in someone else's.
+
+  This raises a question I cannot easily dismiss:
+  does everything have a cause?
+
+  Every event seems to emerge from something preceding it.
+  A decision follows a thought, a thought follows an
+  experience, an experience follows circumstances that
+  were themselves shaped by countless others. What we call
+  a moment is rarely isolated. It is the visible point of
+  a history mostly hidden from us.
+
+  But a cause is not the same as a destination.
+  The fact that something can be explained after it happens
+  does not mean it was always moving toward that outcome.
+  To mistake the sequence of events for a predetermined
+  design is to confuse looking backward with knowing
+  what lies ahead.
+
+  And yet, the past is never entirely finished with us.
+
+  Time does not alter what happened, but it alters the
+  conditions under which we understand it. An ordinary
+  photograph can become evidence of a forgotten self.
+  A meaningless detail can become significant after an
+  event gives it context. What once seemed insignificant
+  may acquire a weight that its original moment could
+  never have carried.
+
+  Did the meaning exist before I recognized it?
+  Was it hidden in the moment, waiting to be discovered,
+  or did it emerge only when the future gave the past
+  a different interpretation?
+
+  Perhaps meaning is neither wholly discovered nor
+  wholly invented. Perhaps it exists in the relationship
+  between what happened, what followed, and the person
+  who remembers.
+
+  These photographs did not need to anticipate this place
+  to end up here. Their presence is the result of a chain
+  of events, some chosen, some inherited, some accidental,
+  and some whose causes I may never know.
+
+  I can trace that chain backward, but I cannot rewind
+  the world and test whether another chain was possible.
+
+  So I will not claim that everything happened for a reason.
+  That would be an answer disguised as an explanation.
+
+  I only know that these moments meant one thing when
+  they happened and mean something else now.
+
+  The past has not changed.
+  The facts remain where they were.
+
+  It is the observer who has changed, and with them,
+  the meaning of what remains.
+
+  Perhaps that is all this place is:
+  not proof that everything was leading here,
+  but evidence that even the past is not finished
+  acquiring meaning.
+-->
+  </body>
+</html>
